@@ -1,5 +1,6 @@
+import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
-import { PUBLIC_PATH } from './routes';
+import { PUBLIC_PATH } from '@routes/.';
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -43,11 +44,25 @@ async function getUserFromSession(token: string): Promise<string | null> {
   try {
     const [, payload] = token.split('.');
     const decoded = JSON.parse(atob(payload));
-    return decoded?.id || null;
+    return decoded?.sub || null;
   } catch {
     return null;
   }
 }
+
+export async function getUserNameFromSession(
+  token: string
+): Promise<string | null> {
+  try {
+    const [, payload] = token.split('.');
+    const decoded = JSON.parse(atob(payload));
+    return decoded?.username || null;
+  } catch {
+    return null;
+  }
+}
+
+export default clerkMiddleware();
 
 async function isTokenExpired(token: string): Promise<boolean | null> {
   try {
@@ -63,5 +78,8 @@ async function isTokenExpired(token: string): Promise<boolean | null> {
   }
 }
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
+    '/(api|trpc)(.*)',
+  ],
 };
