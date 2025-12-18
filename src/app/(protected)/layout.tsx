@@ -1,20 +1,11 @@
 'use client';
-import { useAuth } from '@clerk/nextjs';
-import { useEffect } from 'react';
+
+import { Protect, RedirectToSignIn } from '@clerk/nextjs';
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { isSignedIn } = useAuth();
-
-  useEffect(() => {
-    if (!isSignedIn) {
-      window.location.href = '/';
-    }
-  }, [isSignedIn]);
-
-  if (!isSignedIn) return null;
-  return <>{children}</>;
+  return <Protect fallback={<RedirectToSignIn />}>{children}</Protect>;
 }
