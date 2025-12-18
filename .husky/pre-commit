@@ -1,0 +1,11 @@
+echo 'Running lint'
+
+npm run lint
+
+echo 'Linting complete'
+
+echo 'Checking types'
+
+tsc --noEmit
+
+echo 'Committing your changes'
