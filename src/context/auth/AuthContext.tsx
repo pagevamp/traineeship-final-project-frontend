@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     instance.interceptors.request.use(
       async (config) => {
         try {
-          const token = await getToken();
+          const token = await getToken({ template: 'backend' });
           console.log(token);
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
