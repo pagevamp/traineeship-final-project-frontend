@@ -13,4 +13,4 @@
 
 ---
 
-### Below are the images/video reflecting the said chnages
+### Below are the images/video reflecting the said changes
