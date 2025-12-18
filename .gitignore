@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 
+#to hide the probable secret keys
+.clerk/
