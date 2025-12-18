@@ -4,7 +4,7 @@ npm run lint
 
 echo 'Linting complete'
 
-echo 'Checking types'
+echo 'Running type checks'
 
 tsc --noEmit
 
