@@ -8,7 +8,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-2 border-secondary-100 text-xl text-white font-bold rounded-3xl mx-2 p-0',
+        default:
+          'border-2 border-secondary-100 text-xl text-white font-bold rounded-3xl w-fit',
         handler:
           'bg-undraw-secondary-100 border-2 border-secondary-100 rounded-3xl flex flex-row gap-3 h-12 text-white font-semibold px-2 place-self-end',
         ghost: 'bg-transparent text-placeholder-100',
