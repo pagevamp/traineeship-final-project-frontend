@@ -1,8 +1,8 @@
 export const PUBLIC_PATH = [
-  '/',
-  '/login',
-  '/register',
-  'resend-email',
-  'verify-email',
+  "/",
+  "/login",
+  "/register",
+  "resend-email",
+  "verify-email",
 ];
-export const PROTECTED_PATH = [''];
+export const PROTECTED_PATH = [""];

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 //a simple static page to show page load error
 const UnauthorizedPage = () => {
   return (
@@ -42,7 +42,7 @@ const UnauthorizedPage = () => {
                   className="ml-2 font-bold text-shadow-emerald-400"
                 >
                   istutiupreti805@gmail.com
-                </a>{' '}
+                </a>{" "}
                 if you believe this is an error.
               </p>
             </div>
