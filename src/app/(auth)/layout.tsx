@@ -4,7 +4,7 @@ import { ImageSlider } from '@/components/common/ImageSlider';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
-const LoginLayout = ({ children }: { children: React.ReactNode }) => {
+const SignInLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative min-h-screen">
       <Toaster position="top-right" />
@@ -20,4 +20,4 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default LoginLayout;
+export default SignInLayout;
