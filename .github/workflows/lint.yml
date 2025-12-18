@@ -1,9 +1,9 @@
 name: Frontend Lint
 
-on :
+on:
   pull_request:
-      branches:
-        - main
+    branches:
+      - main
 
 jobs:
   run-linters:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
-      
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -25,7 +25,6 @@ jobs:
           node-version: lts/*
           cache: "pnpm"
 
-
       - name: Install dependencies
         run: pnpm install
 
@@ -34,4 +33,3 @@ jobs:
 
       - name: Check Prettier formatting
         run: pnpm exec npm run prettier:check prettier:fix
-
