@@ -1,6 +1,5 @@
 'use client';
 import { useAuth } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ProtectedLayout({
@@ -9,13 +8,12 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const { isSignedIn } = useAuth();
-  const router = useRouter();
 
   useEffect(() => {
     if (!isSignedIn) {
       window.location.href = '/';
     }
-  }, [isSignedIn, router]);
+  }, [isSignedIn]);
 
   if (!isSignedIn) return null;
   return <>{children}</>;
