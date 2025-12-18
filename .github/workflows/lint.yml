@@ -29,3 +29,6 @@ jobs:
       - name: Run linters
         run: pnpm exec eslint --no-warn-ignored src
 
+      - name: Check Prettier formatting
+        run: pnpm exec npm run prettier:check
+
