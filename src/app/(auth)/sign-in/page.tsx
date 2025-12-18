@@ -1,7 +1,7 @@
-import { LoginComponent } from "@/features/auth/login/LoginComponent";
+import { SignInComponent } from "@/features/auth/login/SignInComponent";
 
-const Login = () => {
-  return <LoginComponent />;
+const SignIn = () => {
+  return <SignInComponent />;
 };
 
-export default Login;
+export default SignIn;
