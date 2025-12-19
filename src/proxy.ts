@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-import { PUBLIC_PATH } from "./routes";
+import { NextRequest, NextResponse } from 'next/server';
+import { PUBLIC_PATH } from './routes';
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get("accessToken")?.value;
+  const token = request.cookies.get('accessToken')?.value;
 
   if (PUBLIC_PATH.includes(pathname)) {
     return handlePublicPath(request, pathname, token);
@@ -11,29 +11,25 @@ export async function proxy(request: NextRequest) {
 
   // Authentication check
   if (!token) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
   if (token && (await isTokenExpired(token)) === true) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
   const userId = await getUserFromSession(token);
   if (!userId) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
   return NextResponse.next();
 }
 
-async function handlePublicPath(
-  request: NextRequest,
-  pathname: string,
-  token?: string,
-) {
+async function handlePublicPath(request: NextRequest, pathname: string, token?: string) {
   if (token && PUBLIC_PATH.some((path) => pathname === path)) {
     const userId = await getUserFromSession(token);
     if (userId) {
-      return NextResponse.redirect(new URL("/rides", request.url));
+      return NextResponse.redirect(new URL('/rides', request.url));
     }
   }
   return NextResponse.next();
@@ -41,7 +37,7 @@ async function handlePublicPath(
 
 async function getUserFromSession(token: string): Promise<string | null> {
   try {
-    const [, payload] = token.split(".");
+    const [, payload] = token.split('.');
     const decoded = JSON.parse(atob(payload));
     return decoded?.id || null;
   } catch {
@@ -51,7 +47,7 @@ async function getUserFromSession(token: string): Promise<string | null> {
 
 async function isTokenExpired(token: string): Promise<boolean | null> {
   try {
-    const [, payload] = token.split(".");
+    const [, payload] = token.split('.');
     const decoded = JSON.parse(atob(payload));
     const now = Math.floor(Date.now() / 1000);
     if (!decoded.exp) {
@@ -63,5 +59,5 @@ async function isTokenExpired(token: string): Promise<boolean | null> {
   }
 }
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 };
