@@ -21,7 +21,9 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     const onboardingUrl = new URL('/onboarding', req.url);
     return NextResponse.redirect(onboardingUrl);
   }
-
+  if (isAuthenticated && onboardingComplete && isOnboardingRoute(req)) {
+    return NextResponse.redirect(new URL('/rides', req.url));
+  }
   if (!isAuthenticated && isProtectedRoute(req))
     return redirectToSignIn({ returnBackUrl: req.url });
 
