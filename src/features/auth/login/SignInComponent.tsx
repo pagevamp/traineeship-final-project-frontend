@@ -1,5 +1,4 @@
 'use client';
-
 import { Icon } from '@iconify/react';
 import { SignInButton } from '@clerk/nextjs';
 
