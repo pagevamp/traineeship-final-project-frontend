@@ -29,14 +29,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } catch (err) {
           console.error('Invalid token', err);
         }
-
         return config;
       },
       (error) => {
         return Promise.reject(error);
       }
     );
-
     return instance;
   }, [getToken]);
 

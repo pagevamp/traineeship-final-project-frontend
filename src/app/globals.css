@@ -2,7 +2,6 @@
 @import 'swiper/css/pagination';
 @import 'swiper/css';
 @import "./colors.css";
-@import "./typography.css";
 
 :root {
   --background: #ffffff;

@@ -4,7 +4,7 @@ declare global {
   interface CustomJwtSessionClaims {
     metadata: {
       onboardingComplete?: boolean;
-      contactNumber?: string;
+      contactNumber: string;
       primaryLocation?: string;
     };
   }
