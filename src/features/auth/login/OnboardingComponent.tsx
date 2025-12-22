@@ -24,7 +24,6 @@ export default function OnboardingComponent() {
       setError(res.error);
     }
   };
-
   return (
     <main className="min-h-screen flex items-center justify-center bg-primary-100 text-text-one-100 px-4">
       <section className="w-full max-w-xl bg-card-bg-100 rounded-2xl p-10 shadow-lg">

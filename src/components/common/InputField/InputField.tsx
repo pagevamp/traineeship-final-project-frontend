@@ -31,7 +31,7 @@ export const InputField = ({
       <label
         htmlFor={name}
         className={cn(
-          'text-shadow-xs text-shadow-text-one-100 flex flex-row gap-2 items-center text-secondary-100 text-xl font-bold',
+          'text-shadow-xs flex flex-row gap-2 items-center text-secondary-100 text-xl font-bold',
           classNames?.label
         )}
       >
