@@ -1,4 +1,4 @@
-import { SideBar } from '@/components/common/SideBar';
+import { SideBar } from "@/components/common/SideBar";
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
           <p>
             An In-House ride-sharing web app built for{' '}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
-              OutSide Studio
+              Outside Studio
             </span>
           </p>
           <p>
@@ -21,7 +21,7 @@ export default function Home() {
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
               Laxman Rumba
             </span>{' '}
-            &{' '}
+            &amp{' '}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
               Stuti Upreti
             </span>
