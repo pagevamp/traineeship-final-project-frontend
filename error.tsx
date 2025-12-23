@@ -41,6 +41,13 @@ const UnauthorizedPage = () => {
                 >
                   istutiupreti805@gmail.com
                 </a>{' '}
+                or
+                <a
+                  href="mailto:laxmanrumba@gmail.com"
+                  className="ml-2 font-bold text-shadow-emerald-400"
+                >
+                  laxmanrumba@gmail.com
+                </a>{' '}
                 if you believe this is an error.
               </p>
             </div>
