@@ -7,7 +7,7 @@ export default function Home() {
       <main className="h-screen w-full  justify-between py-10 px-16 bg-card-bg-100 text-text-two-100">
         <div className="p-6 rounded-2xl flex flex-col items-center gap-12 text-center text-3xl text-shadow-sm text-shadow-primary-100 font-extrabold">
           <p>
-            An In-House ride-sharing web app built for{' '}
+            An In-House ride-sharing web app built for{" "}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
               Outside Studio
             </span>
@@ -17,11 +17,11 @@ export default function Home() {
             and effortlessly.
           </p>
           <p>
-            Built with care by{' '}
+            Built with care by{" "}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
               Laxman Rumba
-            </span>{' '}
-            &amp{' '}
+            </span>{" "}
+            &amp{" "}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
               Stuti Upreti
             </span>
