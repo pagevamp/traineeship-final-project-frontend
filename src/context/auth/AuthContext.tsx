@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       async (config) => {
         try {
           const token = await getToken({ template: 'backend' });
-          console.log(token);
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
           }
