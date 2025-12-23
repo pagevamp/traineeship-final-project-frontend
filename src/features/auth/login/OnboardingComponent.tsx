@@ -30,10 +30,7 @@ export default function OnboardingComponent() {
         <header className="mb-8 text-center">
           <h1 className="mb-3 text-display-1 line-height-display-1--line-height font-display-1--font-weight">
             Welcome to{' '}
-            <span className="text-shadow-md text-shadow-secondary-100">
-              {' '}
-              OutSide Ride Share
-            </span>
+            <span className="text-shadow-md text-shadow-secondary-100"> OutSide Ride Share</span>
           </h1>
           <p className="text-placeholder-100 text-display-2 line-height-display-2--line-height font-display-2--font-weight">
             Let&apos;s get you set up before you continue
@@ -58,9 +55,7 @@ export default function OnboardingComponent() {
           />
 
           {error && (
-            <p className="text-sm text-red-500 bg-red-500/10 rounded-md px-3 py-2">
-              {error}
-            </p>
+            <p className="text-sm text-red-500 bg-red-500/10 rounded-md px-3 py-2">{error}</p>
           )}
 
           <Button

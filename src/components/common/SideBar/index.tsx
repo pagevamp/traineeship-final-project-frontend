@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { SignOutButton, useAuth } from "@clerk/nextjs";
-import { Button } from "../Button";
-import Link from "next/link";
+import { SignOutButton, useAuth } from '@clerk/nextjs';
+import { Button } from '../Button';
+import Link from 'next/link';
 
 export const SideBar = () => {
   const { isSignedIn } = useAuth();
@@ -15,13 +15,13 @@ export const SideBar = () => {
             <Button>Log Out</Button>
           </SignOutButton>
         ) : (
-          <Link href={"/sign-in"}>
+          <Link href={'/sign-in'}>
             <Button>SigIn</Button>
           </Link>
         )}
       </div>
       <span className="font-extrabold text-5xl text-shadow-sm text-shadow-text-two-100">
-        Welcome to{" "}
+        Welcome to{' '}
         <span className="whitespace-pre-wrap text-5xl text-text-two-100 font-extrabold text-shadow-card-bg-100">
           Outside Ride Sharing
         </span>
