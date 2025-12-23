@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/common/SideBar";
+import { SideBar } from '@/components/common/SideBar';
 
 export default function Home() {
   return (
@@ -12,10 +12,7 @@ export default function Home() {
               Outside Studio
             </span>
           </p>
-          <p>
-            Easily request rides and find rides, and travel together—securely
-            and effortlessly.
-          </p>
+          <p>Easily request rides and find rides, and travel together—securely and effortlessly.</p>
           <p>
             Built with care by{' '}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
@@ -26,10 +23,7 @@ export default function Home() {
               Stuti Upreti
             </span>
           </p>
-          <p>
-            Designed to make daily commutes simpler, smarter, and more
-            connected.
-          </p>
+          <p>Designed to make daily commutes simpler, smarter, and more connected.</p>
         </div>
       </main>
     </div>
