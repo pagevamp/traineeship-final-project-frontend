@@ -32,14 +32,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
     return instance;
   }, [getToken]);
 
-  return (
-    <AuthContext.Provider value={authApi}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authApi}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthApi = () => {
