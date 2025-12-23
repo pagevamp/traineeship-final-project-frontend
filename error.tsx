@@ -31,12 +31,10 @@ const UnauthorizedPage = () => {
               Access Denied
             </h1>
             <div className="space-y-2">
-              <p className="text-md text-gray-700 font-secondary">
-                Unauthorized Access
-              </p>
+              <p className="text-md text-gray-700 font-secondary">Unauthorized Access</p>
               <p className="text-sm text-gray-500 leading-relaxed font-secondary font-light">
-                You don&apos;t have permission to access this resource in the
-                Ride Sharing service. Please contact support at
+                You don&apos;t have permission to access this resource in the Ride Sharing service.
+                Please contact support at
                 <a
                   href="mailto:istutiupreti805@gmail.com"
                   className="ml-2 font-bold text-shadow-emerald-400"

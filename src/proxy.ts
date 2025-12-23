@@ -8,8 +8,7 @@ const isSignedInRoute = createRouteMatcher(['/sign-in']);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { isAuthenticated, sessionClaims, redirectToSignIn } = await auth();
-  const onboardingComplete =
-    sessionClaims?.metadata?.onboardingComplete === true;
+  const onboardingComplete = sessionClaims?.metadata?.onboardingComplete === true;
 
   if (isAuthenticated && isOnboardingRoute(req)) {
     return NextResponse.next();
@@ -31,8 +30,5 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 });
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
-    '/(api|trpc)(.*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)', '/(api|trpc)(.*)'],
 };
