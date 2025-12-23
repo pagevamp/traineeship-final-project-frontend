@@ -1,7 +1,7 @@
-'use client';
-import { createContext, ReactNode, useContext, useMemo } from 'react';
-import axios, { AxiosInstance } from 'axios';
-import { useAuth } from '@clerk/nextjs';
+"use client";
+import { createContext, ReactNode, useContext, useMemo } from "react";
+import axios, { AxiosInstance } from "axios";
+import { useAuth } from "@clerk/nextjs";
 
 const AuthContext = createContext<AxiosInstance | undefined>(undefined);
 
@@ -14,19 +14,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       timeout: 5000,
       withCredentials: true,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     instance.interceptors.request.use(
       async (config) => {
         try {
-          const token = await getToken({ template: 'backend' });
+          const token = await getToken({ template: "backend" });
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
           }
         } catch (err) {
-          console.error('Invalid token', err);
+          console.error("Invalid token", err);
         }
         return config;
       },
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuthApi = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuthApi must be used within an AuthProvider');
+    throw new Error("useAuthApi must be used within an AuthProvider");
   }
   return context;
 };
