@@ -49,9 +49,7 @@ const UnauthorizedPage = () => {
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <p className="text-xs text-gray-500 font-secondary">
-              Error Code: 403 - Forbidden
-            </p>
+            <p className="text-xs text-gray-500 font-secondary">Error Code: 403 - Forbidden</p>
           </div>
 
           <div className="pt-4 border-t border-gray-100">
