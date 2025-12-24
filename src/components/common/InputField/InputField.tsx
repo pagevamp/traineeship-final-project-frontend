@@ -34,12 +34,12 @@ export const InputField = ({
           classNames?.label,
         )}
       >
-        <Icon icon={icon} width={16} height={16} className="text-undraw-secondary-100" />
+        <Icon icon={icon} width={16} height={16} className="text-secondary-100" />
         {labelName}
       </label>
       <div
         className={cn(
-          'flex flex-row items-center h-12 w-full my-2 rounded-md border-2 border-undraw-secondary-100 shadow-md shadow-secondary-100 bg-primary-100 text-undraw-secondary-100 font-light px-2 py-2 text-sm placeholder:text-placeholder-100 placeholder:text-sm',
+          'flex flex-row items-center h-12 w-full my-2 rounded-md border-2 border-secondary-100 shadow-md shadow-secondary-100 bg-primary-100 text-secondary-100 font-light px-2 py-2 text-sm placeholder:text-placeholder-100 placeholder:text-sm',
           classNames?.input,
         )}
       >
