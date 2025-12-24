@@ -2,10 +2,10 @@ import { SideBar } from '@/components/common/SideBar';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans bg-primary-100 max-screen-full gird grid-cols-2">
+    <div className="min-h-screen items-center justify-center font-sans bg-primary-100 max-screen-full grid grid-cols-2">
       <SideBar />
-      <main className="h-screen w-full  justify-between py-10 px-16 bg-card-bg-100 text-text-two-100">
-        <div className="p-6 rounded-2xl flex flex-col items-center gap-12 text-center text-3xl text-shadow-sm text-shadow-primary-100 font-extrabold">
+      <main className="h-screen w-full justify-between py-10 px-16 bg-card-bg-100 text-text-two-100">
+        <div className="p-6 lg:p-10 rounded-2xl flex flex-col items-center gap-12 lg:gap-22 text-center text-3xl text-shadow-sm text-shadow-primary-100 font-extrabold">
           <p>
             An In-House ride-sharing web app built for{' '}
             <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
