@@ -1,31 +1,25 @@
 'use client';
 
-import { SignOutButton, useAuth } from '@clerk/nextjs';
-import { Button } from '../Button';
-import Link from 'next/link';
+import { Button } from "../Button";
 
 export const SideBar = () => {
-  const { isSignedIn } = useAuth();
 
   return (
-    <div className="h-screen w-full place-content-center flex flex-col items-center justify-items-stretch text-undraw-secondary-100 px-8">
-      <div className="flex flex-row gap-3 items-center absolute top-5 left-5">
-        {isSignedIn ? (
-          <SignOutButton redirectUrl="/sign-in">
-            <Button>Log Out</Button>
-          </SignOutButton>
-        ) : (
-          <Link href={'/sign-in'}>
-            <Button>SigIn</Button>
-          </Link>
-        )}
-      </div>
-      <span className="font-extrabold text-5xl text-shadow-sm text-shadow-text-two-100">
-        Welcome to{' '}
-        <span className="whitespace-pre-wrap text-5xl text-text-two-100 font-extrabold text-shadow-card-bg-100">
-          Outside Ride Sharing
-        </span>
-      </span>
+    <div className="absolute bottom-10 h-[80vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 shadow-lg shadow-gray-800 place-content-start flex flex-col gap-5 items-center justify-items-stretch text-undraw-secondary-100">
+      
+      <h2 className="text-text-one-100 ">
+        Welcome to Milera
+      </h2>
+      
+      <Button
+      variant={'navigation'}
+      >Directory</Button>
+      <Button
+      variant={'navigation'}
+      >View Rides</Button>
+      <Button
+      variant={'navigation'}
+      >Your Pending Trips</Button>
     </div>
   );
 };

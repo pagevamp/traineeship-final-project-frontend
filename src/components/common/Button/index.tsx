@@ -11,6 +11,8 @@ export const buttonVariants = cva(
           'bg-undraw-secondary-100 border-2 border-secondary-100 rounded-3xl flex flex-row gap-3 h-12 text-white font-semibold px-2 place-self-end',
         ghost: 'bg-transparent text-placeholder-100',
         icon: 'bg-transparent p-0 m-0',
+        navigation:'bg-tertiary-100 border-2 border-secondary-100 rounded-xl flex flex-row gap-3 h-12 w-40 text-white font-semibold px-2 place-self-end',
+        
       },
       size: {
         default: 'px-10 py-2',
