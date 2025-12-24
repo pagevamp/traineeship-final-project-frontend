@@ -8,7 +8,7 @@ export const SideBar = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="h-screen w-full place-content-center flex flex-col items-center justify-items-stretch text-undraw-secondary-100 px-8">
+    <div className="h-screen w-full place-content-center flex flex-col items-center justify-items-stretch text-secondary-100 px-8">
       <div className="flex flex-row gap-3 items-center absolute top-5 left-5">
         {isSignedIn ? (
           <SignOutButton redirectUrl="/sign-in">
