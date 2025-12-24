@@ -1,4 +1,7 @@
 'use client';
+
+import Link from "next/link";
+
 //a simple static page to show page load error
 const UnauthorizedPage = () => {
   return (
@@ -37,12 +40,12 @@ const UnauthorizedPage = () => {
               <p className="text-sm text-gray-500 leading-relaxed font-secondary font-light">
                 You don&apos;t have permission to access this resource in the
                 Ride Sharing service. Please contact support at
-                <a
+                <Link
                   href="mailto:istutiupreti805@gmail.com"
                   className="ml-2 font-bold text-shadow-emerald-400"
                 >
                   istutiupreti805@gmail.com
-                </a>{' '}
+                </Link>{' '}
                 if you believe this is an error.
               </p>
             </div>

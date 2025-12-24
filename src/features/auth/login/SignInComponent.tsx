@@ -23,13 +23,12 @@ export const SignInComponent = () => {
               flex items-center gap-2 text-xl
               hover:opacity-90 transition
               focus:outline-none focus:ring-none
-           text-text-two-100 font-extrabold
-
-            "
+           text-text-two-100 font-extrabold px-6 py-3
+           "
           >
             Sign in with your
-            <Icon icon="logos:google" width={54} height={54} />
-            account
+            <Icon icon="devicon:google" width={26} height={26} />
+          account
           </button>
         </SignInButton>
       </section>
