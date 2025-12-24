@@ -3,11 +3,7 @@
 import { NavBar } from '@/components/common/NavBar';
 import { Protect, RedirectToSignIn } from '@clerk/nextjs';
 
-interface ProtectedLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function ProtectedLayout({ children }: ProtectedLayoutProps) {
+export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   return (
     <Protect fallback={<RedirectToSignIn />}>
       <div className="flex flex-col">
