@@ -21,8 +21,10 @@ export const NavBar = () => {
           <>
             {isSignedIn && (
               <div className="text-right">
-                <p className="text-placeholder-100 text-xs">Hi,</p>
-                <p className="text-text-one-100 text-xs md:text-sm font-semibold">{user.fullName}</p>
+                <p className="text-placeholder-100 text-xs md:text-sm">Hi,</p>
+                <p className="text-text-one-100 text-xs md:text-lg font-semibold">
+                  {user.fullName}
+                </p>
               </div>
             )}
             <UserButton>
@@ -30,7 +32,7 @@ export const NavBar = () => {
                 <UserButton.Link
                   label="History"
                   href="/history"
-                  labelIcon={<Icon icon="nimbus:history" className='w-full'></Icon>}
+                  labelIcon={<Icon icon="nimbus:history" className="w-full"></Icon>}
                 />
               </UserButton.MenuItems>
             </UserButton>
