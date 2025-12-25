@@ -14,13 +14,18 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   return (
     <Protect fallback={<RedirectToSignIn />}>
       
+      
+
       <Button
         onClick={toggleSideBarVisibility}
-        className="absolute top-22 left-3 z-10 backdrop-blur-lg hover:bg-secondary-100/80 rounded-full border-2 border-tertiary-100/20 h-10 max-w-5"
+        size={'icon'}
+        className='absolute top-4 left-8 z-10 backdrop-blur-md rounded-[100%] border-3 border-tertiary-100/30 hover:bg-secondary-100/80 cursor-pointer h-12 w-12'
       >
-        <Icon icon="mingcute:menu-fill" width={32} height={32}/>
+        <Icon icon="mingcute:menu-fill" width={32} height={32} />
       </Button>
 
+
+     
       {sideBarOpen === true && <SideBar />}
       {children}
     </Protect>
