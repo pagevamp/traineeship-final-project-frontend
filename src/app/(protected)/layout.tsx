@@ -1,6 +1,8 @@
 'use client';
 import { Button } from '@/components/common/Button';
 import { SideBar } from '@/components/common/SideBar';
+
+import { NavBar } from '@/components/common/NavBar';
 import { Protect, RedirectToSignIn } from '@clerk/nextjs';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
@@ -13,8 +15,11 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   };
   return (
     <Protect fallback={<RedirectToSignIn />}>
-      
-      
+
+      <div className="flex flex-col">
+        <header className="w-full">
+          <NavBar />
+        </header>
 
       <Button
         onClick={toggleSideBarVisibility}
@@ -24,10 +29,19 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         <Icon icon="mingcute:menu-fill" width={32} height={32} />
       </Button>
 
+     
 
+        {/* Main Content */}
+        <main className="flex items-center justify-center md:p-6 overflow-auto">
+          <div className="w-full">{children}</div>
+        </main>
+      </div>
+      
      
       {sideBarOpen === true && <SideBar />}
-      {children}
+      
+  
+      
     </Protect>
   );
 }
