@@ -1,5 +1,50 @@
+'use client';
+
+import { RidesBackground } from '@/components/Rides/RidesBackground';
+import { RidesHeader } from '@/components/Rides/RidesHeader';
+import { RidesTabs } from '@/components/Rides/RidesTabs';
+import { Button } from '@/components/common/Button';
+
+import { RideRequestsSection } from '@/components/Rides/RideRequest/RideRequestsSection';
+import { MyRideRequestsSection } from '@components/Rides/MyRideRequest/MyRideRequestSection/index';
+import { useRideRequests } from '@/hooks/useRideRequest';
+
 const Rides = () => {
-  return <div>Rides</div>;
+  const { activeTab, setActiveTab } = useRideRequests();
+
+  return (
+    <div className="relative min-h-screen bg-[#0a0a0b] text-white overflow-hidden">
+      <RidesBackground />
+      <div className="relative z-10 md:p-8 lg:p-12">
+        <div className="max-w-7xl p-4 mx-auto mb-3">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <RidesHeader />
+            <div className="absolute top-3 right-3 md:top-5 md:right-5 flex justify-end">
+              <Button className="px-2 py-1 md:px-6 md:py-3 hover:scale-103 hover:bg-secondary-100/10 text-light-text-100">
+                Request ride
+              </Button>
+            </div>
+            <RidesTabs activeTab={activeTab} onChange={setActiveTab} />
+          </div>
+        </div>
+
+        <main className="max-w-7xl mx-auto">
+          <div className="w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent mb-2" />
+          <div className="transition-all duration-700 ease-in-out">
+            {activeTab === 'mine' ? (
+              <div className="animate-in fade-in zoom-in-95 duration-500">
+                <MyRideRequestsSection />
+              </div>
+            ) : (
+              <div className="animate-in fade-in zoom-in-95 duration-500">
+                <RideRequestsSection />
+              </div>
+            )}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 };
 
 export default Rides;
