@@ -1,7 +1,6 @@
 'use client';
 
 import { UserButton, useUser } from '@clerk/nextjs';
-import {} from '@clerk/nextjs';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 
