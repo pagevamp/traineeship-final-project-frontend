@@ -9,10 +9,10 @@ const UnauthorizedPage = () => {
       <article className="w-full max-w-md shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
         <section className="p-8 text-center space-y-6">
           <div className="relative">
-            <div className="w-24 h-24 mx-auto bg-linear-to-r from-undraw-primary-100 to-emerald-800 rounded-full flex items-center justify-center shadow-lg">
+            <div className="w-24 h-24 mx-auto bg-linear-to-r from-primary-100 to-emerald-800 rounded-full flex items-center justify-center shadow-lg">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
                 <svg
-                  className="w-8 h-8 text-undraw-secondary-100"
+                  className="w-8 h-8 text-secondary-100"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
