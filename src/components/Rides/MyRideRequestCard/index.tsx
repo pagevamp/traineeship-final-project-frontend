@@ -77,10 +77,10 @@ export const MyRideRequestCard = ({
               <Icon icon="mdi:steering" className="text-green-600 size-6" />
               <div>
                 <p className="text-xs md:text-sm uppercase font-black text-green-600 tracking-tighter">
-                  {ride.driver.phoneNumber}
+                  {ride.driver?.phoneNumber}
                 </p>
                 <p className="text-sm font-bold text-text-one-100 leading-tight">
-                  {ride.driver.firstName} {ride.driver?.lastName}
+                  {ride.driver?.firstName} {ride.driver?.lastName}
                 </p>
               </div>
             </div>
