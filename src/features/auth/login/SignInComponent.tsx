@@ -28,7 +28,7 @@ export const SignInComponent = () => {
           >
             Sign in with your
             <Icon icon="devicon:google" width={26} height={26} />
-          account
+            account
           </button>
         </SignInButton>
       </section>
