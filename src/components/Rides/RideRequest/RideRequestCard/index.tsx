@@ -1,10 +1,11 @@
 'use client';
 import Image from 'next/image';
-import { Button } from '../../common/Button';
+import { Button } from '@components/common/Button';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
 import { formatTime } from '@/lib/utils';
-import { Ride } from '../../../../types/Ride';
+import { Ride } from '../../../../../types/Ride';
+
 interface RideRequestCardProps {
   ride: Ride;
   onAccept: (id: string) => void;
@@ -13,8 +14,8 @@ interface RideRequestCardProps {
 
 export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProps) => {
   return (
-    <div className="relative flex flex-col border-2 border-secondary-100 rounded-xl w-full md:w-2/3 lg:w-2/4 p-4 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale:105 transition-all duration-300">
-      <div className="absolute top-0 right-0 z-10 px-4 py-1 rounded-bl-xl rounded-tr-lg text-[10px] md:text-xs uppercase font-bold tracking-wider bg-secondary-100 text-light-text-100">
+    <div className="relative flex flex-col border-2 border-secondary-100 rounded-xl w-full md:w-2/3 lg:w-2/4 p-4 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale-101 transition-all duration-300">
+      <div className="absolute top-0 right-0 z-10 px-4 py-1 rounded-bl-xl rounded-tr-lg text-xs uppercase font-bold tracking-wider bg-secondary-100 text-light-text-100">
         {formatDistanceToNow(new Date(ride.createdAt), { addSuffix: true })}
       </div>
       <div className="flex items-center gap-3 mb-3">

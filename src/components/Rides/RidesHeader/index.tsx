@@ -7,7 +7,7 @@ export const RidesHeader = () => (
       </span>
     </div>
 
-    <h1 className="text-4xl md:text-5xl font-black tracking-tight">
+    <h1 className="text-4xl md:text-5xl font-black tracking-tight text-light-text-100">
       Ride <span className="text-secondary-100">Dashboard</span>
     </h1>
 

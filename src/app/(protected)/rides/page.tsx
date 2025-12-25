@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { RideRequestsSection } from '@/components/Rides/RideRequestsSection';
-import { MyRideRequestsSection } from '@/components/Rides/MyRideRequestSection';
+
 import { RidesBackground } from '@/components/Rides/RidesBackground';
 import { RidesHeader } from '@/components/Rides/RidesHeader';
 import { RidesTabs } from '@/components/Rides/RiesTabs';
 import { Button } from '@/components/common/Button';
-import { Icon } from '@iconify/react';
+
+import { RideRequestsSection } from '@/components/Rides/RideRequest/RideRequestsSection';
+import { MyRideRequestsSection } from '@components/Rides/MyRideRequest/MyRideRequestSection/index';
 
 export type RideTab = 'all' | 'mine';
 
@@ -20,6 +21,11 @@ const Rides = () => {
         <div className="max-w-7xl p-4 mx-auto mb-3">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <RidesHeader />
+            <div className="absolute top-3 right-3 md:top-5 md:right-5 flex justify-end">
+              <Button className="px-2 py-1 md:px-6 md:py-3 hover:scale-103 hover:bg-secondary-100/10 text-light-text-100">
+                Request ride
+              </Button>
+            </div>
             <RidesTabs activeTab={activeTab} onChange={setActiveTab} />
           </div>
         </div>
@@ -36,16 +42,6 @@ const Rides = () => {
                 <RideRequestsSection />
               </div>
             )}
-          </div>
-          <div className="fixed bottom-8 right-6 z-50">
-            <Button
-              className="h-20 w-20 rounded-full bg-secondary-100 shadow-2xl shadow-secondary-100/40 flex items-center justify-center active:scale-90 transition-all border border-white/10"
-              aria-label="Create New Request"
-            >
-              <span className="text-6xl text-light-text-100 flex items-center justify-center">
-                <Icon icon="mdi:plus" />
-              </span>
-            </Button>
           </div>
         </main>
       </div>
