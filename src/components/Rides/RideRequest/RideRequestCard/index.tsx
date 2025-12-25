@@ -4,7 +4,7 @@ import { Button } from '@components/common/Button';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
 import { formatTime } from '@/lib/utils';
-import { Ride } from '../../../../../types/Ride';
+import { Ride } from '@/core/types/Ride';
 
 interface RideRequestCardProps {
   ride: Ride;

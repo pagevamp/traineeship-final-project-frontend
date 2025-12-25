@@ -32,3 +32,5 @@ export interface Ride {
   passenger: Passenger;
   createdAt: string;
 }
+
+export type RideTab = 'all' | 'mine';

@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 
 import { RidesBackground } from '@/components/Rides/RidesBackground';
 import { RidesHeader } from '@/components/Rides/RidesHeader';
@@ -8,11 +7,10 @@ import { Button } from '@/components/common/Button';
 
 import { RideRequestsSection } from '@/components/Rides/RideRequest/RideRequestsSection';
 import { MyRideRequestsSection } from '@components/Rides/MyRideRequest/MyRideRequestSection/index';
-
-export type RideTab = 'all' | 'mine';
+import { useRideRequests } from '@/hooks/useRideRequest';
 
 const Rides = () => {
-  const [activeTab, setActiveTab] = useState<RideTab>('all');
+  const { activeTab, setActiveTab } = useRideRequests();
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0b] text-white overflow-hidden">

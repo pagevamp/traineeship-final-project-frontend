@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { Button } from '@/components/common/Button';
 import { formatTime } from '@/lib/utils';
-import { Ride } from '../../../../types/Ride';
+import { Ride } from '@/core/types/Ride';
 
 interface ViewDetailsProps {
   ride: Ride;

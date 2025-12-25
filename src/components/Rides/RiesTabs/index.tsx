@@ -1,7 +1,7 @@
 'use client';
 
-import { RideTab } from '@/app/(protected)/rides/page';
 import { Button } from '@/components/common/Button';
+import { RideTab } from '@/core/types/Ride';
 import { Icon } from '@iconify/react';
 
 interface Props {

@@ -1,9 +1,10 @@
 'use client';
-import { useState } from 'react';
 import { Modal } from '@/components/common/Modal';
 import { RideRequestCard } from '@/components/Rides/RideRequest/RideRequestCard';
-import { Ride } from '../../../../../types/Ride';
 import { ViewDetails } from '../../ViewDetails';
+import { Ride } from '@/core/types/Ride';
+import { useRideRequests } from '@/hooks/useRideRequest';
+import { useModal } from '@/hooks/useModal';
 
 export const RideRequestsSection = () => {
   const ridesData: Ride[] = [
@@ -63,8 +64,8 @@ export const RideRequestsSection = () => {
     },
   ];
 
-  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const { selectedRide, setSelectedRide } = useRideRequests();
+  const { isOpen, setIsOpen } = useModal();
 
   const handleAcceptRide = (id: string) => {
     console.log('Ride Accepted:', id);
