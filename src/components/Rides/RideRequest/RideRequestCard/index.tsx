@@ -20,7 +20,7 @@ export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProp
         {formatDistanceToNow(new Date(ride.createdAt), { addSuffix: true })}
       </div>
       <div className="flex items-center gap-3 mb-3">
-        <div className="relative w-12 h-12 rounded-2xl border-secondary-100/20 border-2 overflow-hidden">
+        <div className="relative w-12 h-12 rounded-lg border-secondary-100/20 border-2 overflow-hidden">
           <Image
             src={ride.passenger.profileImage}
             alt={ride.passenger.firstName}
