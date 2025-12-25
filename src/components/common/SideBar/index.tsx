@@ -16,7 +16,7 @@ export const SideBar = () => {
 
   return (
     <div className="absolute bottom-10 h-[80vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 shadow-lg shadow-gray-900 flex flex-col justify-between text-text-two-100 px-4 py-6">
-      {/* Top Section */}
+      {/* top section with features page links */}
       <section className="flex flex-col gap-4">
         <h2 className="text-text-one-100/80 font-semibold text-xl text-center border-b border-tertiary-100/20 w-full pb-2 mb-4">
           Features
@@ -43,6 +43,7 @@ export const SideBar = () => {
         })}
       </section>
 
+      {/* bottom section with project user count*/}
       <section className="h-40 w-[85%] bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 shadow-md shadow-gray-900  mx-auto my-5 rounded-md flex flex-col gap-3 items-center justify-center text-tertiary-100 text-sm border-black">
       <div className='flex flex-row gap-2 items-center text-text-one-100/80'><Icon icon='mdi:robot-happy' width={24} height={24}/><span>58 Happy Outsiders</span></div>
       <p className='font-semibold text-md'>@Outside Shares</p>
