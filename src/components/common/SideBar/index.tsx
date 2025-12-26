@@ -22,7 +22,7 @@ export const SideBar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`group w-full flex items-center gap-4 rounded-md py-3 px-4 transition-all duration-200
+              className={`w-full flex items-center gap-4 rounded-md py-3 px-4 transition-all duration-200
                 ${
                   isActive
                     ? 'bg-tertiary-100/30 text-text-one-100/80 scale-98'
