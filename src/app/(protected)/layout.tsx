@@ -29,10 +29,8 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         <Icon icon="mingcute:menu-fill" width={32} height={32} />
       </Button>
 
-     
-
         {/* Main Content */}
-        <main className="flex items-center justify-center md:p-6 overflow-auto">
+       <main className="flex items-center justify-center mx-auto md:p-6 overflow-auto">
           <div className="w-full">{children}</div>
         </main>
       </div>
