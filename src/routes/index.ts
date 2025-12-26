@@ -1,2 +1,2 @@
-export const PUBLIC_PATH = ['/', '/login', '/register'];
-export const PROTECTED_PATH = [''];
+export const PUBLIC_PATH = ['/', '/sign-in'];
+export const PROTECTED_PATH = ['/history(.*)', '/rides(.*)', '/trips(.*)'];
