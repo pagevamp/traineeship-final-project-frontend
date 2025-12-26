@@ -6,6 +6,7 @@ import { TripCardProps } from '@/core/types/trip-types';
 import { UpdateStatus } from '../UpdateStatusComponent';
 import { Button } from '@/components/common/Button';
 import { useState } from 'react';
+import { TripModal } from '../TripModal';
 
 export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -17,7 +18,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
         className='flex flex-col border-2 rounded-xl w-[25vw] md:w-[35vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale-101 transition-all duration-300 relative overflow-hidden'
       >
        
-        <div className="flex items-center mb-6 justify-evenly">
+        <div className="flex items-center mb-6 justify-between">
           <section className='flex flex-row gap-4 place-content-start'>
             <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
               <Image src='/login_page_1.jpeg' alt="Passenger" fill className="object-cover" />
@@ -25,7 +26,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
             <div>
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
-                <Icon icon="mdi:calendar-check" /> Created{' '}
+                <Icon icon="mdi:calendar-check" /> Trip Accepted{' '}
                 {formatDistanceToNow(new Date(data.ride.acceptedAt!), { addSuffix: true })}
               </p>
             </div>
@@ -33,7 +34,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
 
            {/* Details Button */}
            <Button
-            className="h-9 px-4 bg-outline-100 border border-secondary-100/30 text-light-text-100 hover:bg-secondary-100/10"
+            className="h-10 px-6 bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% border-2 border-secondary-100 text-light-text-100 hover:bg-secondary-100/10"
             onClick={() => setDetailsOpen(true)}
           >
             Details
@@ -60,11 +61,12 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
 
          <UpdateStatus acceptedAt={data.ride.acceptedAt} id={data.id} onCancel={onCancel} onStatusUpdate={onStatusUpdate}/>
 
-
-         {/* Modal for Details */}
-        
-      
+         <p className="text-xs text-normal flex items-center gap-1 place-content-center mt-2">
+                <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}
+                {formatDistanceToNow(new Date(data.ride.departureTime.end), { addSuffix: true })}
+         </p>
       </div>
+      {detailsOpen && <TripModal {...data}/>}
     </article>
   );
 };

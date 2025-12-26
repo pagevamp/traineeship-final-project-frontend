@@ -17,8 +17,8 @@ export const dummyTrip : Trip =
       landmark: "Outside",
       pickupLocation: "Outside",
       notes: "I have two large suitcases. Please call upon arrival.",
-      departureTime:{start: "2025-12-30 23:41:31+00", end:"2025-12-31 23:42:31+00"},
-      acceptedAt: null,
+      departureTime:{start: "2025-12-30 23:41:31+00", end: "2025-12-31 23:42:31+00"},
+      acceptedAt: "2025-12-25T06:33:23.742Z",
       createdAt: "2025-12-25T06:33:23.742Z",
       updatedAt: "2025-12-25T08:41:47.078Z",
       deletedAt: null

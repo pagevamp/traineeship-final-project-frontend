@@ -1,13 +1,12 @@
 import { Modal } from '@/components/common/Modal';
 import { Trip } from '@/core/types/trip-types';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React from 'react'
 
-export const TripModal : React.FC<Trip> = (data: Trip) => {
-const [detailsOpen, setDetailsOpen] = useState(false);
+export const TripModal = (data: Trip) => {
     
   return (
-    <Modal title="Trip Details" open={detailsOpen} onOpenChange={setDetailsOpen}>
+    <Modal title="Trip Details">
         <div className="flex flex-col gap-2">
             <div className='flex flex-row items-start gap-3 border border-tertiary-100/20 p-4'>
                 <Image src={data.passenger.imageUrl} alt='Requester-logo'/>

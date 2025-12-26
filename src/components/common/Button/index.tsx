@@ -15,7 +15,7 @@ export const buttonVariants = cva(
         navigation:
           'bg-tertiary-100 border-2 border-secondary-100 rounded-md shadow-sm shadow-primary-100 text-md flex flex-row items-center gap-3 h-12 w-50 text-white font-semibold px-2 place-self-end',
         popper:
-          'w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left cursor-pointer',
+          'h-fit w-30 p-2 border-2 border-black rounded-md font-semibold bg-radial-[at_25%_25%] from-secondary-100 to-tertiary-100/60 to-75% hover:bg-secondary-100/20 text-left cursor-pointer',
     
       },
       size: {
