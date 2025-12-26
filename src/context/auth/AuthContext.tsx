@@ -22,27 +22,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       async (config) => {
         try {
           const token = await getToken({ template: 'backend' });
-          console.log(token);
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
           }
         } catch (err) {
           console.error('Invalid token', err);
         }
-
         return config;
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
-
     return instance;
   }, [getToken]);
 
-  return (
-    <AuthContext.Provider value={authApi}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authApi}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthApi = () => {
