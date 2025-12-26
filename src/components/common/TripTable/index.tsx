@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-export const RideTable = () => {
+export const index = () => {
   return (
     <Table>
   <TableCaption>A list of your recent invoices.</TableCaption>
@@ -30,6 +30,3 @@ export const RideTable = () => {
 </Table>
   )
 }
-
-
-
