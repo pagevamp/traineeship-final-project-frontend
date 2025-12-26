@@ -1,24 +1,38 @@
-import { Ride } from "@/core/types/Ride";
+import { Trip } from "@/core/types/trip-types";
 
-export const dummyRide: Ride = {
-  id: 'ride123',
-  pickupLocation: 'Kathmandu',
-  destination: 'Bhaktapur',
-  createdAt: new Date().toISOString(),
-  acceptedAt: null,
-  passengerId: 'passenger123', // required
+
+export const dummyTrip : Trip = 
+  {
+    id: "ce40d645-912d-4de7-ac5f-58c35d7e7b44",
+    driverId: "user_37EqLZmnKWNTJRRA0JvZ7krS3GO",
+    status: "not_started",
+    vehicleType: "two_wheeler",
+    createdAt: "2025-12-26T05:46:32.716Z",
+    updatedAt: null,
+    deletedAt: null,
+  ride: {
+      id: "9a0ace6e-b7ee-4da6-a303-0649ea4d295e",
+      passengerId: "user_37CBCEqaIFbxqebAI2OiQQjCaMI",
+      destination: "Ghar",
+      landmark: "Outside",
+      pickupLocation: "Outside",
+      notes: "I have two large suitcases. Please call upon arrival.",
+      departureTime:{start: "2025-12-30 23:41:31+00", end:"2025-12-31 23:42:31+00"},
+      acceptedAt: null,
+      createdAt: "2025-12-25T06:33:23.742Z",
+      updatedAt: "2025-12-25T08:41:47.078Z",
+      deletedAt: null
+    },
+  driver: {
+      firstName: "Stuti",
+      lastName: "Upreti",
+      profileImage: "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zN0VxTFlKZjlIeGExODZqWXBVRzFFYlhNNzMifQ",
+      phoneNumber: "134365765",
+      primaryLocation: "Kathmandu"
+    },
   passenger: {
-    firstName: 'John',
-    lastName: 'Doe',
-    profileImage: '/profile.jpg',
-    phoneNumber: '3456789',
-  },
-  driver: null,
-  status: 'not_started',
-  landmark: 'Near City Hall', // required
-  notes: 'Handle with care', // required
-  departureTime: {
-     start: '',
-  end: '',
-  }, // required
-};
+      firstName: "Stuti",
+      lastName: "Upreti"
+    }
+  
+}
