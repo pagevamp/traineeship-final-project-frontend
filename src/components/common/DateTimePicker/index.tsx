@@ -62,11 +62,14 @@ export function DateTimePicker({ labelName, value, onChange, error }: DateTimePi
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-card-bg-100" align="start">
-            <Calendar mode="single" selected={currentDate} onSelect={handleDateSelect} />
+            <Calendar
+              disabled={{ before: new Date() }}
+              mode="single"
+              selected={currentDate}
+              onSelect={handleDateSelect}
+            />
           </PopoverContent>
         </Popover>
-
-        {/* Time Part */}
         <Input
           type="time"
           step="1"
@@ -74,8 +77,8 @@ export function DateTimePicker({ labelName, value, onChange, error }: DateTimePi
           onChange={handleTimeChange}
           className="w-30 h-11 bg-card-bg-100 border-secondary-100/20 text-sm cursor-pointer"
         />
-        {error && <p className="text-xs text-destructive mt-1 ml-1">{error}</p>}
       </div>
+      {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
     </div>
   );
 }

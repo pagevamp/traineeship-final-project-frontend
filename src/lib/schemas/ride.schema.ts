@@ -22,6 +22,10 @@ export const createRideRequestSchema = z
     message: 'Latest departure must be after earliest departure',
     path: ['departureEnd'],
   })
+  .refine((data) => data.departureStart < new Date(), {
+    message: 'Departure must be in future',
+    path: ['departureStart'],
+  })
   .refine(
     (data) => {
       const diffMs = data.departureEnd.getTime() - data.departureStart.getTime();

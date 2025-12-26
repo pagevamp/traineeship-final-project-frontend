@@ -50,18 +50,19 @@ export const useCreateRideRequest = () => {
     return true;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, onClose: () => void) => {
     e.preventDefault();
-    console.log(formData);
     const isValid = handleValidation();
     if (!isValid) return;
     try {
       setLoading(true);
+      console.log(formData);
     } catch (err) {
       if (err instanceof Error) {
       } else {
       }
     } finally {
+      onClose();
       setLoading(false);
       setError({});
     }

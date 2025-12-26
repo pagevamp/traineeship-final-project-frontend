@@ -14,7 +14,7 @@ import { RideRequestForm } from '@/components/Rides/RideRequestForm';
 
 const Rides = () => {
   const { activeTab, setActiveTab } = useRideRequests();
-  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // Modal state
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0b] text-white overflow-hidden">
@@ -26,7 +26,7 @@ const Rides = () => {
             <div className="absolute top-3 right-3 md:top-5 md:right-5 flex justify-end">
               <Button
                 className="px-2 py-1 md:px-6 md:py-3 hover:scale-103 hover:bg-secondary-100/10 text-light-text-100"
-                onClick={(e) => setIsPostModalOpen(true)}
+                onClick={() => setIsPostModalOpen(true)}
               >
                 Request ride
               </Button>

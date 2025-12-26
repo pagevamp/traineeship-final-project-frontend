@@ -1,3 +1,5 @@
+import z from 'zod';
+
 export interface DepartureTime {
   start: string;
   end: string;
@@ -34,3 +36,19 @@ export interface Ride {
 }
 
 export type RideTab = 'all' | 'mine';
+
+export const RideRequestItemSchema = z.object({
+  id: z.string(),
+  passenger_id: z.string(),
+  destination: z.string(),
+  landmark: z.string().nullable,
+  driver: z.string().nullable(),
+  status: z.string(),
+  notes: z.string().nullable(),
+  pickup_location: z.string(),
+  departure_time: z.string(),
+  acceptedAt: z.string().nullable(),
+  created_at: z.string(),
+});
+
+export type RideRequestItem = z.infer<typeof RideRequestItemSchema>;

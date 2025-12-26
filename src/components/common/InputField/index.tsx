@@ -71,8 +71,7 @@ export const InputField = ({
         />
       </div>
       {error && (
-        <p className="text-xs text-red-700 flex items-center gap-1 mt-1">
-          <Icon icon="solar:close-square-bold" width="14" height="14" className="text-red-950" />
+        <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
           <span>{error}</span>
         </p>
       )}

@@ -1,15 +1,17 @@
 'use client';
 import { Icon } from '@iconify/react';
 import { Button } from '@/components/common/Button';
-import { InputField } from '@/components/common/InputField'; // Adjust path
+import { InputField } from '@/components/common/InputField';
 import { DateTimePicker } from '@/components/common/DateTimePicker';
 import { useCreateRideRequest } from '@/hooks/useCreateRideRequest';
+import { RideRequestItem } from '@/core/types/Ride';
 
 interface RideRequestFormProps {
+  ride?: RideRequestItem | null;
   onClose: () => void;
 }
 
-export const RideRequestForm = ({ onClose }: RideRequestFormProps) => {
+export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
   const {
     formData,
     setFormData,
@@ -18,10 +20,11 @@ export const RideRequestForm = ({ onClose }: RideRequestFormProps) => {
     setDepartureEnd,
     error,
     handleSubmit,
+    loading,
   } = useCreateRideRequest();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 py-2">
+    <form onSubmit={(e) => handleSubmit(e, onClose)} className="space-y-4 py-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <InputField
           name="pickupLocation"
@@ -48,7 +51,7 @@ export const RideRequestForm = ({ onClose }: RideRequestFormProps) => {
         name="landmark"
         labelName="Landmark"
         icon="mdi:office-building-marker-outline"
-        placeholder="e.g. Near the main gate"
+        placeholder="e.g. Near the main gate (optional)"
         value={formData.landmark}
         variant="card"
         error={error?.landmark}
@@ -75,12 +78,12 @@ export const RideRequestForm = ({ onClose }: RideRequestFormProps) => {
         </label>
         <textarea
           className="w-full p-3 rounded-xl border-2 border-secondary-100/20 bg-card-bg-100 text-light-text-100 text-sm focus:outline-none focus:border-secondary-100 transition-all placeholder:text-placeholder-100/70 h-24 resize-none"
-          placeholder="Any extra details..."
+          placeholder="Any extra details... (optional)"
           value={formData.notes}
           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
         />
       </div>
-      <div className="flex gap-4 pt-4">
+      <div className="flex gap-4 pt-2">
         <Button
           type="button"
           className="flex-1 h-11 bg-transparent border border-secondary-100/30 text-light-text-100 hover:bg-secondary-100/10 transition-all"
@@ -92,7 +95,7 @@ export const RideRequestForm = ({ onClose }: RideRequestFormProps) => {
           type="submit"
           className="flex-1 h-11 bg-secondary-100 text-light-text-100 hover:scale-102 hover:opacity-95 transition-all font-bold"
         >
-          Request Ride
+          {loading ? 'Requesting Ride' : 'Request Ride'}
         </Button>
       </div>
     </form>
