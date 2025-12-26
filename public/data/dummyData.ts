@@ -32,7 +32,8 @@ export const dummyTrip : Trip =
     },
   passenger: {
       firstName: "Stuti",
-      lastName: "Upreti"
+      lastName: "Upreti",
+      imageUrl:'file:///Users/stutiupreti/Downloads/1748281170308.jpeg'
     }
   
 }

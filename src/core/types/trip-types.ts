@@ -1,5 +1,5 @@
 
-export type TripStatus = 'not_started' | 'on_the_way' | 'at_pickup' | 'reached';
+export type TripStatus = 'not_started' | 'on_the_way' | 'reached_pickup' | 'reached_destination';
 export type vehicleType = 'two_wheeler' | 'four_wheeler';
 
 
@@ -37,17 +37,18 @@ export interface Trip {
   passenger: {
     firstName: string,
     lastName: string
+    imageUrl: string
   }
 }
 
 export interface TripCardProps {
   data: Trip;
   onCancel: (id: string) => void;
-  onAccept: (id: string, type: 'two_wheeler' | 'four_wheeler') => void;
+  onStatusUpdate: (id: string, type: TripStatus) => void;
 }
 
 export interface AcceptRideProps {
   acceptedAt : string|null; id: string;
   onCancel: (id: string) => void;
-  onAccept: (id: string, type: 'two_wheeler' | 'four_wheeler') => void;
+  onStatusUpdate: (id: string, type: TripStatus) => void;
 }

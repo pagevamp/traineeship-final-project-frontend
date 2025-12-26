@@ -14,6 +14,9 @@ export const buttonVariants = cva(
         icon: 'bg-transparent p-0 m-0',
         navigation:
           'bg-tertiary-100 border-2 border-secondary-100 rounded-md shadow-sm shadow-primary-100 text-md flex flex-row items-center gap-3 h-12 w-50 text-white font-semibold px-2 place-self-end',
+        popper:
+          'w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left cursor-pointer',
+    
       },
       size: {
         default: 'px-10 py-2',

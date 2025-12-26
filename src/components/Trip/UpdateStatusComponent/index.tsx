@@ -3,7 +3,7 @@ import { Button } from '@/components/common/Button';
 import { AcceptRideProps } from '@/core/types/trip-types';
 import React, { useState } from 'react'
 
-export const AcceptButton = ({id, onAccept, onCancel}:AcceptRideProps) => {
+export const UpdateStatus = ({id, onStatusUpdate, onCancel}:AcceptRideProps) => {
       const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (
@@ -19,24 +19,42 @@ export const AcceptButton = ({id, onAccept, onCancel}:AcceptRideProps) => {
 
           {popoverOpen && (
             <dialog className="absolute left-0 top-full mt-2 w-40 bg-card-bg-100 border border-secondary-100 rounded-lg shadow-lg z-50">
-              <button
+              <Button
                 className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
                 onClick={() => {
-                  onAccept(id, 'two_wheeler');
+                  onStatusUpdate(id, 'not_started');
                   setPopoverOpen(false);
                 }}
               >
-                Two-Wheeler
-              </button>
-              <button
+                Not Started
+              </Button>
+              <Button
                 className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
                 onClick={() => {
-                  onAccept(id, 'four_wheeler');
+                  onStatusUpdate(id, 'on_the_way');
                   setPopoverOpen(false);
                 }}
               >
-                Four-Wheeler
-              </button>
+                On My Way
+              </Button>
+              <Button
+                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
+                onClick={() => {
+                  onStatusUpdate(id, 'reached_pickup');
+                  setPopoverOpen(false);
+                }}
+              >
+                Not Started
+              </Button>
+              <Button
+                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
+                onClick={() => {
+                  onStatusUpdate(id, 'reached_destination');
+                  setPopoverOpen(false);
+                }}
+              >
+                On My Way
+              </Button>
             </dialog>
           )}
         </div>
