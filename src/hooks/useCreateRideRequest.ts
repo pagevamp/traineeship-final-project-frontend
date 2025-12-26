@@ -1,0 +1,83 @@
+'use client';
+
+import { useState } from 'react';
+import { z } from 'zod';
+import { createRideRequestSchema, CreateRideRequestActionState } from '@/lib/schemas/ride.schema';
+
+export const useCreateRideRequest = () => {
+  const [formData, setFormData] = useState({
+    pickupLocation: '',
+    destination: '',
+    landmark: '',
+    notes: '',
+    departureStart: null as Date | null,
+    departureEnd: null as Date | null,
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<CreateRideRequestActionState['errors']>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const setDepartureStart = (date: Date | null) =>
+    setFormData((prev) => ({ ...prev, departureStart: date }));
+
+  const setDepartureEnd = (date: Date | null) =>
+    setFormData((prev) => ({ ...prev, departureEnd: date }));
+
+  const handleValidation = () => {
+    const result = createRideRequestSchema.safeParse(formData);
+
+    if (!result.success) {
+      const fieldErrors = z.treeifyError(result.error);
+
+      setError({
+        pickupLocation: fieldErrors.properties?.pickupLocation?.errors[0],
+        destination: fieldErrors.properties?.destination?.errors[0],
+        landmark: fieldErrors.properties?.landmark?.errors[0],
+        notes: fieldErrors.properties?.notes?.errors[0],
+        departureStart: fieldErrors.properties?.departureStart?.errors[0],
+        departureEnd: fieldErrors.properties?.departureEnd?.errors[0],
+      });
+
+      return false;
+    }
+
+    setError({});
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+    const isValid = handleValidation();
+    if (!isValid) return;
+    try {
+      setLoading(true);
+    } catch (err) {
+      if (err instanceof Error) {
+      } else {
+      }
+    } finally {
+      setLoading(false);
+      setError({});
+    }
+  };
+
+  return {
+    formData,
+    setFormData,
+    handleChange,
+    setDepartureStart,
+    setDepartureEnd,
+    handleValidation,
+    loading,
+    setLoading,
+    error,
+    setError,
+    handleSubmit,
+  };
+};

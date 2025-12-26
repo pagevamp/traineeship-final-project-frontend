@@ -8,9 +8,13 @@ import { Button } from '@/components/common/Button';
 import { RideRequestsSection } from '@/components/Rides/RideRequest/RideRequestsSection';
 import { MyRideRequestsSection } from '@components/Rides/MyRideRequest/MyRideRequestSection/index';
 import { useRideRequests } from '@/hooks/useRideRequest';
+import { useState } from 'react';
+import { Modal } from '@/components/common/Modal';
+import { RideRequestForm } from '@/components/Rides/RideRequestForm';
 
 const Rides = () => {
   const { activeTab, setActiveTab } = useRideRequests();
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // Modal state
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0b] text-white overflow-hidden">
@@ -20,7 +24,10 @@ const Rides = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <RidesHeader />
             <div className="absolute top-3 right-3 md:top-5 md:right-5 flex justify-end">
-              <Button className="px-2 py-1 md:px-6 md:py-3 hover:scale-103 hover:bg-secondary-100/10 text-light-text-100">
+              <Button
+                className="px-2 py-1 md:px-6 md:py-3 hover:scale-103 hover:bg-secondary-100/10 text-light-text-100"
+                onClick={(e) => setIsPostModalOpen(true)}
+              >
                 Request ride
               </Button>
             </div>
@@ -41,6 +48,14 @@ const Rides = () => {
               </div>
             )}
           </div>
+
+          <Modal
+            title="Create a new ride request"
+            open={isPostModalOpen}
+            onOpenChange={setIsPostModalOpen}
+          >
+            <RideRequestForm onClose={() => setIsPostModalOpen(false)} />
+          </Modal>
         </main>
       </div>
     </div>
