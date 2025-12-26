@@ -31,12 +31,10 @@ const UnauthorizedPage = () => {
               Access Denied
             </h1>
             <div className="space-y-2">
-              <p className="text-md text-gray-700 font-secondary">
-                Unauthorized Access
-              </p>
-              <p className="text-sm text-gray-500 leading-relaxed font-secondary font-[300]">
-                You don&apos;t have permission to access this resource in the
-                Ride Sharing service. Please contact support at
+              <p className="text-md text-gray-700 font-secondary">Unauthorized Access</p>
+              <p className="text-sm text-gray-500 leading-relaxed font-secondary font-light">
+                You don&apos;t have permission to access this resource in the Ride Sharing service.
+                Please contact support at
                 <a
                   href="mailto:istutiupreti805@gmail.com"
                   className="ml-2 font-bold text-shadow-emerald-400"
@@ -49,9 +47,7 @@ const UnauthorizedPage = () => {
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <p className="text-xs text-gray-500 font-secondary">
-              Error Code: 403 - Forbidden
-            </p>
+            <p className="text-xs text-gray-500 font-secondary">Error Code: 403 - Forbidden</p>
           </div>
 
           <div className="pt-4 border-t border-gray-100">
