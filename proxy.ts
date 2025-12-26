@@ -11,29 +11,25 @@ export async function proxy(request: NextRequest) {
 
   // Authentication check
   if (!token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
   if (token && (await isTokenExpired(token)) === true) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
   const userId = await getUserFromSession(token);
   if (!userId) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
   return NextResponse.next();
 }
 
-async function handlePublicPath(
-  request: NextRequest,
-  pathname: string,
-  token?: string
-) {
+async function handlePublicPath(request: NextRequest, pathname: string, token?: string) {
   if (token && PUBLIC_PATH.some((path) => pathname === path)) {
     const userId = await getUserFromSession(token);
     if (userId) {
-      return NextResponse.redirect(new URL('/urls', request.url));
+      return NextResponse.redirect(new URL('/rides', request.url));
     }
   }
   return NextResponse.next();
