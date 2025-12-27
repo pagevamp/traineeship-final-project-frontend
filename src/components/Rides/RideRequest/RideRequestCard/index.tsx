@@ -4,7 +4,7 @@ import { Button } from '@components/common/Button';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
 import { Ride } from '@/core/types/Ride';
-import { useRideRequests } from '@/hooks/useRideRequest';
+import { formatTime } from '@/lib/utils';
 
 interface RideRequestCardProps {
   ride: Ride;
@@ -13,7 +13,6 @@ interface RideRequestCardProps {
 }
 
 export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProps) => {
-  const { formatTime } = useRideRequests();
   return (
     <div className="relative flex flex-col border-2 border-secondary-100 rounded-xl w-full md:w-2/3 lg:w-2/4 p-4 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale-101 transition-all duration-300">
       <div className="absolute top-0 right-0 z-10 px-4 py-1 rounded-bl-xl rounded-tr-lg text-xs uppercase font-bold tracking-wider bg-secondary-100 text-light-text-100">
@@ -75,9 +74,9 @@ export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProp
         </div>
 
         <div className="flex text-xs md:text:sm text-light-text-100">
-          <span>{formatTime(ride.departureTime.start)}</span>
+          <span>{formatTime(ride.departureTime.departureStart)}</span>
           <span>&nbsp; {'-'}&nbsp;</span>
-          <span>{formatTime(ride.departureTime.end)}</span>
+          <span>{formatTime(ride.departureTime.departureEnd)}</span>
         </div>
       </div>
       <div className="flex gap-2 md:gap-5">
@@ -99,7 +98,7 @@ export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProp
         >
           Details
           <span className="w-0 h-4 opacity-0 transition-all duration-300 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-1 text-light-text-100">
-            <Icon icon="formkit:arrowright">+</Icon>
+            <Icon icon="formkit:arrowright"></Icon>
           </span>
         </Button>
       </div>

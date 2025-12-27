@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { Button } from '@/components/common/Button';
 import { Ride } from '@/core/types/Ride';
-import { useRideRequests } from '@/hooks/useRideRequest';
+import { formatTime } from '@/lib/utils';
 
 interface ViewDetailsProps {
   ride: Ride;
@@ -14,7 +14,6 @@ interface ViewDetailsProps {
 }
 
 export const ViewDetails = ({ isOwnRide, ride, onEdit, onAccept, onCancel }: ViewDetailsProps) => {
-  const { formatTime } = useRideRequests();
   return (
     <div className="flex flex-col w-full overflow-hidden">
       <div className="flex items-center justify-between p-4 border-b">
@@ -42,8 +41,8 @@ export const ViewDetails = ({ isOwnRide, ride, onEdit, onAccept, onCancel }: Vie
             Departure Time
           </span>
           <div className="text-sm font-semibold text-light-text-100">
-            {formatTime(ride.departureTime.start)}
-            {' - '} {formatTime(ride.departureTime.end)}
+            {formatTime(ride.departureTime.departureStart)}
+            {' - '} {formatTime(ride.departureTime.departureEnd)}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
-import { AuthProvider } from '@/context/auth/AuthContext';
+import ClientAuthInitializer from '@/components/ClientAuthInitiallizer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,19 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        cssLayerName: 'clerk',
-      }}
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    >
-      <AuthProvider>
-        <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-            {children}
-          </body>
-        </html>
-      </AuthProvider>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClerkProvider
+          appearance={{
+            cssLayerName: 'clerk',
+          }}
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        >
+          <ClientAuthInitializer />
+          {children}
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

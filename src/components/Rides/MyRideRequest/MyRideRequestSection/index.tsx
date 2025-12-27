@@ -1,51 +1,26 @@
 'use client';
-import { useState } from 'react';
 import { Ride } from '@/core/types/Ride';
 import { Modal } from '@/components/common/Modal';
 import { ViewDetails } from '../../ViewDetails';
 import { MyRideRequestCard } from '../MyRideRequestCard';
+import { RideRequestForm } from '../../RideRequestForm';
+import { CancelConfirmationDialog } from '../../CancelDialog';
+import { useState } from 'react';
+import { useModal, ViewMode } from '@/hooks/useViewModal';
 
 export const MyRideRequestsSection = () => {
   const ridesData: Ride[] = [
-    {
-      id: '3ff23a36-9f55-472d-b2a9-1e13456e5757',
-      passengerId: 'user_37CEl7rk6l3pMjAF4jJUmSA6fkP',
-      destination: 'Balaju',
-      landmark: 'Outside',
-      driver: {
-        firstName: 'KP',
-        lastName: 'Baa',
-        phoneNumber: null,
-      },
-      status: 'not_started',
-      pickupLocation: 'Naikap',
-      notes: 'I have two large suitcases. Please call upon arrival.',
-      departureTime: {
-        start: '2025-12-24 08:00:00+00',
-        end: '2025-12-24 09:30:00+00',
-      },
-      acceptedAt: '2025-12-24 08:00:00+00',
-      passenger: {
-        firstName: 'Hidden',
-        lastName: 'Name',
-        profileImage:
-          'https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zN0NFbDM4R2NrS0lMVjhGTHJwRlUxSHVVaWkifQ',
-        phoneNumber: '8828828888',
-      },
-      createdAt: '2025-12-23T11:47:41.534Z',
-    },
     {
       id: '3ff23a-9f55-472d-b2a9-1e13456e5757',
       passengerId: 'user_37CEl7rk6l3pMjAF4jJUmSA6fkP',
       destination: 'Naikap',
       landmark: 'Outside',
-      driver: null,
       status: 'not_started',
       pickupLocation: 'Outside',
       notes: 'I have two large suitcases. Please call upon arrival.',
       departureTime: {
-        start: '2025-12-24 08:00:00+00',
-        end: '2025-12-24 09:30:00+00',
+        departureStart: '2025-12-24 08:00:00+00',
+        departureEnd: '2025-12-24 09:30:00+00',
       },
       acceptedAt: null,
       passenger: {
@@ -60,22 +35,12 @@ export const MyRideRequestsSection = () => {
   ];
 
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-  const handleEditRide = (id: string) => {
-    console.log('Navigate to Edit Form or Open Edit Modal for:', id);
-  };
+  const { open, close, isFormOpen, isViewing, isCancelling } = useModal();
 
-  const handleCancelRide = (id: string) => {
-    const confirmCancel = window.confirm('Are you sure you want to cancel this ride request?');
-    if (confirmCancel) {
-      console.log('Ride Request Cancelled:', id);
-    }
-  };
-
-  const handleViewDetails = (ride: Ride) => {
+  const handleAction = (mode: ViewMode, ride: Ride | null) => {
     setSelectedRide(ride);
-    setIsDetailsOpen(true);
+    open(mode);
   };
 
   return (
@@ -85,24 +50,57 @@ export const MyRideRequestsSection = () => {
           <MyRideRequestCard
             key={ride.id}
             ride={ride}
-            onEdit={handleEditRide}
-            onCancel={handleCancelRide}
-            onViewDetails={() => handleViewDetails(ride)}
+            onEdit={() => handleAction('editing', ride)}
+            onCancel={() => handleAction('cancelling', ride)}
+            onViewDetails={() => handleAction('viewing', ride)}
           />
         ))}
       </div>
 
-      {selectedRide && (
+      <Modal
+        title={selectedRide ? 'Edit your ride request' : 'Request a new ride'}
+        open={isFormOpen}
+        onOpenChange={close}
+      >
+        <RideRequestForm ride={selectedRide} onClose={close} />
+      </Modal>
+
+      <Modal title="Ride Cancellation" open={isCancelling} onOpenChange={close}>
+        <CancelConfirmationDialog
+          onConfirm={() => {
+            console.log('Cancelling ID:', selectedRide?.id);
+            close();
+          }}
+          onClose={close}
+        />
+      </Modal>
+
+      {/* {selectedRide && (
         <Modal title="Ride Request Details" open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
           <ViewDetails
-            onCancel={handleCancelRide}
-            isOwnRide={true}
             ride={selectedRide}
-            onEdit={handleEditRide}
-            onAccept={() => console.log('Ride Cancelled')}
+            isOwnRide={true}
+            onEdit={() => {
+              setIsDetailsOpen(false);
+              handleEditRide(selectedRide);
+            }}
+            onCancel={() => handleCancelRide}
+            onAccept={() => {}}
           />
         </Modal>
-      )}
+      )} */}
+
+      <Modal title="Ride Request Details" open={isViewing} onOpenChange={close}>
+        {selectedRide && (
+          <ViewDetails
+            ride={selectedRide}
+            isOwnRide={true}
+            onEdit={() => open('editing')}
+            onCancel={() => open('cancelling')}
+            onAccept={() => {}}
+          />
+        )}
+      </Modal>
     </div>
   );
 };

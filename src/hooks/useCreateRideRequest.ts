@@ -2,16 +2,21 @@
 
 import { useState } from 'react';
 import { z } from 'zod';
-import { createRideRequestSchema, CreateRideRequestActionState } from '@/lib/schemas/ride.schema';
+import { createRideRequestSchema, CreateRideRequestActionState } from '@/core/schemas/ride.schema';
+import { Ride } from '@/core/types/Ride';
 
-export const useCreateRideRequest = () => {
+export const useCreateRideRequest = (ride?: Ride | null) => {
   const [formData, setFormData] = useState({
-    pickupLocation: '',
-    destination: '',
-    landmark: '',
-    notes: '',
-    departureStart: null as Date | null,
-    departureEnd: null as Date | null,
+    pickupLocation: ride?.pickupLocation ?? '',
+    destination: ride?.destination ?? '',
+    landmark: ride?.landmark ?? '',
+    notes: ride?.notes ?? '',
+    departureStart: ride?.departureTime.departureStart
+      ? new Date(ride.departureTime.departureStart)
+      : null,
+    departureEnd: ride?.departureTime.departureEnd
+      ? new Date(ride.departureTime.departureEnd)
+      : null,
   });
 
   const [loading, setLoading] = useState(false);

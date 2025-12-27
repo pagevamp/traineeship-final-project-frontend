@@ -1,54 +1,52 @@
 import z from 'zod';
 
-export interface DepartureTime {
-  start: string;
-  end: string;
-}
+export const DepartureTimeSchema = z.object({
+  departureStart: z.string(),
+  departureEnd: z.string(),
+});
 
-export interface Passenger {
-  firstName: string;
-  lastName: string;
-  profileImage: string;
-  phoneNumber: string | null;
-}
+export const PassengerSchema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  profileImage: z.string().url(),
+  phoneNumber: z.string().nullable(),
+});
 
-export interface Driver {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string | null;
-}
+export const RideSchema = z.object({
+  id: z.string(),
+  passengerId: z.string(),
+  destination: z.string(),
+  landmark: z.string().nullable(),
+  pickupLocation: z.string(),
+  notes: z.string().nullable(),
+  acceptedAt: z.string().nullable(),
+  createdAt: z.string(),
+  passenger: PassengerSchema,
+  departureTime: z.preprocess((val) => {
+    if (typeof val === 'string') {
+      try {
+        const parsed = JSON.parse(val);
+        if (Array.isArray(parsed)) {
+          return {
+            departureStart: parsed[0],
+            departureEnd: parsed[1],
+          };
+        }
+      } catch {
+        return val;
+      }
+    }
+    return val;
+  }, DepartureTimeSchema),
+});
 
-export type RideStatus = 'not_started' | 'on_the_way' | 'at_pickup' | 'reached';
+export type Ride = z.infer<typeof RideSchema>;
+export type Passenger = z.infer<typeof PassengerSchema>;
+export type DepartureTime = z.infer<typeof DepartureTimeSchema>;
 
-export interface Ride {
-  id: string;
-  passengerId: string;
-  destination: string;
-  landmark: string | null;
-  driver: Driver | null;
-  status: RideStatus;
-  pickupLocation: string;
-  notes: string | null;
-  departureTime: DepartureTime;
-  acceptedAt: string | null;
-  passenger: Passenger;
-  createdAt: string;
+export interface RideDTO extends Omit<Ride, 'departureTime' | 'status'> {
+  departureTime: string;
+  status: string;
 }
 
 export type RideTab = 'all' | 'mine';
-
-export const RideRequestItemSchema = z.object({
-  id: z.string(),
-  passenger_id: z.string(),
-  destination: z.string(),
-  landmark: z.string().nullable,
-  driver: z.string().nullable(),
-  status: z.string(),
-  notes: z.string().nullable(),
-  pickup_location: z.string(),
-  departure_time: z.string(),
-  acceptedAt: z.string().nullable(),
-  created_at: z.string(),
-});
-
-export type RideRequestItem = z.infer<typeof RideRequestItemSchema>;

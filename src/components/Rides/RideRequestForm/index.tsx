@@ -4,10 +4,10 @@ import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
 import { DateTimePicker } from '@/components/common/DateTimePicker';
 import { useCreateRideRequest } from '@/hooks/useCreateRideRequest';
-import { RideRequestItem } from '@/core/types/Ride';
+import { Ride } from '@/core/types/Ride';
 
 interface RideRequestFormProps {
-  ride?: RideRequestItem | null;
+  ride?: Ride | null;
   onClose: () => void;
 }
 
@@ -21,7 +21,7 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
     error,
     handleSubmit,
     loading,
-  } = useCreateRideRequest();
+  } = useCreateRideRequest(ride);
 
   return (
     <form onSubmit={(e) => handleSubmit(e, onClose)} className="space-y-4 py-2">
@@ -91,11 +91,19 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
         >
           Cancel
         </Button>
+
         <Button
           type="submit"
-          className="flex-1 h-11 bg-secondary-100 text-light-text-100 hover:scale-102 hover:opacity-95 transition-all font-bold"
+          disabled={loading}
+          className="flex-1 h-11 bg-secondary-100 text-light-text-100 hover:scale-102 hover:opacity-95 active:scale-95 transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
-          {loading ? 'Requesting Ride' : 'Request Ride'}
+          {loading ? (
+            <>{ride ? 'Saving...' : 'Requesting...'}</>
+          ) : ride ? (
+            'Save changes'
+          ) : (
+            'Request Ride'
+          )}
         </Button>
       </div>
     </form>

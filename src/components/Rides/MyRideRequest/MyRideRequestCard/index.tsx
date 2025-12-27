@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { Ride } from '@/core/types/Ride';
 import { Button } from '../../../common/Button';
@@ -7,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 
 interface MyRideRequestCardProps {
   ride: Ride;
-  onEdit: (id: string) => void;
+  onEdit: () => void;
   onCancel: (id: string) => void;
   onViewDetails: () => void;
 }
@@ -33,9 +32,9 @@ export const MyRideRequestCard = ({
       </div>
 
       <div className="flex items-center gap-4 mb-6">
-        <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
+        {/* <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
           <Image src={ride.passenger.profileImage} alt="You" fill className="object-cover" />
-        </div>
+        </div> */}
         <div>
           <h3 className="font-bold text-lg text-text-one-100">Your Trip Request</h3>
           <p className="text-xs text-light-text-100 flex items-center gap-1">
@@ -71,27 +70,18 @@ export const MyRideRequestCard = ({
         </div>
       </div>
 
-      {isAccepted && (
+      {/* {isAccepted && (
         <section className="space-y-4">
           <div className="flex items-center justify-between bg-green-500/5 p-3 rounded-xl border border-green-500/20">
             <div className="flex items-center gap-3">
               <Icon icon="mdi:steering" className="text-green-600 size-6" />
               <div>
                 <p className="text-xs md:text-sm uppercase font-black text-green-600 tracking-tighter">
-                  {ride.driver?.phoneNumber}
+                  {driver?.firstName} {driver?.lastName}{' '}
                 </p>
-                <p className="text-sm font-bold text-text-one-100 leading-tight">
-                  {ride.driver?.firstName} {ride.driver?.lastName}
-                </p>
+                <p className="text-sm text-text-one-100 leading-tight">{driver?.phoneNumber}</p>
               </div>
             </div>
-            <a
-              href={`tel:${ride.driver?.phoneNumber}`}
-              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:scale-105 transition-transform"
-            >
-              <Icon icon="mdi:phone" />
-              Call
-            </a>
           </div>
 
           <div className="space-y-2">
@@ -121,15 +111,14 @@ export const MyRideRequestCard = ({
             </p>
           </div>
         </section>
-      )}
+      )} */}
 
-      {/* Dynamic Action Buttons */}
       <div className="flex items-center justify-between gap-3 mt-auto">
         <div className="flex gap-2 md:gap-5">
           {!isAccepted && (
             <Button
               className="h-9 px-4 bg-secondary-100 text-light-text-100 hover:opacity-90 hover:scale-102 transition-transform"
-              onClick={() => onEdit(ride.id)}
+              onClick={onEdit}
             >
               <Icon icon="mdi:pencil-outline" className="mr-1" /> Edit
             </Button>
@@ -148,8 +137,7 @@ export const MyRideRequestCard = ({
         {!isAccepted && (
           <Button
             className="h-9 px-4 bg-red-600 border-none text-light-text-100  hover:opacity-90  hover:scale-102"
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={() => {
               onCancel(ride.id);
             }}
           >
