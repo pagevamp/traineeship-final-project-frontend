@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { Ride } from '@/core/types/Ride';
 import { Button } from '../../../common/Button';
 import { formatDistanceToNow } from 'date-fns';
+import Image from 'next/image';
 
 interface MyRideRequestCardProps {
   ride: Ride;
@@ -18,6 +19,7 @@ export const MyRideRequestCard = ({
   onViewDetails,
 }: MyRideRequestCardProps) => {
   const isAccepted = !!ride.acceptedAt;
+
   return (
     <div
       className={`flex flex-col border-2 rounded-xl w-full md:w-2/3 lg:w-2/4 p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale-101 transition-all duration-300 relative overflow-hidden
@@ -32,9 +34,9 @@ export const MyRideRequestCard = ({
       </div>
 
       <div className="flex items-center gap-4 mb-6">
-        {/* <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
+        <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
           <Image src={ride.passenger.profileImage} alt="You" fill className="object-cover" />
-        </div> */}
+        </div>
         <div>
           <h3 className="font-bold text-lg text-text-one-100">Your Trip Request</h3>
           <p className="text-xs text-light-text-100 flex items-center gap-1">

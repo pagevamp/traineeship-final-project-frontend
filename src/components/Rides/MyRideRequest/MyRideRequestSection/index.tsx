@@ -7,36 +7,29 @@ import { RideRequestForm } from '../../RideRequestForm';
 import { CancelConfirmationDialog } from '../../CancelDialog';
 import { useState } from 'react';
 import { useModal, ViewMode } from '@/hooks/useViewModal';
+import useSWR from 'swr';
+import { getMyPendingRides } from '@/core/api/ride.api';
 
 export const MyRideRequestsSection = () => {
-  const ridesData: Ride[] = [
-    {
-      id: '3ff23a-9f55-472d-b2a9-1e13456e5757',
-      passengerId: 'user_37CEl7rk6l3pMjAF4jJUmSA6fkP',
-      destination: 'Naikap',
-      landmark: 'Outside',
-      status: 'not_started',
-      pickupLocation: 'Outside',
-      notes: 'I have two large suitcases. Please call upon arrival.',
-      departureTime: {
-        departureStart: '2025-12-24 08:00:00+00',
-        departureEnd: '2025-12-24 09:30:00+00',
-      },
-      acceptedAt: null,
-      passenger: {
-        firstName: 'Hidden',
-        lastName: 'Name',
-        profileImage:
-          'https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zN0NFbDM4R2NrS0lMVjhGTHJwRlUxSHVVaWkifQ',
-        phoneNumber: '8828828888',
-      },
-      createdAt: '2025-12-23T11:47:41.534Z',
-    },
-  ];
-
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
-
   const { open, close, isFormOpen, isViewing, isCancelling } = useModal();
+  const {
+    data: ridesData = [],
+    error,
+    isLoading,
+  } = useSWR<Ride[]>('ride-requests/me/pending', getMyPendingRides);
+
+  if (isLoading) {
+    return <div className="p-6">Loading rides...</div>;
+  }
+
+  if (error) {
+    return <div className="p-6 text-red-500">Failed to load rides</div>;
+  }
+
+  if (ridesData.length === 0) {
+    return <div className="p-6">No rides</div>;
+  }
 
   const handleAction = (mode: ViewMode, ride: Ride | null) => {
     setSelectedRide(ride);

@@ -14,7 +14,6 @@ interface RideRequestFormProps {
 export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
   const {
     formData,
-    setFormData,
     handleChange,
     setDepartureStart,
     setDepartureEnd,
@@ -77,10 +76,11 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
           <Icon icon="mdi:note-text-outline" width={16} /> Notes
         </label>
         <textarea
+          name="notes"
           className="w-full p-3 rounded-xl border-2 border-secondary-100/20 bg-card-bg-100 text-light-text-100 text-sm focus:outline-none focus:border-secondary-100 transition-all placeholder:text-placeholder-100/70 h-24 resize-none"
           placeholder="Any extra details... (optional)"
           value={formData.notes}
-          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+          onChange={handleChange}
         />
       </div>
       <div className="flex gap-4 pt-2">

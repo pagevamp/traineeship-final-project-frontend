@@ -10,7 +10,7 @@ export const setTokenGetter = (fn: () => Promise<string | null>) => {
 
 const axiosInstance = axios.create({
   baseURL: BASE_API_URL,
-  timeout: 5000,
+  timeout: 15000,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });

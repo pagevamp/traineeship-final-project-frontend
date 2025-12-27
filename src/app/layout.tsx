@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import ClientAuthInitializer from '@/components/ClientAuthInitiallizer';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,6 +37,21 @@ export default function RootLayout({
         >
           <ClientAuthInitializer />
           {children}
+          <Toaster
+            position="bottom-right"
+            richColors
+            toastOptions={{
+              style: {
+                background: '#191919',
+                color: '#fff8e3',
+                border: '1px solid rgba(159, 95, 69, 0.2)',
+                borderRadius: '12px',
+                padding: '16px',
+                fontSize: '14px',
+              },
+              className: 'my-custom-toast',
+            }}
+          />{' '}
         </ClerkProvider>
       </body>
     </html>

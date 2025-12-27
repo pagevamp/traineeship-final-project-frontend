@@ -9,7 +9,7 @@ import { useModal } from '@/hooks/useViewModal';
 import { useState } from 'react';
 
 export const RideRequestsSection = () => {
-  const { view, open, close, isViewing } = useModal();
+  const { open, close, isViewing } = useModal();
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
 
   const handleSelectRide = (ride: Ride) => {
@@ -30,6 +30,10 @@ export const RideRequestsSection = () => {
 
   if (error) {
     return <div className="p-6 text-red-500">Failed to load rides</div>;
+  }
+
+  if (ridesData.length === 0) {
+    return <div className="p-6">No rides</div>;
   }
 
   return (
