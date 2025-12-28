@@ -1,0 +1,67 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { HistoryTab } from "@/core/types/history-types";
+import { RideTable } from "../RideTable";
+import { TripTable } from "../TripTable";
+
+
+export const HistoryTabComponent  = () => {
+  const tabs: HistoryTab[] = ["Rides", "Trips"];
+  const [activeTab, setActiveTab] = useState<HistoryTab>('Rides')
+
+  return (
+    <div className="flex flex-col gap-3.75">
+      <div className="flex items-end justify-end md:justify-between w-full flex-wrap md:flex-nowrap">
+        <div className="flex flex-col w-full md:w-auto">
+          <motion.div
+            className="flex gap-20.25 w-full md:w-fit border-b border-secondary-100 overflow-x-auto no-scrollbar"
+            initial={{ x: 0 }}
+            animate={{ x: 0 }}
+          >
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={cn(
+                  "relative whitespace-nowrap text-2xl font-semibold text-text-one-100 pb-3 transition-all duration-300 overflow-visible",
+                  activeTab === tab && "font-semibold"
+                )}
+              >
+                <span className="relative z-10 font-secondary font-normal">
+                  {tab}
+                </span>
+                {activeTab === tab && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-0.75 bg-tertiary-100 rounded-t-[10px] transition-all duration-300 z-0" />
+                )}
+              </button>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          "w-full rounded-[25px] overflow-auto",
+          activeTab === "Trips" && "max-w-fit"
+        )}
+      >
+        <div key={activeTab} className="min-w-150">
+          <div className="w-full bg-tertiary-100 bg-opacity-50 p-4">
+          {activeTab === "Rides" ? (
+            <>
+              <RideTable/>
+             
+            </>
+          ) : (
+            <TripTable/>
+          )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+

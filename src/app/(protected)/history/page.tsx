@@ -1,8 +1,9 @@
+import { HistoryComponent } from '@/features/history/HistoryComponent'
 import React from 'react'
 
 const History = () => {
   return (
-    <div>history</div>
+    <div><HistoryComponent/></div>
   )
 }
 
