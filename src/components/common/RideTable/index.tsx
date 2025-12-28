@@ -1,53 +1,125 @@
+'use client';
+
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { rideTableableHeaders } from "@/core/types/history-types"
-import { dummyRides } from "@public/docs/dummyRides"
-import Image from "next/image"
+} from '@/components/ui/table';
+import { rideTableableHeaders } from '@/core/types/history-types';
+import { useHistory } from '@/hooks/useHistory';
+import { dummyRides } from '@public/docs/dummyRides';
+import Image from 'next/image';
+import { Suspense } from 'react';
+import { Pagination } from '@components/common/PaginationComponent';
+import { SearchComponent } from '@components/common/SearchComponent';
+
 export const RideTable = () => {
+  const itemsPerPage = 5;
+  const { query, currentPage, useFilterRides } = useHistory();
+  const rideData = useFilterRides(query, currentPage, dummyRides);
+
   return (
-    <Table className="bg-radial-[at_90%_85%] from-bg-card-bg-100 to-primary-100 to-100% border-3 border-black">
-        <TableHeader>
-            <TableRow className="border-b border-t border-primary-100">
-                {rideTableableHeaders.map((headers) => (
-                  <TableHead key={headers} className='text-center text-white font-primary text-md py-3 border-r'>
-                    {headers}
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-  
-            <TableBody>
-              {dummyRides.map((data) => (
-                <TableRow key={data.id}>
-                  <TableCell>
-                    {data.id}
-                  </TableCell>
-                  <TableCell><Image src={data.passenger.profileImage} alt='passenger' width={16} height={16}/>{" "}{data.passenger.firstName}{" "}{data.passenger.lastName}</TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    {data.pickupLocation}
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    {data.destination}
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    <span><>From : </>{data.departureTime.departureStart} To : {data.departureTime.departureEnd}</span>
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    {data.acceptedAt}
-                  </TableCell>
-                  
-                </TableRow>
+    <div>
+      <section className="flex flex-row items-center justify-between mt-2 mb-5">
+        <h2 className="font-semibold text-xl">
+          Your Rides History with <span className="text-primary-100 font-extrabold">MILERA...</span>
+        </h2>
+        <SearchComponent />
+      </section>
+      <Suspense key={query + currentPage}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              {rideTableableHeaders.map((header) => (
+                <TableHead
+                  key={header}
+                  className="text-center text-orange-200 font-semibold text-sm uppercase py-4"
+                >
+                  {header}
+                </TableHead>
               ))}
-            </TableBody>
-</Table>
-  )
-}
+            </TableRow>
+          </TableHeader>
 
+          <TableBody>
+            {rideData.map((data, idx) => (
+              <TableRow key={data.id}>
+                {/* S.N */}
+                <TableCell>{idx + 1}</TableCell>
 
+                {/* Ride ID */}
+                <TableCell>{data.id}</TableCell>
 
+                {/* Passenger */}
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={data.passenger.profileImage}
+                      alt="passenger"
+                      width={32}
+                      height={32}
+                      className="rounded-full object-cover border border-black"
+                    />
+                    <span className="font-medium">
+                      {data.passenger.firstName} {data.passenger.lastName}
+                    </span>
+                  </div>
+                </TableCell>
+
+                {/* Pickup */}
+                <TableCell>{data.pickupLocation}</TableCell>
+
+                {/* Destination */}
+                <TableCell>{data.destination}</TableCell>
+
+                {/* Departure Time */}
+                <TableCell>
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-200/20 text-primary-200">
+                    {data.departureTime.departureStart}
+                    {' ➙ '}
+                    {data.departureTime.departureEnd}
+                  </span>
+                </TableCell>
+
+                {/* Accepted At */}
+                <TableCell>
+                  {data.acceptedAt ? (
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/15 text-green-400">
+                      {data.acceptedAt}
+                    </span>
+                  ) : (
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-500/15 text-yellow-400">
+                      Pending
+                    </span>
+                  )}
+                </TableCell>
+
+                {/* Deleted At */}
+                <TableCell className="text-center">
+                  {data.deletedAt ? (
+                    <span className="bg-red-500/15 text-red-400 text-xs font-semibold rounded-full px-3 py-1">
+                      {data.deletedAt}
+                    </span>
+                  ) : (
+                    <span className=" bg-amber-200/15 text-amber-600 text-xs font-semibold rounded-full px-3 py-1">
+                      N/A
+                    </span>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableCaption>
+            <section className="flex flex-col gap-2 items-center">
+              <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
+            </section>
+          </TableCaption>
+        </Table>
+      </Suspense>
+    </div>
+  );
+};

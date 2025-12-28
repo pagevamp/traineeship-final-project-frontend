@@ -1,54 +1,130 @@
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { tripTableableHeaders } from "@/core/types/history-types"
-import { dummyTrips } from "@public/docs/dummyTrips"
-import Image from "next/image"
+} from '@/components/ui/table';
+import { tripTableableHeaders } from '@/core/types/history-types';
+import { useHistory } from '@/hooks/useHistory';
+import { dummyTrips } from '@public/docs/dummyTrips';
+import Image from 'next/image';
+import { Suspense } from 'react';
+import { SearchComponent } from '@components/common/SearchComponent';
+import { Pagination } from '@components/common/PaginationComponent';
+
 export const TripTable = () => {
+  const itemsPerPage = 5;
+  const { query, currentPage, useFilterTrips } = useHistory();
+  const tripData = useFilterTrips(query, currentPage, dummyTrips);
+
   return (
     <div>
-    <Table className="bg-radial-[at_90%_85%] from-bg-card-bg-100 to-primary-100 to-100% border-3 border-black">
+      <section className="flex flex-row items-center justify-between mt-2 mb-5">
+        <h2 className="font-semibold text-xl">
+          Your Trips History with <span className="text-primary-100 font-extrabold">MILERA...</span>
+        </h2>
+        <SearchComponent />
+      </section>
+      <Suspense key={query + currentPage}>
+        <Table>
           <TableHeader>
-            <TableRow className="border-b border-t border-primary-100">
-              {tripTableableHeaders.map((headers) => (
-                  <TableHead key={headers} className='text-center text-white font-primary text-md py-3 border-r'>
-                  {headers}
+            <TableRow>
+              {tripTableableHeaders.map((header) => (
+                <TableHead
+                  key={header}
+                  className="text-center text-orange-200 font-semibold text-sm uppercase tracking-wide py-4"
+                >
+                  {header}
                 </TableHead>
               ))}
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {dummyTrips.map((data) => (
+            {tripData.map((data, idx) => (
               <TableRow key={data.id}>
-                <TableCell><Image src={data.driver.profileImage} alt='passenger' width={16} height={16}/>{" "}{data.driver.firstName}{" "}{data.driver.lastName}</TableCell>
+                {/* S.N */}
+                <TableCell>{idx + 1}</TableCell>
 
-                <TableCell><Image src={data.passenger.imageUrl!} alt='passenger' width={16} height={16}/>{" "}{data.passenger.firstName}{" "}{data.passenger.lastName}</TableCell>
+                {/* Driver */}
                 <TableCell>
-                  {data.ride.id}
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={data.driver.profileImage}
+                      alt="driver"
+                      width={32}
+                      height={32}
+                      className="rounded-full object-cover border border-white/20"
+                    />
+                    <span className="font-medium">
+                      {data.driver.firstName} {data.driver.lastName}
+                    </span>
+                  </div>
                 </TableCell>
+
+                {/* Passenger */}
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={data.passenger.imageUrl!}
+                      alt="passenger"
+                      width={32}
+                      height={32}
+                      className="rounded-full object-cover border border-white/20"
+                    />
+                    <span className="font-medium">
+                      {data.passenger.firstName} {data.passenger.lastName}
+                    </span>
+                  </div>
+                </TableCell>
+
+                {/* Pickup Location*/}
+                <TableCell>{data.ride.pickupLocation}</TableCell>
+
+                {/* Destination */}
+                <TableCell>{data.ride.destination}</TableCell>
+
+                {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell">
-                  {data.ride.pickupLocation}
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-200/20 text-primary-200">
+                    {data.ride.departureTime.departureStart}
+                    {' → '}
+                    {data.ride.departureTime.departureEnd}
+                  </span>
                 </TableCell>
-                <TableCell className="hidden lg:table-cell">
-                  {data.ride.destination}
+
+                {/* Accepted At */}
+                <TableCell>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/15 text-green-400">
+                    {data.createdAt}
+                  </span>
                 </TableCell>
-                <TableCell className="hidden lg:table-cell">
-                    <span><>From : </>{data.ride.departureTime.departureStart} To : {data.ride.departureTime.departureEnd}</span>
+
+                {/* Cancelled At */}
+                <TableCell className="text-center">
+                  {data.deletedAt ? (
+                    <span className="bg-red-500/25 text-red-400 text-xs font-semibold rounded-full px-3 py-1">
+                      {data.deletedAt}
+                    </span>
+                  ) : (
+                    <span className=" bg-amber-200/15 text-amber-600 text-xs font-semibold rounded-full px-3 py-1">
+                      N/A
+                    </span>
+                  )}
                 </TableCell>
-                <TableCell className="hidden lg:table-cell">
-                  {data.createdAt}
-                </TableCell>
-                
               </TableRow>
             ))}
           </TableBody>
+          <TableCaption>
+            <section className="flex flex-col gap-2 items-center">
+              <Pagination totalPages={Math.ceil(dummyTrips.length / itemsPerPage)} />
+            </section>
+          </TableCaption>
         </Table>
-        </div>
-  )
-}
+      </Suspense>
+    </div>
+  );
+};

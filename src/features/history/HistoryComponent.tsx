@@ -1,8 +1,8 @@
-import { HistoryTabComponent } from '@/components/common/HistoryTabComponent'
-import React from 'react'
-
+import { HistoryTabComponent } from '@/components/common/HistoryTabComponent';
 export const HistoryComponent = () => {
   return (
-    <section><HistoryTabComponent/></section>
-  )
-}
+    <>
+      <HistoryTabComponent />
+    </>
+  );
+};

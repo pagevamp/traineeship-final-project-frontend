@@ -1,6 +1,5 @@
 const Register = () => {
-    return 'Register Page';
-
+  return 'Register Page';
 };
 
 export default Register;
