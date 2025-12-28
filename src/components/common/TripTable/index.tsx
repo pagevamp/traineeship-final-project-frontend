@@ -14,10 +14,12 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { SearchComponent } from '@components/common/SearchComponent';
 import { Pagination } from '@components/common/PaginationComponent';
+import { Icon } from '@iconify/react';
+import { ViewContentComponent } from '../ViewContentComponent';
 
 export const TripTable = () => {
   const itemsPerPage = 5;
-  const { query, currentPage, useFilterTrips } = useHistory();
+  const { query, currentPage, useFilterTrips,toggleContentVisibility,viewContentOpen } = useHistory();
   const tripData = useFilterTrips(query, currentPage, dummyTrips);
 
   return (
@@ -89,12 +91,23 @@ export const TripTable = () => {
 
                 {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-200/20 text-primary-200">
-                    {data.ride.departureTime.departureStart}
-                    {' → '}
-                    {data.ride.departureTime.departureEnd}
-                  </span>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium 
+                                  bg-primary-200/20 text-primary-200">
+                    <Icon icon="eos-icons:hourglass" width={16} height={16} className='cursor-pointer' onClick={toggleContentVisibility}/>
+                    <span className="truncate">
+                      {data.ride.departureTime.departureStart} → {data.ride.departureTime.departureEnd}
+                    </span>
+                  </div>
+                  {viewContentOpen &&  
+                    <ViewContentComponent content= {
+                      <div className='flex flex-col gap-2'>
+                        <p>FROM : {data.ride.departureTime.departureStart}</p>
+                        <p>TO : {data.ride.departureTime.departureEnd}</p>
+                      </div>}>
+                    </ViewContentComponent>
+                  }                
                 </TableCell>
+
 
                 {/* Accepted At */}
                 <TableCell>

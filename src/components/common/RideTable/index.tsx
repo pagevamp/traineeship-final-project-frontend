@@ -16,10 +16,12 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { Pagination } from '@components/common/PaginationComponent';
 import { SearchComponent } from '@components/common/SearchComponent';
+import { ViewContentComponent } from '../ViewContentComponent';
+import { Icon } from '@iconify/react';
 
 export const RideTable = () => {
   const itemsPerPage = 5;
-  const { query, currentPage, useFilterRides } = useHistory();
+  const { query, currentPage, useFilterRides,toggleContentVisibility,viewContentOpen } = useHistory();
   const rideData = useFilterRides(query, currentPage, dummyRides);
 
   return (
@@ -78,11 +80,23 @@ export const RideTable = () => {
 
                 {/* Departure Time */}
                 <TableCell>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-200/20 text-primary-200">
-                    {data.departureTime.departureStart}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium 
+                                  bg-primary-200/20 text-primary-200">
+                    <Icon icon="eos-icons:hourglass" width={16} height={16} className='cursor-pointer' onClick={toggleContentVisibility}/>
+                    <span className="truncate">                    {data.departureTime.departureStart}
                     {' ➙ '}
                     {data.departureTime.departureEnd}
-                  </span>
+                    </span>
+                  </div>
+                  {viewContentOpen &&  
+                    <ViewContentComponent content= {
+                      <div className='flex flex-col gap-2'>
+                        <p>FROM : {data.departureTime.departureStart}</p>
+                        <p>TO : {data.departureTime.departureEnd}</p>
+                      </div>}>
+                    </ViewContentComponent>
+                  }
+                  
                 </TableCell>
 
                 {/* Accepted At */}

@@ -1,9 +1,18 @@
+"use client"
 import { Ride, RideSearchTypes, Trip, TripSearchTypes } from '@/core/types/history-types';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export function useHistory() {
+
+  const [viewContentOpen, setViewContentOpen] = useState<boolean>(false);
+  
+    const toggleContentVisibility = () => {
+      setViewContentOpen(!viewContentOpen);
+    };
+
+  //for adding and reading the url parameters  
   const searchParams = useSearchParams();
   const query = searchParams?.get('query') || '';
   const currentPage = Number(searchParams?.get('page')) || 1;
@@ -11,6 +20,7 @@ export function useHistory() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  //To add search query for content in the Rides/Trips table
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
@@ -29,6 +39,7 @@ export function useHistory() {
     };
   }
 
+  //To add page query params for pagination in the Rides/Trips table
   function handlePagination(page: number) {
     const params = new URLSearchParams(searchParams);
     if (page) {
@@ -39,6 +50,7 @@ export function useHistory() {
     replace(`${pathname}?${params.toString()}`);
   }
 
+  //to get the query and page params from the url and provide search and pagination for the Ride table
   function useFilterRides<RideHistory extends Ride[]>(
     query: string,
     currentPage: number,
@@ -61,6 +73,7 @@ export function useHistory() {
     return ridesData;
   }
 
+  //to get the query and page params from the url and provide search and pagination for the Trips table
   function useFilterTrips<TripHistory extends Trip[]>(
     query: string,
     currentPage: number,
@@ -93,5 +106,7 @@ export function useHistory() {
     handlePagination,
     useFilterRides,
     useFilterTrips,
+    viewContentOpen,
+    toggleContentVisibility
   };
 }
