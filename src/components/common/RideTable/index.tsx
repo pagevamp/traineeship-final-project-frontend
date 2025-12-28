@@ -80,8 +80,7 @@ export const RideTable = () => {
 
                 {/* Departure Time */}
                 <TableCell>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium 
-                                  bg-primary-200/20 text-primary-200">
+                  <div className="inline-flex items-center gap-1">
                     <Icon icon="eos-icons:hourglass" width={16} height={16} className='cursor-pointer' onClick={toggleContentVisibility}/>
                     <span className="truncate">                    {data.departureTime.departureStart}
                     {' ➙ '}

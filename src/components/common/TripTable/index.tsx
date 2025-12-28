@@ -91,11 +91,10 @@ export const TripTable = () => {
 
                 {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium 
-                                  bg-primary-200/20 text-primary-200">
+                  <div className="inline-flex items-center gap-1">
                     <Icon icon="eos-icons:hourglass" width={16} height={16} className='cursor-pointer' onClick={toggleContentVisibility}/>
                     <span className="truncate">
-                      {data.ride.departureTime.departureStart} → {data.ride.departureTime.departureEnd}
+                      {data.ride.departureTime.departureStart} {' ➙ '} {data.ride.departureTime.departureEnd}
                     </span>
                   </div>
                   {viewContentOpen &&  
