@@ -76,7 +76,6 @@ export const useEditRideRequest = (ride: Ride) => {
         },
       });
       mutate('ride-requests/me/pending');
-      console.log('Ride updated');
     } catch (err) {
       if (err instanceof Error) {
         setError((prev) => ({ ...prev, server: err.message }));

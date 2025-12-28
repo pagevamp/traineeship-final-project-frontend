@@ -20,19 +20,19 @@ export const ViewDetails = ({ isOwnRide, ride, onEdit, onAccept, onCancel }: Vie
         <div className="flex items-center gap-4">
           <div className="relative w-12 h-12 rounded-2xl border-secondary-100/20 border-2 overflow-hidden">
             <Image
-              src={ride.passenger.profileImage}
-              alt={ride.passenger.firstName}
+              src={ride.passenger!.profileImage}
+              alt={ride.passenger!.firstName}
               fill
               className="object-cover"
             />
           </div>
           <div>
             <h3 className="text-xl font-bold text-secondary-100 leading-tight">
-              {ride.passenger.firstName} {ride.passenger.lastName}
+              {ride.passenger!.firstName} {ride.passenger!.lastName}
             </h3>
             <p className="text-sm text-light-text-100 flex items-center gap-1">
               <Icon icon="mdi:phone" />
-              {ride.passenger.phoneNumber}
+              {ride.passenger!.phoneNumber}
             </p>
           </div>
         </div>

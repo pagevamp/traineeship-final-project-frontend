@@ -15,8 +15,6 @@ export async function getRides(): Promise<Ride[]> {
 
     const result = z.array(RideSchema).safeParse(res.data.rides);
 
-    console.log(result);
-
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');
     }
@@ -33,8 +31,6 @@ export async function getMyPendingRides(): Promise<Ride[]> {
 
     const result = z.array(RideSchema).safeParse(res.data.rides);
 
-    console.log(result);
-
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');
     }
@@ -50,7 +46,6 @@ export async function createRide(data: CreateRideRequest): Promise<Ride> {
     CreateRideApiSchema.parse(data);
 
     const res = await axiosInstance.post('/ride-requests', data);
-    console.log(res.data);
     const result = RideSchema.safeParse(res.data);
 
     if (!result.success) {

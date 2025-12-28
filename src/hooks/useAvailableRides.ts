@@ -3,7 +3,7 @@ import { getRides } from '@/core/api/ride.api';
 import { Ride } from '@/core/types/Ride';
 
 export function useAvailableRides() {
-  const { data, error, isLoading, mutate } = useSWR<Ride[]>('ride-requests', getRides);
+  const { data, error, isLoading } = useSWR<Ride[]>('ride-requests', getRides);
 
   const acceptRide = async (id: string) => {
     console.log('Accepting ride:', id);

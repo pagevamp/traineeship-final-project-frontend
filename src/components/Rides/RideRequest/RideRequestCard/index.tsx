@@ -21,19 +21,19 @@ export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProp
       <div className="flex items-center gap-3 mb-3">
         <div className="relative w-12 h-12 rounded-lg border-secondary-100/20 border-2 overflow-hidden">
           <Image
-            src={ride.passenger.profileImage}
-            alt={ride.passenger.firstName}
+            src={ride.passenger!.profileImage}
+            alt={ride.passenger!.firstName}
             fill
             className="object-cover"
           />
         </div>
         <div>
           <h3 className="font-semibold md:text-lg text-secondary-100">
-            {ride.passenger.firstName} {ride.passenger.lastName}
+            {ride.passenger!.firstName} {ride.passenger!.lastName}
           </h3>
           <div className="flex gap-1 items-center">
             <Icon icon="mdi:phone" className="size-3" />
-            <p className="text-xs md:text-sm text-light-text-100">{ride.passenger.phoneNumber}</p>
+            <p className="text-xs md:text-sm text-light-text-100">{ride.passenger!.phoneNumber}</p>
           </div>
         </div>
       </div>

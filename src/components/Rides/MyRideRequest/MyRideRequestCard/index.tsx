@@ -35,7 +35,7 @@ export const MyRideRequestCard = ({
 
       <div className="flex items-center gap-4 mb-6">
         <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
-          <Image src={ride.passenger.profileImage} alt="You" fill className="object-cover" />
+          <Image src={ride.passenger!.profileImage} alt="You" fill className="object-cover" />
         </div>
         <div>
           <h3 className="font-bold text-lg text-text-one-100">Your Trip Request</h3>
