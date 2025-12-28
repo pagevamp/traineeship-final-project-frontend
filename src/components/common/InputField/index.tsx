@@ -17,7 +17,6 @@ export interface InputProps {
 export const InputField = ({
   labelName,
   name,
-  type,
   icon,
   error,
   value,
