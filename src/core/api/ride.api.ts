@@ -81,3 +81,11 @@ export async function updateRide(
     throw error;
   }
 }
+
+export async function deleteRide(id: string) {
+  try {
+    await axiosInstance.delete(`/ride-requests/${id}`);
+  } catch (error: unknown) {
+    throw error;
+  }
+}

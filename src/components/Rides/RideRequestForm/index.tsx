@@ -21,7 +21,7 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
     handleSubmit,
     loading,
   } = useCreateRideRequest(ride);
-
+  const isEdit = !!ride;
   return (
     <form onSubmit={(e) => handleSubmit(e, onClose)} className="space-y-4 py-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -63,14 +63,14 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
           value={formData.departureStart}
           error={error?.departureStart}
           onChange={setDepartureStart}
-          disabled={ride !== null || loading}
+          disabled={isEdit}
         />
         <DateTimePicker
           labelName="Latest Departure"
           value={formData.departureEnd}
           error={error?.departureEnd}
           onChange={setDepartureEnd}
-          disabled={ride !== null || loading}
+          disabled={isEdit}
         />
       </div>
       <div className="flex flex-col">

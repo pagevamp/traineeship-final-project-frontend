@@ -7,8 +7,9 @@ import { RideRequestForm } from '../../RideRequestForm';
 import { CancelConfirmationDialog } from '../../CancelDialog';
 import { useState } from 'react';
 import { useModal, ViewMode } from '@/hooks/useViewModal';
-import useSWR from 'swr';
-import { getMyPendingRides } from '@/core/api/ride.api';
+import useSWR, { mutate } from 'swr';
+import { deleteRide, getMyPendingRides } from '@/core/api/ride.api';
+import { toast } from 'sonner';
 
 export const MyRideRequestsSection = () => {
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
@@ -18,6 +19,25 @@ export const MyRideRequestsSection = () => {
     error,
     isLoading,
   } = useSWR<Ride[]>('ride-requests/me/pending', getMyPendingRides);
+
+  const onConfirmCancel = async () => {
+    if (!selectedRide) return;
+
+    try {
+      toast.promise(deleteRide(selectedRide.id), {
+        loading: 'Cancelling your ride request...',
+        success: () => {
+          mutate('ride-requests/me/pending');
+          close();
+          return 'Ride request cancelled.';
+        },
+        error: (err) => err?.response?.data?.message || 'Failed to cancel ride',
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+    }
+  };
 
   if (isLoading) {
     return <div className="p-6">Loading rides...</div>;
@@ -59,29 +79,8 @@ export const MyRideRequestsSection = () => {
       </Modal>
 
       <Modal title="Ride Cancellation" open={isCancelling} onOpenChange={close}>
-        <CancelConfirmationDialog
-          onConfirm={() => {
-            console.log('Cancelling ID:', selectedRide?.id);
-            close();
-          }}
-          onClose={close}
-        />
+        <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
       </Modal>
-
-      {/* {selectedRide && (
-        <Modal title="Ride Request Details" open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
-          <ViewDetails
-            ride={selectedRide}
-            isOwnRide={true}
-            onEdit={() => {
-              setIsDetailsOpen(false);
-              handleEditRide(selectedRide);
-            }}
-            onCancel={() => handleCancelRide}
-            onAccept={() => {}}
-          />
-        </Modal>
-      )} */}
 
       <Modal title="Ride Request Details" open={isViewing} onOpenChange={close}>
         {selectedRide && (
