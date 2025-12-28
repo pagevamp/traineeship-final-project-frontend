@@ -9,7 +9,7 @@ import {
   Ride,
 } from '@/core/types/Ride';
 import { useSWRConfig } from 'swr';
-import { createRide } from '@/core/api/ride.api';
+import { createRide, updateRide } from '@/core/api/ride.api';
 import { toast } from 'sonner';
 
 export const useCreateRideRequest = (ride?: Ride | null) => {
@@ -66,37 +66,55 @@ export const useCreateRideRequest = (ride?: Ride | null) => {
 
   const handleSubmit = async (e: React.FormEvent, onClose: () => void) => {
     e.preventDefault();
-    const isValid = handleValidation();
-    if (!isValid) return;
+    if (!handleValidation()) return;
+
     try {
       setLoading(true);
-      const payload: CreateRideRequest = {
+
+      const metadata = {
         destination: formData.destination,
         pickupLocation: formData.pickupLocation,
         landmark: formData.landmark || null,
         notes: formData.notes || null,
-        departureStart: formData.departureStart!.toISOString(),
-        departureEnd: formData.departureEnd!.toISOString(),
       };
-      toast.promise(createRide(payload), {
-        loading: ride ? 'Saving changes...' : 'Posting your ride request...',
-        success: () => {
-          mutate('ride-requests/me/pending');
-          onClose();
-          return ride ? 'Ride updated successfully!' : 'Ride requested successfully!';
-        },
-        error: (err) => {
-          const message = err?.response?.data?.message || err.message || 'Something went wrong';
-          setError((prev) => ({ ...prev, server: message }));
-          return message;
-        },
-      });
-      mutate('ride-requests/me/pending');
-      console.log('Ride created');
-    } catch (err) {
-      if (err instanceof Error) {
-        setError((prev) => ({ ...prev, server: err.message }));
+
+      if (ride) {
+        toast.promise(updateRide(ride.id, metadata), {
+          loading: 'Saving changes...',
+          success: (res) => {
+            mutate('ride-requests/me/pending');
+            onClose();
+            return res.message;
+          },
+          error: (err) => {
+            const msg = err?.response?.data?.message || 'Update failed';
+            setError((prev) => ({ ...prev, server: msg }));
+            return msg;
+          },
+        });
+      } else {
+        const payload: CreateRideRequest = {
+          ...metadata,
+          departureStart: formData.departureStart!.toISOString(),
+          departureEnd: formData.departureEnd!.toISOString(),
+        };
+
+        toast.promise(createRide(payload), {
+          loading: 'Posting ride request...',
+          success: () => {
+            mutate('ride-requests/me/pending');
+            onClose();
+            return 'Ride requested successfully!';
+          },
+          error: (err) => {
+            const msg = err?.response?.data?.message || 'Request failed';
+            setError((prev) => ({ ...prev, server: msg }));
+            return msg;
+          },
+        });
       }
+    } catch (err) {
+      console.error('Submission Error:', err);
     } finally {
       setLoading(false);
     }

@@ -8,7 +8,7 @@ export const DepartureTimeSchema = z.object({
 export const PassengerSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  profileImage: z.string().url(),
+  profileImage: z.url(),
   phoneNumber: z.string().nullable(),
 });
 
@@ -19,21 +19,19 @@ export const RideSchema = z.object({
   landmark: z.string().nullable(),
   pickupLocation: z.string(),
   notes: z.string().nullable(),
-  acceptedAt: z.string().nullable(),
+  acceptedAt: z.string().nullable().optional(),
   createdAt: z.string(),
-  passenger: PassengerSchema,
+  updatedAt: z.string().nullable().optional(),
+  passenger: PassengerSchema.optional(),
+  deletedAt: z.string().nullable().optional(),
   departureTime: z.preprocess((val) => {
     if (typeof val === 'string') {
-      try {
-        const parsed = JSON.parse(val);
-        if (Array.isArray(parsed)) {
-          return {
-            departureStart: parsed[0],
-            departureEnd: parsed[1],
-          };
-        }
-      } catch {
-        return val;
+      const dates = val.replace(/[\[\]"]/g, '').split(',');
+      if (dates.length === 2) {
+        return {
+          departureStart: dates[0].trim(),
+          departureEnd: dates[1].trim(),
+        };
       }
     }
     return val;
@@ -111,5 +109,25 @@ export interface RideDTO extends Omit<Ride, 'departureTime' | 'status'> {
   departureTime: string;
   status: string;
 }
+
+const RideMetadataFields = {
+  destination: z.string().trim().min(1, 'Destination is required'),
+  pickupLocation: z.string().trim().min(1, 'Pickup location is required'),
+  landmark: z.string().trim().optional(),
+  notes: z.string().trim().optional(),
+};
+
+export const UpdateRideSchema = z.object(RideMetadataFields);
+
+export const UpdateRideApiSchema = CreateRideApiSchema.omit({
+  departureStart: true,
+  departureEnd: true,
+});
+
+export type UpdateRideRequest = z.infer<typeof UpdateRideApiSchema>;
+
+export type UpdateRideActionState = {
+  errors?: Omit<CreateRideActionState['errors'], 'departureStart' | 'departureEnd'>;
+};
 
 export type RideTab = 'all' | 'mine';

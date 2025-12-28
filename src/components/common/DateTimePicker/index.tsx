@@ -12,11 +12,18 @@ import { format, isValid } from 'date-fns';
 interface DateTimePickerProps {
   labelName: string;
   value: Date | null;
+  disabled?: boolean;
   onChange: (value: Date | null) => void;
   error?: string;
 }
 
-export function DateTimePicker({ labelName, value, onChange, error }: DateTimePickerProps) {
+export function DateTimePicker({
+  labelName,
+  value,
+  disabled,
+  onChange,
+  error,
+}: DateTimePickerProps) {
   const [open, setOpen] = React.useState(false);
 
   const currentDate = value ? new Date(value) : undefined;
@@ -55,6 +62,7 @@ export function DateTimePicker({ labelName, value, onChange, error }: DateTimePi
           <PopoverTrigger asChild>
             <Button
               variant="outline"
+              disabled={disabled}
               className="flex-1 justify-between font-normal bg-card-bg-100 border-tertiary-100/20 text-sm h-11 cursor-pointer"
             >
               {isDateValid ? format(currentDate, 'PPP') : 'Select date'}
@@ -63,7 +71,7 @@ export function DateTimePicker({ labelName, value, onChange, error }: DateTimePi
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-card-bg-100" align="start">
             <Calendar
-              disabled={{ before: new Date() }}
+              disabled={disabled ? true : { before: new Date() }}
               mode="single"
               selected={currentDate}
               onSelect={handleDateSelect}
@@ -73,6 +81,7 @@ export function DateTimePicker({ labelName, value, onChange, error }: DateTimePi
         <Input
           type="time"
           step="1"
+          disabled={disabled}
           value={timeValue}
           onChange={handleTimeChange}
           className="w-30 h-11 bg-card-bg-100 border-secondary-100/20 text-sm cursor-pointer"

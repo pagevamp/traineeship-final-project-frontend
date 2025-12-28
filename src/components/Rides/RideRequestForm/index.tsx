@@ -63,12 +63,14 @@ export const RideRequestForm = ({ onClose, ride }: RideRequestFormProps) => {
           value={formData.departureStart}
           error={error?.departureStart}
           onChange={setDepartureStart}
+          disabled={ride !== null || loading}
         />
         <DateTimePicker
           labelName="Latest Departure"
           value={formData.departureEnd}
           error={error?.departureEnd}
           onChange={setDepartureEnd}
+          disabled={ride !== null || loading}
         />
       </div>
       <div className="flex flex-col">
