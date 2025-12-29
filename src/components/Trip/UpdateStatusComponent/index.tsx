@@ -1,12 +1,16 @@
 "use client"
 import { Button } from '@/components/common/Button';
+import { Modal } from '@/components/common/Modal';
+import { tripStatusUpdates } from '@/constants';
 import { AcceptRideProps } from '@/core/types/trip-types';
+import { Icon } from '@iconify/react';
 import { useState } from 'react'
 
 export const UpdateStatus = ({id, onStatusUpdate, onCancel}:AcceptRideProps) => {
       const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (
+  
     <div className="flex justify-between items-center mt-auto gap-3">
 
       {/* Cancel Button */}
@@ -26,47 +30,27 @@ export const UpdateStatus = ({id, onStatusUpdate, onCancel}:AcceptRideProps) => 
             Trip Status
           </Button>
 
+          </div> 
           {popoverOpen && (
-            <article className="absolute left-0 top-full mt-2 w-40 bg-card-bg-100 border border-secondary-100 rounded-lg shadow-lg">
-              <Button
-                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
+          <Modal title='Update Trip Status' open={popoverOpen} onOpenChange={()=>setPopoverOpen(false)}>
+            <div className='flex flex-col gap-2 w-full p-2 '>
+              {tripStatusUpdates.map((update)=>(
+                <Button
+                key={update.label}
+                className="w-full px-4 py-2 text-light-text-100 bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:bg-secondary-100/20 text-left"
                 onClick={() => {
-                  onStatusUpdate(id, 'not_started');
+                  onStatusUpdate(id, update.status);
                   setPopoverOpen(false);
                 }}
               >
-                Not Started
+               <Icon icon={update.icon}/> {update.label}
               </Button>
-              <Button
-                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
-                onClick={() => {
-                  onStatusUpdate(id, 'on_the_way');
-                  setPopoverOpen(false);
-                }}
-              >
-                On My Way
-              </Button>
-              <Button
-                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
-                onClick={() => {
-                  onStatusUpdate(id, 'reached_pickup');
-                  setPopoverOpen(false);
-                }}
-              >
-                Not Started
-              </Button>
-              <Button
-                className="w-full px-4 py-2 text-light-text-100 hover:bg-secondary-100/20 text-left"
-                onClick={() => {
-                  onStatusUpdate(id, 'reached_destination');
-                  setPopoverOpen(false);
-                }}
-              >
-                On My Way
-              </Button>
-            </article>
+              ))}
+              
+              </div>
+            </Modal>
           )}
-        </div>  
+        
     </div>
   )
 }

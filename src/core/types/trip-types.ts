@@ -1,7 +1,12 @@
 
-export type TripStatus = 'not_started' | 'on_the_way' | 'reached_pickup' | 'reached_destination';
 export type vehicleType = 'two_wheeler' | 'four_wheeler';
 
+export enum TripStatus{
+  NOT_STARTED = 'not_started',
+  ON_THE_WAY = 'on_the_way',
+  REACHED_DESTINATION = 'reached_destination',
+  REACHED_PICKUP = 'reached_pickup',
+}
 
 export interface Trip {
   id: string,
@@ -52,3 +57,4 @@ export interface AcceptRideProps {
   onCancel: (id: string) => void;
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }
+

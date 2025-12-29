@@ -78,7 +78,7 @@ export const MyRideRequestsSection = () => {
         <RideRequestForm ride={selectedRide} onClose={close} />
       </Modal>
 
-      <Modal title="Ride Cancellation" open={isCancelling} onOpenChange={close}>
+      <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
         <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
       </Modal>
 

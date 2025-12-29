@@ -14,7 +14,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
   return (
     <article className='flex flex-col items-center gap-5'>
       <div 
-        className='flex flex-col border border-secondary-100/60 rounded-xl w-[25vw] md:w-[35vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% hover:scale-101 transition-all duration-300 relative overflow-hidden'
+        className='flex flex-col border border-secondary-100/60 rounded-xl w-[25vw] md:w-[35vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative'
       >
        
         <div className="flex items-center mb-6 justify-between">
@@ -65,7 +65,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
                 {formatDistanceToNow(new Date(data.ride.departureTime.end), { addSuffix: true })}
          </p>
       </div>
-      {detailsOpen && <TripModal {...data}/>}
+      {detailsOpen && <TripModal data={data} onClose={() => setDetailsOpen(false)}/>}
     </article>
   );
 };

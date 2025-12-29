@@ -33,7 +33,7 @@ export const dummyTrip : Trip =
   passenger: {
       firstName: "Stuti",
       lastName: "Upreti",
-      imageUrl:'file:///Users/stutiupreti/Downloads/1748281170308.jpeg'
+      imageUrl:"https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zN0NCQzhVWlJPV3ptRm15eXZrblMxbFFCNloifQ"
     }
   
 }
