@@ -1,3 +1,4 @@
+import { Trip } from "../schema/trip.schema";
 
 export enum VehicleType {
   TWO_WHEELER = 'two_wheeler',
@@ -11,13 +12,14 @@ export enum TripStatus{
 }
 
 export interface TripCardProps {
-  onCancel: (id: string) => void;
+  onCancel?: (id: string) => void;
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }
 
 export interface AcceptRideProps {
   acceptedAt?: string|null; 
-  id: string;
+  trip: Trip;
+  id?: string;
   onCancel: (id: string) => void;
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }

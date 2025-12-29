@@ -7,17 +7,46 @@ import { UpdateStatus } from '../UpdateStatusComponent';
 import { Button } from '@/components/common/Button';
 import { useState } from 'react';
 import { TripModal } from '../TripModal';
-import useSWR from 'swr';
-import { getMyPendingTrips } from '@/core/api/trip.api';
+import useSWR, { mutate } from 'swr';
+import { deleteTrip, getMyPendingTrips } from '@/core/api/trip.api';
 import { Trip } from '@/core/schema/trip.schema';
+import { useModal, ViewMode } from '@/hooks/useViewModal';
+import { toast } from 'sonner';
+import { Modal } from '@/components/common/Modal';
+import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 
-export const TripCard = ({ onCancel, onStatusUpdate }: TripCardProps) => {
-const [detailsOpen, setDetailsOpen] = useState(false);
+
+
+export const TripCard = ({ onStatusUpdate }: TripCardProps) => {  
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const { open, close, isFormOpen, isViewing, isCancelling } = useModal();
+  
  const {
     data: tripsData,
     error,
     isLoading,
   } = useSWR<Trip[]>('trips/me/pending', getMyPendingTrips);
+
+  const onConfirmCancel = async () => {
+    if (!selectedTrip) return;
+
+    try {
+      toast.promise(deleteTrip(selectedTrip.id), {
+        loading: 'Cancelling the trip you accepted...',
+        success: () => {
+          mutate('trips/me/pending');
+          close();
+          return 'Accepted Trip cancelled.';
+        },
+        error: (err) => err?.response?.data?.message || 'Failed to cancel trip',
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+    }
+  };
+
   
   if (isLoading) {
     return <div className="p-6">Loading trips...</div>;
@@ -32,6 +61,11 @@ const [detailsOpen, setDetailsOpen] = useState(false);
     return <div className="p-6">No trips pending</div>;
   }
   
+    const handleAction = (mode: ViewMode, trip: Trip | null) => {
+      setSelectedTrip(trip);
+      open(mode);
+    };
+
   return (
     <article className='flex flex-col items-center gap-5'>
       <div 
@@ -78,8 +112,13 @@ const [detailsOpen, setDetailsOpen] = useState(false);
             </div>
           </div>
         </div>
+        
 
-         <UpdateStatus id={tripsData?.[0].id} onCancel={onCancel} onStatusUpdate={onStatusUpdate}/>
+         <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}  id={tripsData?.[0].id} onStatusUpdate={onStatusUpdate}/>
+
+        <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
+              <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
+        </Modal>
 
          <p className="text-xs text-normal flex items-center gap-1 place-content-center mt-2">
                 <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}

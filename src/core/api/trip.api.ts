@@ -72,7 +72,7 @@ export async function updateTrip(
   }
 }
 
-export async function deleteTrips(id: string) {
+export async function deleteTrip(id: string) {
   try {
     await axiosInstance.delete(`/trips/${id}`);
   } catch (error: unknown) {
