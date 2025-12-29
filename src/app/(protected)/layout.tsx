@@ -30,7 +30,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
       </Button>
 
         {/* Main Content */}
-       <main className="flex items-center justify-center mx-auto md:p-6 overflow-auto">
+        <main className="flex items-center justify-center  bg-primary-100 overflow-auto">
           <div className="w-full">{children}</div>
         </main>
       </div>
