@@ -1,10 +1,8 @@
 "use client"
 import { Button } from '@/components/common/Button';
 import { Modal } from '@/components/common/Modal';
-import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { tripStatusUpdates } from '@/constants';
 import { AcceptRideProps } from '@/core/types/trip-types';
-import { useModal } from '@/hooks/useViewModal';
 import { Icon } from '@iconify/react';
 import { useState } from 'react'
 

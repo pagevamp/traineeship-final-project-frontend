@@ -15,12 +15,10 @@ import { toast } from 'sonner';
 import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 
-
-
-export const TripCard = ({ onStatusUpdate }: TripCardProps) => {  
+export const TripCard = () => {  
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
-  const { open, close, isFormOpen, isViewing, isCancelling } = useModal();
+  const { open, close, isCancelling } = useModal();
   
  const {
     data: tripsData,
@@ -66,6 +64,9 @@ export const TripCard = ({ onStatusUpdate }: TripCardProps) => {
       open(mode);
     };
 
+    const now = new Date()
+    const expired = new Date(tripsData?.[0].ride.departureTime.departureEnd)
+
   return (
     <article className='flex flex-col items-center gap-5'>
       <div 
@@ -81,7 +82,7 @@ export const TripCard = ({ onStatusUpdate }: TripCardProps) => {
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
                 <Icon icon="mdi:calendar-check" /> Trip Accepted{' '}
-                {formatDistanceToNow(new Date(tripsData?.[0].createdAt))}
+                {formatDistanceToNow(new Date(tripsData?.[0].createdAt))} ago
               </p>
             </div>
           </section>
@@ -113,9 +114,9 @@ export const TripCard = ({ onStatusUpdate }: TripCardProps) => {
           </div>
         </div>
         
-
-         <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}  id={tripsData?.[0].id} onStatusUpdate={onStatusUpdate}/>
-
+        {expired > now &&
+        <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}  onStatusUpdate={() => handleAction('editing',  tripsData?.[0])}  id={tripsData?.[0].id} />
+      }
         <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
               <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
         </Modal>
