@@ -1,6 +1,8 @@
 
-export type vehicleType = 'two_wheeler' | 'four_wheeler';
-
+export enum VehicleType {
+  TWO_WHEELER = 'two_wheeler',
+  FOUR_WHEELER = 'four_wheeler',
+}
 export enum TripStatus{
   NOT_STARTED = 'not_started',
   ON_THE_WAY = 'on_the_way',
@@ -11,43 +13,43 @@ export enum TripStatus{
 export interface Trip {
   id: string,
   driverId: string,
-  status: string,
-  vehicleType: string,
+  status: TripStatus,
+  vehicleType: VehicleType,
   createdAt: string,
-  updatedAt: string | null,
-  deletedAt: string | null,
+  updatedAt?: string | null,
+  deletedAt?: string | null,
   ride: {
       id: string,
       passengerId: string,
       destination: string,
-      landmark: string,
+      landmark?: string | null,
       pickupLocation: string,
-      notes: string,
+      notes?: string | null,
       departureTime: {
-        start: string,
-        end: string,
+        departureStart: string,
+        departureEnd: string,
       },
-      acceptedAt: string|null,
+      acceptedAt?: string|null,
       createdAt: string,
-      updatedAt: string | null,
-      deletedAt: string | null
+      updatedAt?: string | null,
+      deletedAt?: string | null
     },
   driver: {
     firstName: string,
     lastName: string,
     profileImage: string,
-    phoneNumber: string,
-    primaryLocation:string,
+    phoneNumber?: string|null,
+    primaryLocation?:string |null,
   },
   passenger: {
     firstName: string,
-    lastName: string
-    imageUrl: string
+    lastName: string,
+    profileImage: string,
+    phoneNumber?:string|null,
   }
 }
 
 export interface TripCardProps {
-  data: Trip;
   onCancel: (id: string) => void;
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }

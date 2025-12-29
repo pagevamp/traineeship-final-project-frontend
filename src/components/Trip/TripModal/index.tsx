@@ -44,7 +44,7 @@ const tripsInfoRow = [
         <div className="flex items-center gap-4 rounded-xl border border-tertiary-100/20 bg-secondary-100/5 p-4">
           <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
             <Image
-              src={data.passenger.imageUrl}
+              src={data.passenger.profileImage}
               alt="Passenger"
               fill
               className="object-cover"

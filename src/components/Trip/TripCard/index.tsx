@@ -2,14 +2,34 @@
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
-import { TripCardProps } from '@/core/types/trip-types';
+import { Trip, TripCardProps } from '@/core/types/trip-types';
 import { UpdateStatus } from '../UpdateStatusComponent';
 import { Button } from '@/components/common/Button';
 import { useState } from 'react';
 import { TripModal } from '../TripModal';
+import useSWR from 'swr';
+import { getMyPendingTrips } from '@/core/api/trip.api';
 
-export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
+export const TripCard = ({ onCancel, onStatusUpdate }: TripCardProps) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
+ const {
+    data: tripsData,
+    error,
+    isLoading,
+  } = useSWR<Trip>('trips/me/pending', getMyPendingTrips);
+  
+  if (isLoading) {
+    return <div className="p-6">Loading trips...</div>;
+  }
+
+  if (error) {
+    console.log(error.message)
+    return <div className="p-6 text-red-500">Failed to load trips</div>;
+  }
+
+  if (!tripsData) {
+    return <div className="p-6">No trips pending</div>;
+  }
   
   return (
     <article className='flex flex-col items-center gap-5'>
@@ -26,7 +46,7 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
                 <Icon icon="mdi:calendar-check" /> Trip Accepted{' '}
-                {formatDistanceToNow(new Date(data.ride.acceptedAt!), { addSuffix: true })}
+                {formatDistanceToNow(new Date(tripsData.ride.acceptedAt!))}
               </p>
             </div>
           </section>
@@ -49,23 +69,23 @@ export const TripCard = ({ data, onCancel, onStatusUpdate }: TripCardProps) => {
           <div className="flex flex-col justify-between py-0.5 gap-5">
             <div className="flex flex-col">
               <span className="text-xs md:text-sm uppercase font-semibold text-tertiary-100 leading-none">Pickup</span>
-              <span className="text-xs md:text-sm truncate text-light-text-100 font-medium">{data.ride.pickupLocation}</span>
+              <span className="text-xs md:text-sm truncate text-light-text-100 font-medium">{tripsData.ride.pickupLocation}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs md:text-sm uppercase font-semibold text-tertiary-100 leading-none">Destination</span>
-              <span className="text-sm text-light-text-100 font-medium truncate">{data.ride.destination}</span>
+              <span className="text-sm text-light-text-100 font-medium truncate">{tripsData.ride.destination}</span>
             </div>
           </div>
         </div>
 
-         <UpdateStatus acceptedAt={data.ride.acceptedAt} id={data.id} onCancel={onCancel} onStatusUpdate={onStatusUpdate}/>
+         <UpdateStatus acceptedAt={tripsData.ride.acceptedAt!} id={tripsData.ride.id} onCancel={onCancel} onStatusUpdate={onStatusUpdate}/>
 
          <p className="text-xs text-normal flex items-center gap-1 place-content-center mt-2">
                 <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}
-                {formatDistanceToNow(new Date(data.ride.departureTime.end), { addSuffix: true })}
+                {formatDistanceToNow(new Date(tripsData.ride.departureTime.departureEnd), { addSuffix: true })}
          </p>
       </div>
-      {detailsOpen && <TripModal data={data} onClose={() => setDetailsOpen(false)}/>}
+      {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)}/>}
     </article>
   );
 };

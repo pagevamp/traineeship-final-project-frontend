@@ -1,12 +1,10 @@
 import { TripCard } from '@/components/Trip/TripCard'
 import { TripHeader } from '@/components/Trip/TripHeader';
 import { TripStatus } from '@/core/types/trip-types';
-import { dummyTrip } from '@public/data/dummyData';
 import React from 'react'
 
 export const TripComponent = () => {
 
-    const data = dummyTrip
     const handleCancel = (id: string) => {
     console.log('Cancel Trip:', id);
   };
@@ -19,7 +17,6 @@ export const TripComponent = () => {
         <TripHeader/>
     
     <TripCard
-            data = {data}
             onCancel={handleCancel}
             onStatusUpdate={handleStatusUpdate}
     />
