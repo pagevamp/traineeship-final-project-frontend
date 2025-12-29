@@ -10,16 +10,12 @@ export const DepartureTimeSchema = z.object({
 export const PassengerSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  profileImage: z.url(),
-  phoneNumber: z.string().nullable(),
 });
 
 export const DriverSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  profileImage: z.url(),
-  phoneNumber: z.string().nullable(),
-  primaryLocation:z.string().nullable(),
+  phoneNumber: z.string().nullable().optional(),
 });
 
 
@@ -28,7 +24,7 @@ export const RideSchema = z.object({
   passengerId: z.string(),
   destination: z.string(),
   landmark: z.string().nullable(),
-  pickupLocation: z.string(),
+  pickupLocation: z.string().nullable(),
   notes: z.string().nullable(),
    departureTime: z.preprocess((val) => {
       if (typeof val === 'string') {
@@ -86,6 +82,8 @@ export const UpdateTripApiSchema = UpdateTripSchema;
 
 export type CreateTripRequest = z.infer<typeof CreateTripApiSchema>;
 export type UpdateTrip = z.infer<typeof UpdateTripApiSchema>;
+export type Trip = z.infer<typeof TripSchema>;
+
 
 
 

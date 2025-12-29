@@ -1,13 +1,12 @@
 import axiosInstance from '@/lib/private-axios';
 import { z } from 'zod';
-import { Trip } from '../types/trip-types';
-import { CreateTripApiSchema, CreateTripRequest, TripSchema, UpdateTrip, UpdateTripApiSchema } from '../schema/trip.schema';
+import { CreateTripApiSchema, CreateTripRequest, Trip, TripSchema, UpdateTrip, UpdateTripApiSchema } from '../schema/trip.schema';
 
 export async function getTrips(): Promise<Trip> {
   try {
     const res = await axiosInstance.get('/trips');
 
-    const result = TripSchema.safeParse(res.data.trips.trips);
+    const result = TripSchema.safeParse(res.data.data.trips);
 
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');
@@ -19,11 +18,12 @@ export async function getTrips(): Promise<Trip> {
   }
 }
 
-export async function getMyPendingTrips(): Promise<Trip> {
+export async function getMyPendingTrips(): Promise<Trip[]> {
   try {
     const res = await axiosInstance.get('/trips/me/pending');
 
-    const result = TripSchema.safeParse(res.data.trips.trips?.[0]);
+    const result = z.array(TripSchema).safeParse(res.data.data.trips.trips);
+    console.log('This is pending trips',result)
 
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');

@@ -72,48 +72,6 @@ export const MyRideRequestCard = ({
         </div>
       </div>
 
-      {/* {isAccepted && (
-        <section className="space-y-4">
-          <div className="flex items-center justify-between bg-green-500/5 p-3 rounded-xl border border-green-500/20">
-            <div className="flex items-center gap-3">
-              <Icon icon="mdi:steering" className="text-green-600 size-6" />
-              <div>
-                <p className="text-xs md:text-sm uppercase font-black text-green-600 tracking-tighter">
-                  {driver?.firstName} {driver?.lastName}{' '}
-                </p>
-                <p className="text-sm text-text-one-100 leading-tight">{driver?.phoneNumber}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between text-[10px] uppercase font-bold text-tertiary-100 px-1">
-              <span>Current Status</span>
-              <span className="text-green-600">{ride.status?.replace('_', ' ') || 'Assigned'}</span>
-            </div>
-
-            <div className="flex gap-1.5 h-1.5">
-              {['not_started', 'on_the_way', 'at_pickup', 'reached'].map((step, idx, arr) => {
-                const statusOrder = arr.indexOf(ride.status);
-                const isActive = idx <= statusOrder;
-                return (
-                  <div
-                    key={step}
-                    className={`flex-1 rounded-full transition-colors duration-500 ${isActive ? 'bg-green-500' : 'bg-secondary-100/20'}`}
-                  />
-                );
-              })}
-            </div>
-
-            <p className="text-xs md:text-sm text-light-text-100 italic text-center">
-              {ride.status === 'on_the_way' && 'Driver is heading to your location'}
-              {ride.status === 'at_pickup' && 'Driver has arrived at pickup point'}
-              {ride.status === 'reached' && 'Trip completed successfully'}
-              {!ride.status && 'Driver is has not yet started the ride.'}
-            </p>
-          </div>
-        </section>
-      )} */}
 
       <div className="flex items-center justify-between gap-3 mt-auto">
         <div className="flex gap-2 md:gap-5">

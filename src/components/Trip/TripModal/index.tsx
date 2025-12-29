@@ -1,36 +1,37 @@
 import { Modal } from '@/components/common/Modal';
-import { Trip } from '@/core/types/trip-types';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
+import { Trip } from '@/core/schema/trip.schema';
 
 export const TripModal = ({
   data,
   onClose,
 }: {
-  data: Trip;
+  data: Trip[];
   onClose: () => void;
 }) => {
 
+const trip =data
 const tripsInfoRow = [
   {
     icon : "mdi:calendar-clock",
     label :"Created",
-    value : new Date(data.createdAt).toLocaleString()
+    value : new Date(trip?.[0].createdAt).toLocaleString()
   },
   {
     icon : "mdi:map-marker",
     label :"Pickup",
-    value : data.ride.pickupLocation
+    value : trip?.[0].ride.pickupLocation
   },
   {
     icon : "mdi:map-marker-radius",
     label :"Destination",
-    value : data.ride.destination
+    value : trip?.[0].ride.destination
   },
   {
     icon : "mdi:map-search",
     label :"Landmark",
-    value : data.ride.landmark
+    value : trip?.[0].ride.landmark
   }
 ]
 
@@ -42,21 +43,21 @@ const tripsInfoRow = [
 
         {/* Passenger Section */}
         <div className="flex items-center gap-4 rounded-xl border border-tertiary-100/20 bg-secondary-100/5 p-4">
-          <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
+          {/* <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
             <Image
-              src={data.passenger.profileImage}
+              src={trip?.[0].passenger.profileImage!}
               alt="Passenger"
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
 
           <div>
             <p className="text-xs uppercase font-semibold text-tertiary-100">
               Passenger
             </p>
             <h2 className="text-sm md:text-base font-semibold text-light-text-100">
-              {data.passenger.firstName} {data.passenger.lastName}
+              {trip?.[0].passenger.firstName} {trip?.[0].passenger.lastName}
             </h2>
           </div>
         </div>
