@@ -3,16 +3,10 @@
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import { usePathname } from 'next/navigation';
+import { links } from '@/constants';
 
 export const SideBar = () => {
   const pathname = usePathname();
-
-  const links = [
-    { href: '/directory', icon: 'bxs:food-menu', label: 'Directory' },
-    { href: '/rides', icon: 'mdi:bike-fast', label: 'View Rides' },
-    { href: '/trips', icon: 'mdi:account-pending', label: 'View Pending Trips' },
-    { href: '/about-us', icon: 'ix:about', label: 'About Us' },
-  ];
 
   return (
     <div className="absolute bottom-10 h-[80vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 shadow-lg shadow-gray-900 flex flex-col justify-between text-text-two-100 px-4 py-6">
@@ -28,7 +22,7 @@ export const SideBar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`group w-full flex items-center gap-4 rounded-md py-3 px-4 transition-all duration-200
+              className={`w-full flex items-center gap-4 rounded-md py-3 px-4 transition-all duration-200
                 ${
                   isActive
                     ? 'bg-tertiary-100/30 text-text-one-100/80 scale-98'
