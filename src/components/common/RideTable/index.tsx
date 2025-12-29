@@ -27,8 +27,8 @@ export const RideTable = () => {
   return (
     <div>
       <section className="flex flex-row items-center justify-between mt-2 mb-5">
-        <h2 className="font-semibold text-xl">
-          Your Rides History with <span className="text-primary-100 font-extrabold">MILERA...</span>
+        <h2 className="font-semibold text-xl text-amber-100/90">
+          Your Rides History with <span className="text-tertiary-100/70 text-shadow-sm text-shadow-black font-extrabold">MILERA...</span>
         </h2>
         <SearchComponent />
       </section>
