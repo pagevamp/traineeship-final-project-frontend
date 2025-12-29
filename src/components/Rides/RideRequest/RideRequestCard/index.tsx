@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Button } from '@components/common/Button';
 import { Icon } from '@iconify/react';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, max } from 'date-fns';
 import { Ride } from '@/core/types/Ride';
 import { formatTime } from '@/lib/utils';
 
@@ -23,8 +23,9 @@ export const RideRequestCard = ({ ride, onAccept, onClick }: RideRequestCardProp
           <Image
             src={ride.passenger!.profileImage}
             alt={ride.passenger!.firstName}
-            fill
             className="object-cover"
+            width={45}
+            height={45}
           />
         </div>
         <div>
