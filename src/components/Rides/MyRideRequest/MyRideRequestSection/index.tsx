@@ -7,7 +7,7 @@ import { CancelConfirmationDialog } from '../../CancelDialog';
 import { useState } from 'react';
 import { useModal, ViewMode } from '@/hooks/useViewModal';
 import useSWR, { mutate } from 'swr';
-import { deleteRide, getMyPendingRides } from '@/core/api/ride.api';
+import { deleteRide, getMyPendingRides, getMyRidsStatus } from '@/core/api/ride.api';
 import { toast } from 'sonner';
 import { getAcceptedTrips } from '@/core/api/trip.api';
 import { Trip } from '@/core/types/Trip';
@@ -16,7 +16,9 @@ export const MyRideRequestsSection = () => {
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
   const { open, close, isFormOpen, isCancelling } = useModal();
 
-  const isAccepted = false;
+  const { data: isAccepted } = useSWR<boolean>('/ride-requests/me/pending', getMyRidsStatus);
+
+  console.log('the status is: ', isAccepted);
 
   const {
     data: tripsData = [],
@@ -38,6 +40,7 @@ export const MyRideRequestsSection = () => {
         loading: 'Cancelling your ride request...',
         success: () => {
           mutate('ride-requests/me/pending');
+          mutate('trips/accepted');
           close();
           return 'Ride request cancelled.';
         },

@@ -102,7 +102,13 @@ export const MyRideRequestCard = ({ ride, trip, onCancel }: MyRideRequestCardPro
           <div className="flex items-center justify-between bg-green-500/5 p-3 rounded-xl border border-green-500/20">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                <Image src={driver.profileImage} alt="Driver" fill className="object-cover" />
+                <Image
+                  src={driver.profileImage}
+                  alt="Driver"
+                  width={46}
+                  height={46}
+                  className="object-cover"
+                />
               </div>
               <div>
                 <p className="text-xs md:text-sm uppercase font-black text-green-600 tracking-tighter">

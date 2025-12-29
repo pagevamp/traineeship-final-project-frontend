@@ -10,8 +10,6 @@ export async function getAcceptedTrips(): Promise<Trip[]> {
 
     if (!tripsData) return [];
 
-    console.log('the trips data are: ', tripsData);
-
     const normalizedData = Array.isArray(tripsData) ? tripsData : [tripsData];
 
     const result = z.array(TripSchema).safeParse(normalizedData);

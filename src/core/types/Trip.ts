@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { RideSchema } from './Ride';
+import { PassengerSchema, RideSchema } from './Ride';
 
 export const DriverSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  profileImage: z.string().url(),
-  phoneNumber: z.string().nullable(),
-  primaryLocation: z.string().nullable(),
+  profileImage: z.url(),
+  phoneNumber: z.string().nullable().optional(),
+  primaryLocation: z.string().nullable().optional(),
 });
 
 export const TripSchema = z.object({
@@ -19,6 +19,7 @@ export const TripSchema = z.object({
   deletedAt: z.string().nullable(),
   ride: RideSchema,
   driver: DriverSchema,
+  passenger: PassengerSchema,
 });
 
 export type Trip = z.infer<typeof TripSchema>;

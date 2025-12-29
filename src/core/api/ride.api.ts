@@ -34,6 +34,20 @@ export async function getMyPendingRides(): Promise<Ride[]> {
   }
 }
 
+export async function getMyRidsStatus(): Promise<boolean> {
+  try {
+    const res = await axiosInstance.get('/ride-requests/me/pending');
+
+    if (res.data.rides.length === 0) {
+      return true;
+    }
+
+    return false;
+  } catch (error: unknown) {
+    throw error;
+  }
+}
+
 export async function createRide(data: CreateRideRequest): Promise<Ride> {
   try {
     CreateRideApiSchema.parse(data);
