@@ -1,13 +1,14 @@
 import { Modal } from '@/components/common/Modal';
-import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { Trip } from '@/core/schema/trip.schema';
 
 export const TripModal = ({
   data,
+  open,
   onClose,
 }: {
   data: Trip[];
+  open:boolean;
   onClose: () => void;
 }) => {
 
@@ -36,16 +37,18 @@ const tripsInfoRow = [
 ]
 
   return (
-    <article
+    <Modal
       title="Trip Details"
+      open={open}
+      onOpenChange={onClose}
     >
-      <div className="flex flex-col gap-6 rounded-2xl bg-card-bg-100 p-5 md:p-6">
+      <div className="flex flex-col gap-6 rounded-2xl bg-card-bg-100 p-3 md:p-4 w-full">
 
         {/* Passenger Section */}
         <div className="flex items-center gap-4 rounded-xl border border-tertiary-100/20 bg-secondary-100/5 p-4">
           {/* <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
             <Image
-              src={trip?.[0].passenger.profileImage!}
+              src={trip?.[0].passenger.profileImage}
               alt="Passenger"
               fill
               className="object-cover"
@@ -59,6 +62,9 @@ const tripsInfoRow = [
             <h2 className="text-sm md:text-base font-semibold text-light-text-100">
               {trip?.[0].passenger.firstName} {trip?.[0].passenger.lastName}
             </h2>
+            <h5 className="text-2xs font-light text-gray-500">
+              {trip?.[0].passenger.phoneNumber} 
+            </h5>
           </div>
         </div>
 
@@ -84,7 +90,7 @@ const tripsInfoRow = [
           ))}
         </div>
       </div>
-    </article>
+    </Modal>
   );
 };
 

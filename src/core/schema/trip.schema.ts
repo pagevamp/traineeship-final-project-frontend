@@ -10,6 +10,9 @@ export const DepartureTimeSchema = z.object({
 export const PassengerSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
+  profileImage: z.string().nullable().optional(),
+  phoneNumber: z.string().nullable().optional(),
+
 });
 
 export const DriverSchema = z.object({

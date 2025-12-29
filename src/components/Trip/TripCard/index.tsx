@@ -12,7 +12,7 @@ import { getMyPendingTrips } from '@/core/api/trip.api';
 import { Trip } from '@/core/schema/trip.schema';
 
 export const TripCard = ({ onCancel, onStatusUpdate }: TripCardProps) => {
-  const [detailsOpen, setDetailsOpen] = useState(false);
+const [detailsOpen, setDetailsOpen] = useState(false);
  const {
     data: tripsData,
     error,
@@ -40,9 +40,9 @@ export const TripCard = ({ onCancel, onStatusUpdate }: TripCardProps) => {
        
         <div className="flex items-center mb-6 justify-between">
           <section className='flex flex-row gap-4 place-content-start'>
-            <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
-              <Image src='/login_page_1.jpeg' alt="Passenger" fill className="object-cover" />
-            </div>
+            {/* <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
+              <Image src={tripsData?.[0].passenger.profileImage} alt="Passenger" fill className="object-cover" />
+            </div> */}
             <div>
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
@@ -86,7 +86,7 @@ export const TripCard = ({ onCancel, onStatusUpdate }: TripCardProps) => {
                 {formatDistanceToNow(new Date(tripsData?.[0].ride.departureTime.departureEnd))}
          </p>
       </div>
-      {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)}/>}
+      {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)} open={detailsOpen}/>}
     </article>
   );
 };
