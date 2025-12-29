@@ -9,11 +9,9 @@ interface ViewDetailsProps {
   ride: Ride;
   onAccept: (id: string) => void;
   isOwnRide: boolean;
-  onCancel?: (id: string) => void;
-  onEdit?: (id: string) => void;
 }
 
-export const ViewDetails = ({ isOwnRide, ride, onEdit, onAccept, onCancel }: ViewDetailsProps) => {
+export const ViewDetails = ({ isOwnRide, ride, onAccept }: ViewDetailsProps) => {
   return (
     <div className="flex flex-col w-full overflow-hidden">
       <div className="flex items-center justify-between p-4 border-b">
@@ -98,38 +96,15 @@ export const ViewDetails = ({ isOwnRide, ride, onEdit, onAccept, onCancel }: Vie
         </div>
       )}
 
-      {isOwnRide ? (
-        <div className="flex justify-between">
-          {!ride.acceptedAt && (
-            <Button
-              className="px-4 bg-secondary-100 text-light-text-100 hover:opacity-90 hover:scale-102"
-              onClick={() => onEdit?.(ride.id)}
-            >
-              <Icon icon="mdi:pencil-outline" className="mr-1" /> Edit
-            </Button>
-          )}
-
-          <Button
-            className="h-9 px-4 bg-red-600 border-none text-light-text-100  hover:opacity-90  hover:scale-102"
-            onClick={(e) => {
-              e.stopPropagation();
-              onCancel?.(ride.id);
-            }}
-          >
-            cancel
-          </Button>
-        </div>
-      ) : (
-        <Button
-          className="ml-6 bg-secondary-100  hover:scale-102 text-light-text-100 hover:opacity-90"
-          onClick={(e) => {
-            e.stopPropagation();
-            onAccept(ride.id);
-          }}
-        >
-          Accept
-        </Button>
-      )}
+      <Button
+        className="ml-6 bg-secondary-100  hover:scale-102 text-light-text-100 hover:opacity-90"
+        onClick={(e) => {
+          e.stopPropagation();
+          onAccept(ride.id);
+        }}
+      >
+        Accept
+      </Button>
     </div>
   );
 };

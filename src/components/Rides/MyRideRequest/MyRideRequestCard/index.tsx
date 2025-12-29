@@ -10,11 +10,10 @@ import { formatTime } from '@/lib/utils';
 interface MyRideRequestCardProps {
   ride?: Ride;
   trip?: Trip;
-  onEdit?: () => void;
   onCancel?: (id: string) => void;
 }
 
-export const MyRideRequestCard = ({ ride, trip, onEdit, onCancel }: MyRideRequestCardProps) => {
+export const MyRideRequestCard = ({ ride, trip, onCancel }: MyRideRequestCardProps) => {
   const data = trip ? trip.ride : ride;
   const isAccepted = !!trip;
   const driver = trip?.driver;
@@ -147,14 +146,6 @@ export const MyRideRequestCard = ({ ride, trip, onEdit, onCancel }: MyRideReques
       )}
 
       <div className="flex items-center justify-between gap-3 mt-auto">
-        <div className="flex gap-2">
-          {onEdit && (
-            <Button className="h-9 px-4 bg-secondary-100" onClick={onEdit}>
-              <Icon icon="mdi:pencil-outline" className="mr-1" /> Edit
-            </Button>
-          )}
-        </div>
-
         {onCancel && (
           <Button
             className=" p-2 px-4 bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white border border-red-600/20 transition-all text-xs"

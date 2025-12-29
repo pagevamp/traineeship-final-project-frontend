@@ -16,7 +16,7 @@ export const MyRideRequestsSection = () => {
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
   const { open, close, isFormOpen, isCancelling } = useModal();
 
-  const isAccepted = true;
+  const isAccepted = false;
 
   const {
     data: tripsData = [],
@@ -81,7 +81,6 @@ export const MyRideRequestsSection = () => {
             <MyRideRequestCard
               key={ride.id}
               ride={ride}
-              onEdit={() => handleAction('editing', ride)}
               onCancel={() => handleAction('cancelling', ride)}
             />
           ))}
@@ -91,11 +90,7 @@ export const MyRideRequestsSection = () => {
         )}
       </div>
 
-      <Modal
-        title={selectedRide ? 'Edit your ride request' : 'Request a new ride'}
-        open={isFormOpen}
-        onOpenChange={close}
-      >
+      <Modal title={'Request a new ride'} open={isFormOpen} onOpenChange={close}>
         <RideRequestForm ride={selectedRide} onClose={close} />
       </Modal>
 
