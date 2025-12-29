@@ -6,7 +6,7 @@ import { AcceptRideProps } from '@/core/types/trip-types';
 import { Icon } from '@iconify/react';
 import { useState } from 'react'
 
-export const UpdateStatus = ({id,acceptedAt, onStatusUpdate, onCancel}:AcceptRideProps) => {
+export const UpdateStatus = ({id, onStatusUpdate, onCancel}:AcceptRideProps) => {
       const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (

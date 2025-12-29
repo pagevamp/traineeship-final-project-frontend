@@ -1,7 +1,6 @@
 import { TripCard } from '@/components/Trip/TripCard'
 import { TripHeader } from '@/components/Trip/TripHeader';
 import { TripStatus } from '@/core/types/trip-types';
-import React from 'react'
 
 export const TripComponent = () => {
 

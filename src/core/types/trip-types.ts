@@ -55,7 +55,8 @@ export interface TripCardProps {
 }
 
 export interface AcceptRideProps {
-  acceptedAt : string|null; id: string;
+  acceptedAt?: string|null; 
+  id: string;
   onCancel: (id: string) => void;
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }
