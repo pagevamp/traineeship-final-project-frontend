@@ -110,24 +110,4 @@ export interface RideDTO extends Omit<Ride, 'departureTime' | 'status'> {
   status: string;
 }
 
-const RideMetadataFields = {
-  destination: z.string().trim().min(1, 'Destination is required'),
-  pickupLocation: z.string().trim().min(1, 'Pickup location is required'),
-  landmark: z.string().trim().optional(),
-  notes: z.string().trim().optional(),
-};
-
-export const UpdateRideSchema = z.object(RideMetadataFields);
-
-export const UpdateRideApiSchema = CreateRideApiSchema.omit({
-  departureStart: true,
-  departureEnd: true,
-});
-
-export type UpdateRideRequest = z.infer<typeof UpdateRideApiSchema>;
-
-export type UpdateRideActionState = {
-  errors?: Omit<CreateRideActionState['errors'], 'departureStart' | 'departureEnd'>;
-};
-
 export type RideTab = 'all' | 'mine';

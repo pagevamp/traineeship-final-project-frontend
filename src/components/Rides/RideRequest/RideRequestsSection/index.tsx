@@ -2,27 +2,20 @@
 import { Modal } from '@/components/common/Modal';
 import { RideRequestCard } from '@/components/Rides/RideRequest/RideRequestCard';
 import { ViewDetails } from '../../ViewDetails';
-import { Ride } from '@/core/types/Ride';
-import { getRides } from '@/core/api/ride.api';
-import useSWR from 'swr';
-import { useModal } from '@/hooks/useViewModal';
-import { useState } from 'react';
+
+import { useAvailableRides } from '@/hooks/useAvailableRides';
 
 export const RideRequestsSection = () => {
-  const { open, close, isViewing } = useModal();
-  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
-
-  const handleSelectRide = (ride: Ride) => {
-    setSelectedRide(ride);
-    open('viewing');
-  };
-
-  const handleAcceptRide = (id: string) => {
-    console.log('Ride Accepted:', id);
-    close();
-  };
-
-  const { data: ridesData = [], error, isLoading } = useSWR<Ride[]>('ride-requests', getRides);
+  const {
+    close,
+    handleSelectRide,
+    handleAcceptRide,
+    ridesData,
+    isLoading,
+    error,
+    isViewing,
+    selectedRide,
+  } = useAvailableRides();
 
   if (isLoading) {
     return <div className="p-6">Loading rides...</div>;

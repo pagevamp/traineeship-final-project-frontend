@@ -11,8 +11,6 @@ export const RidesHeader = () => (
       Ride <span className="text-secondary-100">Dashboard</span>
     </h1>
 
-    <p className="text-light-text-100 mt-2 max-w-md">
-      Manage your personal requests and discover new opportunities.
-    </p>
+    <p className="text-light-text-100 mt-2 max-w-md">Manage your personal requests and trips.</p>
   </div>
 );
