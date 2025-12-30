@@ -10,7 +10,7 @@ export const NavBar = () => {
   return (
     <nav className="flex items-center justify-between w-full h-20 px-6 bg-primary-100 border-b border-secondary-100/30">
       <div className="flex items-center gap-3">
-        <Link href="/rides" className="text-text-one-100 text-2xl font-bold text">
+        <Link href="/rides" className="text-text-one-100 text-2xl font-bold text ml-20">
           MILERA
         </Link>
       </div>

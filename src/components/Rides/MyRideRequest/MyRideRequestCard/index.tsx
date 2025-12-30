@@ -1,11 +1,11 @@
 'use client';
 import { Icon } from '@iconify/react';
 import { Ride } from '@/core/types/Ride';
-import { Trip } from '@/core/types/Trip';
 import { Button } from '../../../common/Button';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import { formatTime } from '@/lib/utils';
+import { Trip } from '@/core/schema/trip.schema';
 
 interface MyRideRequestCardProps {
   ride?: Ride;
@@ -103,7 +103,7 @@ export const MyRideRequestCard = ({ ride, trip, onCancel }: MyRideRequestCardPro
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full overflow-hidden">
                 <Image
-                  src={driver.profileImage}
+                  src={driver.profileImage ?? '/unknown.png'}
                   alt="Driver"
                   width={46}
                   height={46}

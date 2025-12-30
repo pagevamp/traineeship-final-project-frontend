@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useModal } from './useViewModal';
 import { deleteRide, getMyPendingRides, getMyRidsStatus } from '@/core/api/ride.api';
 import useSWR, { mutate } from 'swr';
-import { Trip } from '@/core/types/Trip';
 import { getAcceptedTrips } from '@/core/api/trip.api';
 import { toast } from 'sonner';
+import { Trip } from '@/core/schema/trip.schema';
 
 export function useMyRideRequests() {
   const [activeTab, setActiveTab] = useState<RideTab>('all');
