@@ -14,7 +14,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     return NextResponse.next();
   }
   if (isAuthenticated && isSignedInRoute(req)) {
-    return NextResponse.redirect(new URL('/', req.url));
+    return NextResponse.redirect(new URL('/rides', req.url));
   }
   if (isAuthenticated && !onboardingComplete) {
     const onboardingUrl = new URL('/onboarding', req.url);

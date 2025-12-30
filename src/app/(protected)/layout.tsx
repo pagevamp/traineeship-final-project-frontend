@@ -14,10 +14,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   };
   return (
     <Protect fallback={<RedirectToSignIn />}>
-      
-      
-
-     <div className="flex flex-col">
+      <div className="flex flex-col">
         <header className="w-full">
           <NavBar />
         </header>

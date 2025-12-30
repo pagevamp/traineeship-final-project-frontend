@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
-import { AuthProvider } from '@/context/auth/AuthContext';
+import { Toaster } from 'sonner';
+import ClientAuthInitializer from '@/components/ClientAuthInitiallizer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,19 +27,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        cssLayerName: 'clerk',
-      }}
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    >
-      <AuthProvider>
-        <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-            {children}
-          </body>
-        </html>
-      </AuthProvider>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClerkProvider
+          appearance={{
+            cssLayerName: 'clerk',
+          }}
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        >
+          <ClientAuthInitializer />
+          {children}
+          <Toaster
+            position="bottom-right"
+            richColors
+            toastOptions={{
+              style: {
+                background: '#191919',
+                color: '#fff8e3',
+                border: '1px solid rgba(159, 95, 69, 0.2)',
+                borderRadius: '12px',
+                padding: '16px',
+                fontSize: '14px',
+              },
+              className: 'my-custom-toast',
+            }}
+          />{' '}
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
