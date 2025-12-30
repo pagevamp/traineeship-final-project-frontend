@@ -1,6 +1,6 @@
 'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 //a simple static page to show page load error
 const UnauthorizedPage = () => {
@@ -9,10 +9,10 @@ const UnauthorizedPage = () => {
       <article className="w-full max-w-md shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
         <section className="p-8 text-center space-y-6">
           <div className="relative">
-            <div className="w-24 h-24 mx-auto bg-linear-to-r from-undraw-primary-100 to-emerald-800 rounded-full flex items-center justify-center shadow-lg">
+            <div className="w-24 h-24 mx-auto bg-linear-to-r from-primary-100 to-emerald-800 rounded-full flex items-center justify-center shadow-lg">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
                 <svg
-                  className="w-8 h-8 text-undraw-secondary-100"
+                  className="w-8 h-8 text-secondary-100"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -34,12 +34,10 @@ const UnauthorizedPage = () => {
               Access Denied
             </h1>
             <div className="space-y-2">
-              <p className="text-md text-gray-700 font-secondary">
-                Unauthorized Access
-              </p>
+              <p className="text-md text-gray-700 font-secondary">Unauthorized Access</p>
               <p className="text-sm text-gray-500 leading-relaxed font-secondary font-light">
-                You don&apos;t have permission to access this resource in the
-                Ride Sharing service. Please contact support at
+                You don&apos;t have permission to access this resource in the Ride Sharing service.
+                Please contact support at
                 <Link
                   href="mailto:istutiupreti805@gmail.com"
                   className="ml-2 font-bold text-shadow-emerald-400"
