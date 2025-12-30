@@ -82,7 +82,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.ride.passenger?.profileImage ?? '/unknown_profile.png'}
+                      src={data.ride?.passenger?.profileImage ?? '/unknown_profile.png'}
                       alt="passenger"
                       width={32}
                       height={32}
