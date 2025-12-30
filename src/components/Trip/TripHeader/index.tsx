@@ -2,10 +2,21 @@ import React from 'react'
 
 export const TripHeader = () => {
   return (
-    <section>   
-    <h1 className='font-semibold text-xl w-full rounded-xl px-6 py-4 mb-6 bg-secondary-100/80'> 
-        We have a trip waiting for you today
+    <section> 
+      <div className="flex items-center gap-2">
+      <span className="h-1 w-8 bg-secondary-100 rounded-full" />
+      <span className="text-xs font-bold uppercase tracking-widest text-secondary-100">
+        For Daily Commuters
+      </span>
+      </div>  
+
+      <h1 className="text-4xl md:text-5xl font-black tracking-tight text-light-text-100">
+      Trip <span className="text-secondary-100">Dashboard</span>
     </h1>
+
+    <p className='font-semibold text-xl w-full rounded-xl px-6 py-4 mb-6 text-center text-text-one-100 bg-secondary-100/80 my-4'> 
+        Your Pending Trips
+    </p>
     </section>
   )
 }
