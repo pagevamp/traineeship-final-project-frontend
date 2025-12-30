@@ -24,8 +24,8 @@ export const HistoryTabComponent = () => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={cn(
-                  'relative whitespace-nowrap text-2xl font-semibold text-text-one-100 pb-3 transition-all duration-300 overflow-visible',
-                  activeTab === tab && 'font-bold',
+                  'relative whitespace-nowrap text-2xl font-semibold text-text-one-100/70 pb-3 transition-all duration-300 overflow-visible cursor-pointer',
+                  activeTab === tab && 'font-bold text-secondary-100',
                 )}
               >
                 <span className="relative font-secondary font-normal">{tab}</span>

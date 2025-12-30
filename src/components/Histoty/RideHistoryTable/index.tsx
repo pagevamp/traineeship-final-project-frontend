@@ -16,7 +16,6 @@ import { Suspense } from 'react';
 import { Pagination } from '@components/common/PaginationComponent';
 import { SearchComponent } from '@components/common/SearchComponent';
 import { ViewContentComponent } from '../../common/ViewContentComponent';
-import { Icon } from '@iconify/react';
 import { format } from 'date-fns';
 import { Ride } from '@/core/types/Ride';
 import { getMyRides } from '@/core/api/ride.api';
@@ -44,7 +43,7 @@ export const RideTable = () => {
   return (
     <div>
       <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
-        <h2 className="font-bold text-2xl text-text-one-100">
+        <h2 className="font-bold text-2xl text-text-one-100/70">
           Your Ride History with <span className="text-secondary-100 font-extrabold">MILERA</span>
         </h2>
         <SearchComponent/>
@@ -55,9 +54,10 @@ export const RideTable = () => {
             <TableRow>
               {rideTableableHeaders.map((header) => (
                 <TableHead
-                  key={header}
+                  key={header.title}
+                  className={header.className}
                 >
-                  {header}
+                  {header.title}
                 </TableHead>
               ))}
             </TableRow>
@@ -92,7 +92,7 @@ export const RideTable = () => {
                 <TableCell>{data.destination}</TableCell>
 
                 {/* Departure Time */}
-                <TableCell className="hidden lg:table-cell text-text-one-100">
+                <TableCell className="hidden lg:table-cell">
                   <span>
   {data.departureTime?.departureStart 
     ? format(new Date(data.departureTime.departureStart), 'EEE, MMM dd, yyyy') 
@@ -113,26 +113,26 @@ export const RideTable = () => {
                 </TableCell>
 
                 {/* Accepted At */}
-                <TableCell>
+                <TableCell className="hidden lg:table-cell">
                   {data.acceptedAt ? (
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/15 text-green-400">
+                    <span className="px-3 py-1 rounded-md text-xs font-semibold bg-green-500/10 text-green-800">
                       {format(data.acceptedAt,'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-500/15 text-yellow-400">
+                    <span className="px-3 py-1 rounded-md text-xs font-semibold bg-yellow-500/10 text-yellow-800">
                       Pending
                     </span>
                   )}
                 </TableCell>
 
                 {/* Deleted At */}
-                <TableCell className="text-center">
+                <TableCell className="hidden lg:table-cell">
                   {data.deletedAt ? (
-                    <span className="bg-red-500/15 text-red-400 text-xs font-semibold rounded-full px-3 py-1">
+                    <span className="bg-red-500/10 text-red-800 text-xs font-semibold rounded-md px-3 py-1">
                       {format(data.deletedAt,'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
-                    <span className=" bg-amber-200/15 text-amber-600 text-xs font-semibold rounded-full px-3 py-1">
+                    <span className="bg-amber-200/10 text-amber-800 text-xs font-semibold rounded-md px-3 py-1">
                       N/A
                     </span>
                   )}

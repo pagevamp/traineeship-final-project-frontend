@@ -2,24 +2,25 @@ export type TripStatus = 'not_started' | 'on_the_way' | 'reached_pickup' | 'reac
 export type vehicleType = 'two_wheeler' | 'four_wheeler';
 
 export const tripTableableHeaders = [
-  'S.N',
-  'Driver',
-  'Passenger',
-  'Pick-Up Location',
-  'Destination',
-  'Departure Time',
-  'Accepted At',
-  'Cancelled At',
+  {title : 'S.N', className : ''},
+  {title : 'Driver', className : 'hidden lg:table-cell'},
+  {title : 'Passenger', className : ''},
+  {title : 'Destination', className : ''},
+  {title : 'Pick-Up Location', className : ''},
+  {title : 'Departure Time', className : 'hidden lg:table-cell'},
+  {title : 'Accepted At', className : 'hidden lg:table-cell'},
+  {title : 'Cancelled At', className : 'hidden lg:table-cell'},
+
 ];
 
 export const rideTableableHeaders = [
-  'S.N',
-  'Passenger',
-  'Pick-Up Location',
-  'Destination',
-  'Departure Time',
-  'Accepted At',
-  'Deleted At',
+  {title : 'S.N', className : ''},
+  {title : 'Passenger', className : ''},
+  {title : 'Destination', className : ''},
+  {title : 'Pick-Up Location', className : ''},
+  {title : 'Departure Time', className : 'hidden lg:table-cell'},
+  {title : 'Accepted At', className : 'hidden lg:table-cell'},
+  {title : 'Cancelled At', className : 'hidden lg:table-cell'},
 ];
 
 export type HistoryTab = 'Rides' | 'Trips';

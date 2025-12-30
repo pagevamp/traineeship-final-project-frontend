@@ -35,6 +35,7 @@ export const buttonVariants = cva(
 export const Button = ({
   children,
   variant,
+  disabled,
   size,
   className,
   type = 'button',
@@ -47,6 +48,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={cn(buttonVariants({ variant, size }), className)}
     >
       {children}

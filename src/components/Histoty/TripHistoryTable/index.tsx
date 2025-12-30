@@ -13,7 +13,6 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { SearchComponent } from '@/components/common/SearchComponent';
 import { Pagination } from '@/components/common/PaginationComponent';
-import { Icon } from '@iconify/react';
 import { ViewContentComponent } from '../../common/ViewContentComponent';
 import { format } from 'date-fns';
 import useSWR from 'swr';
@@ -27,7 +26,7 @@ export const TripTable = () => {
     data: tripsData ,
     error,
     isLoading,
-  } = useSWR<Trip[]>('trips/', getTrips);
+  } = useSWR<Trip[]>('trips/me', getTrips);
 const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
 
   if (isLoading){
@@ -35,13 +34,13 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
   }
 
   if (error){
-   return <div>Error fetching for your ride data</div>
+   return (error.message)
   }
 
   return (
     <div className="">
       <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
-        <h2 className="font-bold text-2xl text-text-one-100">
+        <h2 className="font-bold text-2xl text-text-one-100/70">
           Your Trip History with <span className="text-secondary-100 font-extrabold">MILERA</span>
         </h2>
         <SearchComponent/>
@@ -52,8 +51,8 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
           <TableHeader>
             <TableRow>
               {tripTableableHeaders.map((header) => (
-                <TableHead key={header}>
-                  {header}
+                <TableHead key={header.title} className={header.className}>
+                  {header.title}
                 </TableHead>
               ))}
             </TableRow>
@@ -66,7 +65,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 <TableCell className="text-text-two-100">{idx + 1}</TableCell>
 
                 {/* Driver */}
-                <TableCell>
+                <TableCell className='hidden lg:table-cell'>
                   <div className="flex items-center gap-3">
                     <Image
                       src={data.driver?.profileImage ?? '/unknown_profile.png'}
@@ -75,7 +74,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
-                    <span className="text-text-one-100 font-medium">{data.driver.firstName} {data.driver.lastName}</span>
+                    {data.driver?.firstName} {data.driver?.lastName}
                   </div>
                 </TableCell>
 
@@ -83,24 +82,24 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.passenger?.profileImage ?? '/unknown_proile.png'}
+                      src={data.passenger?.profileImage ?? '/unknown_profile.png'}
                       alt="passenger"
                       width={32}
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
-                    <span className="text-text-one-100 font-medium">{data.passenger.firstName} {data.passenger.lastName}</span>
+                    <span className="text-text-one-100 font-medium">{data.passenger?.firstName} {data.passenger?.lastName}</span>
                   </div>
                 </TableCell>
 
                 {/* Pickup Location */}
-                <TableCell className="text-text-one-100">{data.ride.pickupLocation}</TableCell>
+                <TableCell >{data.ride?.pickupLocation}</TableCell>
 
                 {/* Destination */}
-                <TableCell className="text-text-one-100">{data.ride.destination}</TableCell>
+                <TableCell >{data.ride?.destination}</TableCell>
 
                 {/* Departure Time */}
-                <TableCell className="hidden lg:table-cell text-text-one-100">
+                <TableCell className="hidden lg:table-cell">
                   <span>
                     {data.ride?.departureTime?.departureStart 
                       ? format(new Date(data.ride?.departureTime?.departureStart), 'EEE, MMM dd, yyyy') 
@@ -112,7 +111,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                   </span>
                   {viewContentOpen && (
                     <ViewContentComponent content={
-                      <div className="flex flex-col gap-1 mt-1 text-light-text-100 text-sm">
+                      <div className="flex flex-col gap-1 mt-1 text-sm">
                         <p>From: {data.ride?.departureTime?.departureStart}</p>
                         <p>To: {data.ride?.departureTime?.departureEnd}</p>
                       </div>
@@ -121,9 +120,9 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 </TableCell>
 
                 {/* Accepted At */}
-                <TableCell className="text-center">
+                <TableCell className="text-center hidden lg:table-cell">
                   {data.createdAt ? (
-                    <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm font-medium">
+                    <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-800 text-sm font-medium">
                       {format(new Date(data.createdAt), 'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
@@ -134,13 +133,13 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 </TableCell>
 
                 {/* Cancelled At */}
-                <TableCell className="text-center">
+                <TableCell className="text-center hidden lg:table-cell">
                   {data.deletedAt ? (
-                    <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-medium">
+                    <span className="px-3 py-1 rounded-full bg-red-500/10 text-red-800 text-sm font-medium">
                       {format(new Date(data.deletedAt), 'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
-                    <span className="px-3 py-1 rounded-full bg-light-bg-100/15 text-secondary-100 text-sm font-medium">
+                    <span className="px-3 py-1 rounded-full bg-amber-200/10 text-amber-800  text-sm font-medium">
                       N/A
                     </span>
                   )}
@@ -150,7 +149,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
           </TableBody>
 
           <TableCaption className="mt-4">
-<Pagination totalPages={Math.ceil((tripsData?.length ?? 0) / itemsPerPage)} />
+            <Pagination totalPages={Math.ceil((tripsData?.length ?? 0) / itemsPerPage)} />
           </TableCaption>
         </Table>
       </Suspense>

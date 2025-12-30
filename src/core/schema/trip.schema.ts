@@ -55,15 +55,15 @@ export const RideSchema = z.object({
 export const TripSchema = z.object({
   id: z.string(),
   driverId: z.string(),
-  status: z.enum(TripStatus),
-  vehicleType: z.enum(VehicleType),
+  status: z.string(),
+  vehicleType: z.string(),
   createdAt: z.string(),
   updatedAt: z.string().nullable().optional(),
   deletedAt: z.string().nullable().optional(),  
   
   ride:RideSchema,
-  driver: DriverSchema,
-  passenger: PassengerSchema,
+  driver: DriverSchema.nullable().optional(),
+  passenger: PassengerSchema.nullable().optional(),
 });
 
 

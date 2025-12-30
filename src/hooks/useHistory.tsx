@@ -55,22 +55,22 @@ export function useHistory() {
   function useFilterRides<RideHistory extends Ride[]>(
     query: string,
     currentPage: number,
-    historyData: RideHistory,
+    RideHistoryData: RideHistory,
   ) {
     const itemsPerPage = 5;
     const lowerCaseQuery = query.toLowerCase();
     const ridesData = useMemo(() => {
       const start = (currentPage - 1) * itemsPerPage;
-      const queriedData = historyData.filter(
-        (data) =>
-          data.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
-          data.destination.toLowerCase().includes(lowerCaseQuery),
+      const queriedData = RideHistoryData.filter(
+        (rideData) =>
+          rideData.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          rideData.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
+          rideData.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
+          rideData.destination.toLowerCase().includes(lowerCaseQuery),
       );
 
       return queriedData.slice(start, start + itemsPerPage);
-    }, [currentPage, historyData, lowerCaseQuery]);
+    }, [RideHistoryData, currentPage, lowerCaseQuery]);
     return ridesData;
   }
 
@@ -78,24 +78,24 @@ export function useHistory() {
   function useFilterTrips<TripHistory extends Trip[]>(
     query: string,
     currentPage: number,
-    historyData: TripHistory,
+    tripsHistoryData: TripHistory,
   ) {
     const itemsPerPage = 5;
     const lowerCaseQuery = query.toLowerCase();
     const tripsData = useMemo(() => {
       const start = (currentPage - 1) * itemsPerPage;
-      const queriedData = historyData.filter(
-        (data) =>
-          data.driver.firstName.toLowerCase().includes(lowerCaseQuery) ||
-          data.driver.lastName.toLowerCase().includes(lowerCaseQuery) ||
-          data.passenger.firstName.toLowerCase().includes(lowerCaseQuery) ||
-          data.passenger.lastName.toLowerCase().includes(lowerCaseQuery) ||
-          data.ride.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
-          data.ride.destination.toLowerCase().includes(lowerCaseQuery),
+      const queriedData = tripsHistoryData.filter(
+        (tripData) =>
+          tripData.driver?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.driver?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.ride.pickupLocation?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.ride.destination?.toLowerCase().includes(lowerCaseQuery),
       );
 
       return queriedData.slice(start, start + itemsPerPage);
-    }, [currentPage, historyData, lowerCaseQuery]);
+    }, [currentPage, lowerCaseQuery, tripsHistoryData]);
     return tripsData;
   }
   return {

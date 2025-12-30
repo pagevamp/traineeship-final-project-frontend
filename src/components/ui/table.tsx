@@ -8,7 +8,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot="table-container"
-      className="relative w-full overflow-x-auto rounded-2xl bg-card-bg-100 border border-tertiary-100/30 overflow-hidden bg-radial-[at_95%_85%] from-bg-card-bg-100 to-primary-100 to-90% min-w-[86vw]"
+      className="relative w-full overflow-x-auto rounded-2xl bg-card-bg-100 border border-tertiary-100/30 overflow-hidden bg-radial-[at_95%_85%] from-bg-card-bg-100 to-primary-100 to-90% min-w-[36vw] md:min-w-[66vw] lg:min-w-[86vw]"
     >
       <table
         data-slot="table"
@@ -67,7 +67,7 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
     <th
       data-slot="table-head"
       className={cn(
-        'text-center text-text-one-100/70 font-semibold text-sm uppercase tracking-wider py-4 h-10 px-2 align-middle whitespace-nowrap border-r border-gray-600 [&_td:last-child]:border-r-0',
+        'text-center text-text-one-100/70 font-semibold text-sm uppercase tracking-wider py-4 h-10 px-2 align-middle max-w-fit md:max-w-20 lg:max-w-50 whitespace-nowrap border-r border-tertiary-100/30  [&_td:last-child]:border-r-0',
         className,
       )}
       {...props}
@@ -80,7 +80,7 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
     <td
       data-slot="table-cell"
       className={cn(
-        'px-3 py-2 align-middle whitespace-nowrap font-medium text-center border border-gray-600 max-w-50 truncate text-xs',
+        'px-3 py-2 align-middle whitespace-nowrap border border-tertiary-100/30 max-w-fit md:max-w-20 lg:max-w-50 truncate text-center text-xs text-text-one-100/80 ',
         className,
       )}
       {...props}

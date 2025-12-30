@@ -26,7 +26,7 @@ export const Pagination = ({ totalPages }: { totalPages: number }): React.ReactE
         onClick={previous}
         disabled={isFirstPage}
         className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-          disabled:opacity-40 disabled:cursor-not-allowed
+          disabled:bg-secondary-100/20 disabled:cursor-not-allowed border
           transition"
       >
         <Icon icon="icon-park-solid:back" />
@@ -43,7 +43,7 @@ export const Pagination = ({ totalPages }: { totalPages: number }): React.ReactE
         onClick={next}
         disabled={isLastPage}
         className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-          disabled:opacity-40 disabled:cursor-not-allowed
+          disabled:bg-secondary-100/20 disabled:cursor-not-allowed border
           transition"
       >
         Next

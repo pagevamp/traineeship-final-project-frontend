@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { useUpdateTrip } from '@/hooks/useUpdateTrip';
+import { TripStatus } from '@/core/types/trip-types';
 
 
 export const TripCard = () => {  
@@ -117,7 +118,7 @@ export const TripCard = () => {
         
         {expired > now &&
           <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}   
-                        onStatusUpdate={(tripId, status) => updateStatus(tripId, status)}/>
+                        onStatusUpdate={(tripId, status) => updateStatus(tripId, status as TripStatus)}/>
         }
         <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
               <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
