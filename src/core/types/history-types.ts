@@ -75,7 +75,6 @@ export interface Ride {
 
 export const rideTableableHeaders = [
   'S.N',
-  'Ride ID',
   'Passenger',
   'Pick-Up Location',
   'Destination',

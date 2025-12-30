@@ -18,6 +18,8 @@ import { Pagination } from '@components/common/PaginationComponent';
 import { SearchComponent } from '@components/common/SearchComponent';
 import { ViewContentComponent } from '../../common/ViewContentComponent';
 import { Icon } from '@iconify/react';
+import { format } from 'date-fns';
+
 
 export const RideTable = () => {
   const itemsPerPage = 5;
@@ -50,10 +52,7 @@ export const RideTable = () => {
             {rideData.map((data, idx) => (
               <TableRow key={data.id}>
                 {/* S.N */}
-                <TableCell>{idx + 1}</TableCell>
-
-                {/* Ride ID */}
-                <TableCell>{data.id}</TableCell>
+                <TableCell className='text-text-two-100'>{idx + 1}</TableCell>
 
                 {/* Passenger */}
                 <TableCell>
@@ -63,7 +62,7 @@ export const RideTable = () => {
                       alt="passenger"
                       width={32}
                       height={32}
-                      className="rounded-full object-cover border border-black"
+                      className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
                     <span className="font-medium">
                       {data.passenger.firstName} {data.passenger.lastName}
@@ -78,30 +77,26 @@ export const RideTable = () => {
                 <TableCell>{data.destination}</TableCell>
 
                 {/* Departure Time */}
-                <TableCell>
-                  <div className="inline-flex items-center gap-1">
-                    <Icon icon="eos-icons:hourglass" width={16} height={16} className='cursor-pointer' onClick={toggleContentVisibility}/>
-                    <span className="truncate">                    {data.departureTime.departureStart}
-                    {' ➙ '}
-                    {data.departureTime.departureEnd}
-                    </span>
+                <TableCell className="hidden lg:table-cell text-text-one-100">
+                  <div className="flex items-center gap-1 cursor-pointer" onClick={toggleContentVisibility}>
+                    <Icon icon="eos-icons:hourglass" width={12} height={12} className="text-secondary-100" />
+                    <span className="truncate">{format(data.departureTime.departureStart,'EEE, MMM dd, yyyy')} → {format(data.departureTime.departureEnd,'EEE, MMM dd, yyyy')}</span>
                   </div>
-                  {viewContentOpen &&  
-                    <ViewContentComponent content= {
-                      <div className='flex flex-col gap-2'>
-                        <p>FROM : {data.departureTime.departureStart}</p>
-                        <p>TO : {data.departureTime.departureEnd}</p>
-                      </div>}>
-                    </ViewContentComponent>
-                  }
-                  
+                  {viewContentOpen && (
+                    <ViewContentComponent content={
+                      <div className="flex flex-col gap-1 mt-1 text-light-text-100 text-sm">
+                        <p>From: {data.departureTime.departureStart}</p>
+                        <p>To: {data.departureTime.departureEnd}</p>
+                      </div>
+                    } />
+                  )}
                 </TableCell>
 
                 {/* Accepted At */}
                 <TableCell>
                   {data.acceptedAt ? (
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/15 text-green-400">
-                      {data.acceptedAt}
+                      {format(data.acceptedAt,'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-500/15 text-yellow-400">
@@ -114,7 +109,7 @@ export const RideTable = () => {
                 <TableCell className="text-center">
                   {data.deletedAt ? (
                     <span className="bg-red-500/15 text-red-400 text-xs font-semibold rounded-full px-3 py-1">
-                      {data.deletedAt}
+                      {format(data.deletedAt,'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
                     <span className=" bg-amber-200/15 text-amber-600 text-xs font-semibold rounded-full px-3 py-1">
@@ -126,8 +121,8 @@ export const RideTable = () => {
             ))}
           </TableBody>
            <TableCaption className="mt-4">
-                      <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
-                    </TableCaption>
+              <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
+            </TableCaption>
         </Table>
       </Suspense>
     </div>

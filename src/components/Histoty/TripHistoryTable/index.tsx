@@ -16,6 +16,7 @@ import { SearchComponent } from '@/components/common/SearchComponent';
 import { Pagination } from '@/components/common/PaginationComponent';
 import { Icon } from '@iconify/react';
 import { ViewContentComponent } from '../../common/ViewContentComponent';
+import { format } from 'date-fns';
 
 export const TripTable = () => {
   const itemsPerPage = 5;
@@ -87,7 +88,7 @@ export const TripTable = () => {
                 <TableCell className="hidden lg:table-cell text-text-one-100">
                   <div className="flex items-center gap-1 cursor-pointer" onClick={toggleContentVisibility}>
                     <Icon icon="eos-icons:hourglass" width={16} height={16} className="text-secondary-100" />
-                    <span className="truncate">{data.ride.departureTime.departureStart} → {data.ride.departureTime.departureEnd}</span>
+                    <span className="truncate">{format(data.ride.departureTime.departureStart,'EEE, MMM dd, yyyy')} → {format(data.ride.departureTime.departureEnd,'EEE, MMM dd, yyyy')}</span>
                   </div>
                   {viewContentOpen && (
                     <ViewContentComponent content={
@@ -102,7 +103,7 @@ export const TripTable = () => {
                 {/* Accepted At */}
                 <TableCell className="text-center">
                   <span className="px-3 py-1 rounded-full bg-green-500/15 text-green-400 text-sm font-medium">
-                    {data.createdAt}
+                    {format(data.createdAt,'EEE, MMM dd, yyyy')}
                   </span>
                 </TableCell>
 
@@ -110,7 +111,7 @@ export const TripTable = () => {
                 <TableCell className="text-center">
                   {data.deletedAt ? (
                     <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-medium">
-                      {data.deletedAt}
+                      {format(data.deletedAt,'EEE, MMM dd, yyyy')}
                     </span>
                   ) : (
                     <span className="px-3 py-1 rounded-full bg-light-bg-100/15 text-secondary-100 text-sm font-medium">
