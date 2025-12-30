@@ -87,12 +87,12 @@ export const ViewDetails = ({ isOwnRide, ride, onAccept }: ViewDetailsProps) => 
       </div>
 
       {ride.notes && (
-        <div className="mx-6 mb-6 p-4 bg-light-bg-100 rounded-lg border-secondary-100 border-2">
+        <div className="mx-6 mb-6 p-4 bg-secondary-100/5 rounded-lg border-secondary-100/10 border">
           <div className="flex items-center gap-2 mb-1">
             <Icon icon="mdi:note-text-outline" className="size-4 text-secondary-100" />
             <span className="text-lg uppercase font-bold text-tertiary-100">Passenger Notes</span>
           </div>
-          <p className="text-sm text-tertiary-100 leading-relaxed">{ride.notes}</p>
+          <p className="text-sm text-text-one-100 leading-relaxed">{ride.notes}</p>
         </div>
       )}
 
