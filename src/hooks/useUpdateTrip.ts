@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSWRConfig } from 'swr';
 import { toast } from 'sonner';
-import { Trip } from '@/core/schema/trip.schema';
 import { updateTrip } from '@/core/api/trip.api';
 import { TripStatus } from '@/core/types/trip-types';
 

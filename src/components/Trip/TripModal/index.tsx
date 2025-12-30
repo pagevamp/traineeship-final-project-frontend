@@ -12,7 +12,7 @@ export const TripModal = ({
   onClose: () => void;
 }) => {
 
-const trip =data
+const trip = data
 const tripsInfoRow = [
   {
     icon : "mdi:calendar-clock",
