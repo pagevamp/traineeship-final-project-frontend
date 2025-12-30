@@ -7,13 +7,13 @@ import { Button } from '@/components/common/Button';
 
 import { RideRequestsSection } from '@/components/Rides/RideRequest/RideRequestsSection';
 import { MyRideRequestsSection } from '@components/Rides/MyRideRequest/MyRideRequestSection/index';
-import { useRideRequests } from '@/hooks/useRideRequest';
+import { useMyRideRequests } from '@/hooks/useMyRideRequest';
 import { useState } from 'react';
 import { Modal } from '@/components/common/Modal';
 import { RideRequestForm } from '@/components/Rides/RideRequestForm';
 
 const Rides = () => {
-  const { activeTab, setActiveTab } = useRideRequests();
+  const { activeTab, setActiveTab } = useMyRideRequests();
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   return (

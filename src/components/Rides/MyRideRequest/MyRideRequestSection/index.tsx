@@ -4,62 +4,30 @@ import { Modal } from '@/components/common/Modal';
 import { MyRideRequestCard } from '../MyRideRequestCard';
 import { RideRequestForm } from '../../RideRequestForm';
 import { CancelConfirmationDialog } from '../../CancelDialog';
-import { useState } from 'react';
 import { useModal, ViewMode } from '@/hooks/useViewModal';
-import useSWR, { mutate } from 'swr';
-import { deleteRide, getMyPendingRides, getMyRidsStatus } from '@/core/api/ride.api';
-import { toast } from 'sonner';
-import { getAcceptedTrips } from '@/core/api/trip.api';
-import { Trip } from '@/core/types/Trip';
+import { useMyRideRequests } from '@/hooks/useMyRideRequest';
 
 export const MyRideRequestsSection = () => {
-  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
   const { open, close, isFormOpen, isCancelling } = useModal();
 
-  const { data: isAccepted } = useSWR<boolean>('/ride-requests/me/pending', getMyRidsStatus);
-
-  console.log('the status is: ', isAccepted);
-
   const {
-    data: tripsData = [],
-    error: tripsDataError,
-    isLoading: tripsLoading,
-  } = useSWR<Trip[]>(isAccepted ? 'trips/accepted' : null, getAcceptedTrips);
+    onConfirmCancel,
+    ridesData,
+    isLoading,
+    ridesError,
+    tripsData,
+    selectedRide,
+    setSelectedRide,
+  } = useMyRideRequests();
 
-  const {
-    data: ridesData = [],
-    error: ridesDataError,
-    isLoading: ridesLoading,
-  } = useSWR<Ride[]>(isAccepted ? null : 'ride-requests/me/pending', getMyPendingRides);
-
-  const onConfirmCancel = async () => {
-    if (!selectedRide) return;
-
-    try {
-      toast.promise(deleteRide(selectedRide.id), {
-        loading: 'Cancelling your ride request...',
-        success: () => {
-          mutate('ride-requests/me/pending');
-          mutate('trips/accepted');
-          close();
-          return 'Ride request cancelled.';
-        },
-        error: (err) => err?.response?.data?.message || 'Failed to cancel ride',
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-    }
-  };
-
-  if (ridesLoading || tripsLoading) return <div className="p-6">Loading...</div>;
-
-  if (ridesDataError || tripsDataError) {
-    return <div className="p-6 text-red-500">Failed to load rides</div>;
-  }
+  if (isLoading) return <div className="p-6">Loading...</div>;
 
   if (ridesData.length === 0 && tripsData.length === 0) {
     return <div className="p-6">No rides found.</div>;
+  }
+
+  if (ridesError) {
+    return <div className="p-6 text-red-500">Failed to load rides</div>;
   }
 
   const handleAction = (mode: ViewMode, ride: Ride | null) => {
