@@ -88,8 +88,8 @@ export function useHistory() {
         (tripData) =>
           tripData.driver?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
           tripData.driver?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
-          tripData.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
-          tripData.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.ride?.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          tripData.ride?.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
           tripData.ride.pickupLocation?.toLowerCase().includes(lowerCaseQuery) ||
           tripData.ride.destination?.toLowerCase().includes(lowerCaseQuery),
       );

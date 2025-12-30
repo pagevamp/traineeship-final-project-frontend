@@ -130,7 +130,7 @@ export const TripCard = () => {
 
          <p className="text-xs text-normal flex items-center gap-1 place-content-center mt-2">
                 <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}
-                                {tripsData?.[0]?.ride?.departureTime.departureEnd ? formatDistanceToNow(new Date(tripsData?.[0]?.createdAt)) : formatDistanceToNow(new Date(0))} ago
+                                {tripsData?.[0]?.ride?.departureTime.departureEnd ? formatDistanceToNow(new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)) : formatDistanceToNow(new Date(0))} from now
          </p>
       </div>
       {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)} open={detailsOpen}/>}
