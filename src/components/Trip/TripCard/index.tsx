@@ -1,8 +1,6 @@
 'use client';
-import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
-import { TripCardProps } from '@/core/types/trip-types';
 import { UpdateStatus } from '../UpdateStatusComponent';
 import { Button } from '@/components/common/Button';
 import { useState } from 'react';
@@ -14,12 +12,15 @@ import { useModal, ViewMode } from '@/hooks/useViewModal';
 import { toast } from 'sonner';
 import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
+import { useUpdateTrip } from '@/hooks/useUpdateTrip';
+
 
 export const TripCard = () => {  
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const { open, close, isCancelling } = useModal();
-  
+  const { updateStatus, loading } = useUpdateTrip();
+
  const {
     data: tripsData,
     error,
@@ -115,8 +116,9 @@ export const TripCard = () => {
         </div>
         
         {expired > now &&
-        <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}  onStatusUpdate={() => handleAction('editing',  tripsData?.[0])}  id={tripsData?.[0].id} />
-      }
+          <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}   
+                        onStatusUpdate={(tripId, status) => updateStatus(tripId, status)}/>
+        }
         <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
               <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
         </Modal>

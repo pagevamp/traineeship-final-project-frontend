@@ -46,6 +46,7 @@ export const UpdateStatus = ({trip, onStatusUpdate, onCancel}:AcceptRideProps) =
                   onStatusUpdate(trip.id, update.status);
                   setPopoverOpen(false);
                 }}
+
               >
                <Icon icon={update.icon}/> {update.label}
               </Button>

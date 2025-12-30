@@ -16,11 +16,10 @@ export interface TripCardProps {
   onStatusUpdate: (id: string, type: TripStatus) => void;
 }
 
-export interface AcceptRideProps {
-  acceptedAt?: string|null; 
+export interface AcceptRideProps { 
   trip: Trip;
   id?: string;
   onCancel: (id: string) => void;
-  onStatusUpdate: (id: string, type: TripStatus) => void;
+  onStatusUpdate: (tripId: string, status: Trip['status']) => void;
 }
 
