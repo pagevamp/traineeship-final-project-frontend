@@ -1,5 +1,6 @@
 import z from 'zod';
 import { TripStatus, VehicleType } from '../types/trip-types';
+import { RideSchema } from '../types/Ride';
 
 export const DepartureTimeSchema = z.object({
   departureStart: z.string(),
@@ -19,33 +20,9 @@ export const DriverSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   phoneNumber: z.string().nullable().optional(),
+  profileImage: z.string().nullable().optional(),
 });
 
-
-export const RideSchema = z.object({
-  id: z.string(),
-  passengerId: z.string(),
-  destination: z.string(),
-  landmark: z.string().nullable(),
-  pickupLocation: z.string().nullable(),
-  notes: z.string().nullable(),
-   departureTime: z.preprocess((val) => {
-      if (typeof val === 'string') {
-        const dates = val.replace(/[\[\]"]/g, '').split(',');
-        if (dates.length === 2) {
-          return {
-            departureStart: dates[0].trim(),
-            departureEnd: dates[1].trim(),
-          };
-        }
-      }
-      return val;
-    }, DepartureTimeSchema),
-  acceptedAt: z.string().nullable().optional(),
-  createdAt: z.string(),
-  updatedAt: z.string().nullable().optional(),
-  deletedAt: z.string().nullable().optional(),
-});
 
 export const TripSchema = z.object({
   id: z.string(),
@@ -56,7 +33,7 @@ export const TripSchema = z.object({
   updatedAt: z.string().nullable().optional(),
   deletedAt: z.string().nullable().optional(),  
   
-  ride:RideSchema,
+  ride: RideSchema,
   driver: DriverSchema,
   passenger: PassengerSchema,
 });

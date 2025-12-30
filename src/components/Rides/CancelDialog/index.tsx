@@ -23,13 +23,13 @@ export const CancelConfirmationDialog = ({ onClose, onConfirm }: CancelConfirmat
       <div className="flex w-full gap-3">
         <Button
           onClick={onClose}
-          className="flex-1 h-11 bg-outline-100 border border-secondary-100/30 text-light-text-100 "
+          className="flex-1 h-11 bg-outline-100 border border-secondary-100/30 text-light-text-100 hover:bg-secondary-100"
         >
           Go Back
         </Button>
         <Button
           type="button"
-          className="flex-1 h-11 bg-transparent border border-secondary-100/30 text-light-text-100 hover:bg-secondary-100/10 transition-all"
+          className="flex-1 h-11 border bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-light-text-100  border-red-600/20 transition-all"
           onClick={onConfirm}
         >
           Cancel
