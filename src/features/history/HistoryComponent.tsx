@@ -1,4 +1,4 @@
-import { HistoryTabComponent } from '@/components/common/HistoryTabComponent';
+import { HistoryTabComponent } from '@/components/Histoty/HistoryTabComponent';
 export const HistoryComponent = () => {
   return (
     <>

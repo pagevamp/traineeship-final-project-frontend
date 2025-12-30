@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { HistoryTab } from '@/core/types/history-types';
-import { RideTable } from '../RideTable';
-import { TripTable } from '../TripTable';
+import { RideTable } from '../RideHistoryTable';
+import { TripTable } from '../TripHistoryTable';
 
 export const HistoryTabComponent = () => {
   const tabs: HistoryTab[] = ['Rides', 'Trips'];
@@ -40,7 +40,7 @@ export const HistoryTabComponent = () => {
 
       <div className={cn('w-full rounded-2xl overflow-auto', activeTab === 'Trips' && 'max-w-fit')}>
         <div key={activeTab} className="min-w-150">
-          <div className="w-full bg-tertiary-100/30 p-4">
+          <div className="p-4 md:p-6 bg-card-bg-100 rounded-xl shadow-lg">
             {activeTab === 'Rides' ? (
               <>
                 <RideTable />

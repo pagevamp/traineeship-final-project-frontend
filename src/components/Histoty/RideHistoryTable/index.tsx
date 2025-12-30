@@ -16,7 +16,7 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { Pagination } from '@components/common/PaginationComponent';
 import { SearchComponent } from '@components/common/SearchComponent';
-import { ViewContentComponent } from '../ViewContentComponent';
+import { ViewContentComponent } from '../../common/ViewContentComponent';
 import { Icon } from '@iconify/react';
 
 export const RideTable = () => {
@@ -26,11 +26,11 @@ export const RideTable = () => {
 
   return (
     <div>
-      <section className="flex flex-row items-center justify-between mt-2 mb-5">
-        <h2 className="font-semibold text-xl text-amber-100/90">
-          Your Rides History with <span className="text-tertiary-100/70 text-shadow-sm text-shadow-black font-extrabold">MILERA...</span>
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
+        <h2 className="font-bold text-2xl text-text-one-100">
+          Your Ride History with <span className="text-secondary-100 font-extrabold">MILERA</span>
         </h2>
-        <SearchComponent />
+        <SearchComponent/>
       </section>
       <Suspense key={query + currentPage}>
         <Table>
@@ -39,7 +39,6 @@ export const RideTable = () => {
               {rideTableableHeaders.map((header) => (
                 <TableHead
                   key={header}
-                  className="text-center text-orange-200 font-semibold text-sm uppercase py-4"
                 >
                   {header}
                 </TableHead>
@@ -126,11 +125,9 @@ export const RideTable = () => {
               </TableRow>
             ))}
           </TableBody>
-          <TableCaption>
-            <section className="flex flex-col gap-2 items-center">
-              <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
-            </section>
-          </TableCaption>
+           <TableCaption className="mt-4">
+                      <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
+                    </TableCaption>
         </Table>
       </Suspense>
     </div>
