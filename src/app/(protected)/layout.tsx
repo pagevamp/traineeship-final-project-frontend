@@ -4,14 +4,22 @@ import { NavBar } from '@/components/common/NavBar';
 import { SideBar } from '@/components/common/SideBar';
 import { Protect, RedirectToSignIn } from '@clerk/nextjs';
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const [sideBarOpen, setSideBarOpen] = useState<boolean>(true);
+ const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  const toggleSideBarVisibility = () => {
-    setSideBarOpen(!sideBarOpen);
-  };
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsClient(true);
+  }, []);
+
+    const toggleSideBarVisibility = () => setSideBarOpen(!sideBarOpen);
+
+
+  if (!isClient) return null; // don't render until on client
+
   return (
     <Protect fallback={<RedirectToSignIn />}>
       <div className="flex flex-col">
@@ -19,21 +27,20 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
           <NavBar />
         </header>
 
-      <Button
-        onClick={toggleSideBarVisibility}
-        size={'icon'}
-        className='absolute top-4 left-8 z-10 backdrop-blur-md rounded-xl border-3 border-tertiary-100/30 hover:bg-secondary-100/80 cursor-pointer h-12 w-12'
-      >
-        <Icon icon="mingcute:menu-fill" width={32} height={32} />
-      </Button>
+        <Button
+          onClick={toggleSideBarVisibility}
+          size={'icon'}
+          className="absolute top-4 left-8 z-10 backdrop-blur-md rounded-xl border-3 border-tertiary-100/30 hover:bg-secondary-100/80 cursor-pointer h-12 w-12"
+        >
+          <Icon icon="mingcute:menu-fill" width={32} height={32} />
+        </Button>
 
         {/* Main Content */}
-       <main className="flex items-center justify-center mx-auto md:p-6 overflow-auto">
+        <main className="flex items-center justify-center mx-auto md:p-6 overflow-auto">
           <div className="w-full">{children}</div>
         </main>
       </div>
-      
-     
+
       {sideBarOpen === true && <SideBar />}
     </Protect>
   );

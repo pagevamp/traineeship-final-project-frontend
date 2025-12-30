@@ -29,7 +29,12 @@ export const useCreateTrip = () => {
 
       return trip;
     } catch (error) {
-      console.error('Error creating trip:', error);
+      if(error instanceof Error){      
+          toast.error(`Error creating trip : ${error.message}`);
+        }
+      else{
+          toast.error(`Creating trip failed due to unknown error`);
+      } 
       throw error;
     } finally {
       setLoading(false);

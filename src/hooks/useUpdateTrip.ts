@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useSWRConfig } from 'swr';
 import { toast } from 'sonner';
-import { Trip } from '@/core/schema/trip.schema';
 import { updateTrip } from '@/core/api/trip.api';
+import { TripStatus } from '@/core/types/trip-types';
 
 export const useUpdateTrip = () => {
   const { mutate } = useSWRConfig();
@@ -12,13 +12,13 @@ export const useUpdateTrip = () => {
 
   const updateStatus = async (
     tripId: string,
-    status: Trip['status'],
+    status: TripStatus,
     onClose?: () => void,
   ) => {
     try {
       setLoading(true);
 
-      await toast.promise(
+      toast.promise(
         updateTrip(tripId, { status }),
         {
           loading: 'Updating status...',
@@ -29,9 +29,8 @@ export const useUpdateTrip = () => {
             onClose?.();
             return `Status updated to ${res.status}`;
           },
-          error: (err) =>
-            err?.response?.data?.message,
-        },
+          error: (err) => err?.response?.data?.message,
+        }
       );
     } finally {
       setLoading(false);

@@ -87,7 +87,7 @@ export const RideRequestCard = ({ ride, onClick }: RideRequestCardProps) => {
       <div className="flex gap-2 md:gap-5">
         <Button
           className="h-9 px-4 bg-secondary-100 text-light-text-100 hover:scale-102 hover:opacity-90"
-                  onClick={() => acceptRide(ride.id, VehicleType.FOUR_WHEELER)}
+                  onClick={() => acceptRide(ride.id, VehicleType.TWO_WHEELER)}
 
         >
           <span className=" text-light-text-100">

@@ -13,13 +13,14 @@ import { toast } from 'sonner';
 import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { useUpdateTrip } from '@/hooks/useUpdateTrip';
+import { TripStatus } from '@/core/types/trip-types';
 
 
 export const TripCard = () => {  
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const { open, close, isCancelling } = useModal();
-  const { updateStatus, loading } = useUpdateTrip();
+  const { updateStatus } = useUpdateTrip();
 
  const {
     data: tripsData,
@@ -59,6 +60,10 @@ export const TripCard = () => {
   if (!tripsData) {
     return <div className="p-6">No trips pending</div>;
   }
+
+  if (!tripsData.length) {
+    return <div className="p-6">No trips pending</div>;
+  }
   
     const handleAction = (mode: ViewMode, trip: Trip | null) => {
       setSelectedTrip(trip);
@@ -66,7 +71,7 @@ export const TripCard = () => {
     };
 
     const now = new Date()
-    const expired = new Date(tripsData?.[0].ride.departureTime.departureEnd)
+    const expired = new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)
 
   return (
     <article className='flex flex-col items-center gap-5'>
@@ -83,7 +88,7 @@ export const TripCard = () => {
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
                 <Icon icon="mdi:calendar-check" /> Trip Accepted{' '}
-                {formatDistanceToNow(new Date(tripsData?.[0].createdAt))} ago
+                {tripsData?.[0]?.createdAt ? formatDistanceToNow(new Date(tripsData?.[0]?.createdAt)) : formatDistanceToNow(new Date(0))} ago
               </p>
             </div>
           </section>
@@ -106,18 +111,18 @@ export const TripCard = () => {
           <div className="flex flex-col justify-between py-0.5 gap-5">
             <div className="flex flex-col">
               <span className="text-xs md:text-sm uppercase font-semibold text-tertiary-100 leading-none">Pickup</span>
-              <span className="text-xs md:text-sm truncate text-light-text-100 font-medium">{tripsData?.[0].ride.pickupLocation}</span>
+              <span className="text-xs md:text-sm truncate text-light-text-100 font-medium">{tripsData?.[0]?.ride?.pickupLocation}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs md:text-sm uppercase font-semibold text-tertiary-100 leading-none">Destination</span>
-              <span className="text-sm text-light-text-100 font-medium truncate">{tripsData?.[0].ride.destination}</span>
+              <span className="text-sm text-light-text-100 font-medium truncate">{tripsData?.[0]?.ride?.destination}</span>
             </div>
           </div>
         </div>
         
         {expired > now &&
           <UpdateStatus trip={tripsData?.[0]}  onCancel={() => handleAction('cancelling', tripsData?.[0])}   
-                        onStatusUpdate={(tripId, status) => updateStatus(tripId, status)}/>
+                        onStatusUpdate={(tripId, status) => updateStatus(tripId, status as TripStatus)}/>
         }
         <Modal title="Trip Cancellation" open={isCancelling} onOpenChange={close}>
               <CancelConfirmationDialog onConfirm={onConfirmCancel} onClose={close} />
@@ -125,7 +130,7 @@ export const TripCard = () => {
 
          <p className="text-xs text-normal flex items-center gap-1 place-content-center mt-2">
                 <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}
-                {formatDistanceToNow(new Date(tripsData?.[0].ride.departureTime.departureEnd))}
+                                {tripsData?.[0]?.ride?.departureTime.departureEnd ? formatDistanceToNow(new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)) : formatDistanceToNow(new Date(0))} from now
          </p>
       </div>
       {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)} open={detailsOpen}/>}

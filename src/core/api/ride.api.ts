@@ -18,6 +18,22 @@ export async function getRides(): Promise<Ride[]> {
   }
 }
 
+export async function getMyRides(): Promise<Ride[]> {
+  try {
+    const res = await axiosInstance.get('/ride-requests/me');
+
+    const result = z.array(RideSchema).safeParse(res.data.rides);
+
+    if (!result.success) {
+      throw new Error('Data corruption: API response does not match frontend types.');
+    }
+
+    return result.data;
+  } catch (error: unknown) {
+    throw error;
+  }
+}
+
 export async function getMyPendingRides(): Promise<Ride[]> {
   try {
     const res = await axiosInstance.get('/ride-requests/me/pending');

@@ -12,7 +12,7 @@ export const TripModal = ({
   onClose: () => void;
 }) => {
 
-const trip =data
+const trip = data
 const tripsInfoRow = [
   {
     icon : "mdi:calendar-clock",
@@ -60,10 +60,10 @@ const tripsInfoRow = [
               Passenger
             </p>
             <h2 className="text-sm md:text-base font-semibold text-light-text-100">
-              {trip?.[0].passenger.firstName} {trip?.[0].passenger.lastName}
+              {trip?.[0].ride?.passenger?.firstName} {trip?.[0].ride?.passenger?.lastName}
             </h2>
             <h5 className="text-2xs font-light text-gray-500">
-              {trip?.[0].passenger.phoneNumber} 
+              {trip?.[0].ride?.passenger?.phoneNumber} 
             </h5>
           </div>
         </div>
