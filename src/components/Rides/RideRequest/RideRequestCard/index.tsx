@@ -5,8 +5,8 @@ import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
 import { Ride } from '@/core/types/Ride';
 import { formatTime } from '@/lib/utils';
-import { useCreateTrip } from '@/hooks/useUpdateTrips';
 import { VehicleType } from '@/core/types/trip-types';
+import { useCreateTrip } from '@/hooks/useCreateTrips';
 
 interface RideRequestCardProps {
   ride: Ride;
