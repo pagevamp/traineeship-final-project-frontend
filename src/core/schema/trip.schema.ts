@@ -12,6 +12,8 @@ export const PassengerSchema = z.object({
   lastName: z.string(),
   profileImage: z.string().nullable().optional(),
   phoneNumber: z.string().nullable().optional(),
+  primaryLocation: z.string().nullable().optional(),
+
 
 });
 
@@ -19,6 +21,9 @@ export const DriverSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   phoneNumber: z.string().nullable().optional(),
+  profileImage: z.string().nullable().optional(),
+  primaryLocation: z.string().nullable().optional(),
+
 });
 
 

@@ -1,5 +1,7 @@
 "use client"
-import { Ride, RideSearchTypes, Trip, TripSearchTypes } from '@/core/types/history-types';
+import { Trip } from '@/core/schema/trip.schema';
+import { RideSearchTypes, TripSearchTypes } from '@/core/types/history-types';
+import { Ride } from '@/core/types/Ride';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -61,7 +63,7 @@ export function useHistory() {
     const ridesData = useMemo(() => {
       const start = (currentPage - 1) * itemsPerPage;
       const queriedData = historyData.filter(
-        (data: RideSearchTypes) =>
+        (data) =>
           data.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
           data.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
           data.pickupLocation?.toLowerCase().includes(lowerCaseQuery) ||
@@ -84,7 +86,7 @@ export function useHistory() {
     const tripsData = useMemo(() => {
       const start = (currentPage - 1) * itemsPerPage;
       const queriedData = historyData.filter(
-        (data: TripSearchTypes) =>
+        (data) =>
           data.driver?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
           data.driver?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
           data.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||

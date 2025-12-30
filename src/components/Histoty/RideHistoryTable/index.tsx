@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/table';
 import { rideTableableHeaders } from '@/core/types/history-types';
 import { useHistory } from '@/hooks/useHistory';
-import { dummyRides } from '@public/docs/dummyRides';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { Pagination } from '@components/common/PaginationComponent';
@@ -19,12 +18,28 @@ import { SearchComponent } from '@components/common/SearchComponent';
 import { ViewContentComponent } from '../../common/ViewContentComponent';
 import { Icon } from '@iconify/react';
 import { format } from 'date-fns';
+import { Ride } from '@/core/types/Ride';
+import { getMyRides } from '@/core/api/ride.api';
+import useSWR from 'swr';
 
 
 export const RideTable = () => {
   const itemsPerPage = 5;
-  const { query, currentPage, useFilterRides,toggleContentVisibility,viewContentOpen } = useHistory();
-  const rideData = useFilterRides(query, currentPage, dummyRides);
+  const { query, currentPage, useFilterRides,viewContentOpen } = useHistory();
+   const {
+    data: ridesData ,
+    error,
+    isLoading,
+  } = useSWR<Ride[]>('trips/', getMyRides);
+  const rideData = useFilterRides(query, currentPage, ridesData ?? []);
+
+   if (isLoading){
+   return <div>Looking for your trips data</div>
+  }
+
+  if (error){
+   return <div>Error fetching for your ride data</div>
+  }
 
   return (
     <div>
@@ -58,14 +73,14 @@ export const RideTable = () => {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.passenger.profileImage}
+                      src={data.passenger?.profileImage ?? '/unknown_proile.png'}
                       alt="passenger"
                       width={32}
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
                     <span className="font-medium">
-                      {data.passenger.firstName} {data.passenger.lastName}
+                      {data.passenger?.firstName} {data.passenger?.lastName}
                     </span>
                   </div>
                 </TableCell>
@@ -78,10 +93,15 @@ export const RideTable = () => {
 
                 {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell text-text-one-100">
-                  <div className="flex items-center gap-1 cursor-pointer" onClick={toggleContentVisibility}>
-                    <Icon icon="eos-icons:hourglass" width={12} height={12} className="text-secondary-100" />
-                    <span className="truncate">{format(data.departureTime.departureStart,'EEE, MMM dd, yyyy')} → {format(data.departureTime.departureEnd,'EEE, MMM dd, yyyy')}</span>
-                  </div>
+                  <span>
+  {data.departureTime?.departureStart 
+    ? format(new Date(data.departureTime.departureStart), 'EEE, MMM dd, yyyy') 
+    : 'N/A'}
+  {' → '}
+  {data.departureTime?.departureEnd 
+    ? format(new Date(data.departureTime.departureEnd), 'EEE, MMM dd, yyyy') 
+    : 'N/A'}
+</span>
                   {viewContentOpen && (
                     <ViewContentComponent content={
                       <div className="flex flex-col gap-1 mt-1 text-light-text-100 text-sm">
@@ -120,8 +140,8 @@ export const RideTable = () => {
               </TableRow>
             ))}
           </TableBody>
-           <TableCaption className="mt-4">
-              <Pagination totalPages={Math.ceil(dummyRides.length / itemsPerPage)} />
+            <TableCaption className="mt-4">
+              <Pagination totalPages={Math.ceil((ridesData?.length ?? 0) / itemsPerPage)} />
             </TableCaption>
         </Table>
       </Suspense>

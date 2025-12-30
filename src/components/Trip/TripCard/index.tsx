@@ -19,7 +19,7 @@ export const TripCard = () => {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const { open, close, isCancelling } = useModal();
-  const { updateStatus, loading } = useUpdateTrip();
+  const { updateStatus } = useUpdateTrip();
 
  const {
     data: tripsData,

@@ -4,14 +4,22 @@ import { NavBar } from '@/components/common/NavBar';
 import { SideBar } from '@/components/common/SideBar';
 import { Protect, RedirectToSignIn } from '@clerk/nextjs';
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
+ const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  const toggleSideBarVisibility = () => {
-    setSideBarOpen(!sideBarOpen);
-  };
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsClient(true);
+  }, []);
+
+    const toggleSideBarVisibility = () => setSideBarOpen(!sideBarOpen);
+
+
+  if (!isClient) return null; // don't render until on client
+
   return (
     <Protect fallback={<RedirectToSignIn />}>
       <div className="flex flex-col">

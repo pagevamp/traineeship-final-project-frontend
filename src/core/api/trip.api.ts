@@ -2,11 +2,11 @@ import axiosInstance from '@/lib/private-axios';
 import { z } from 'zod';
 import { CreateTripApiSchema, CreateTripRequest, Trip, TripSchema, UpdateTrip, UpdateTripApiSchema } from '../schema/trip.schema';
 
-export async function getTrips(): Promise<Trip> {
+export async function getTrips(): Promise<Trip[]> {
   try {
-    const res = await axiosInstance.get('/trips');
+    const res = await axiosInstance.get('/trips/me');
 
-    const result = TripSchema.safeParse(res.data.data.trips);
+    const result = z.array(TripSchema).safeParse(res.data.data.trips.trips);
 
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');

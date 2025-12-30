@@ -1,44 +1,6 @@
 export type TripStatus = 'not_started' | 'on_the_way' | 'reached_pickup' | 'reached_destination';
 export type vehicleType = 'two_wheeler' | 'four_wheeler';
 
-export interface Trip {
-  id: string;
-  driverId: string;
-  status: string;
-  vehicleType: string;
-  createdAt: string;
-  updatedAt: string | null;
-  deletedAt: string | null;
-  ride: {
-    id: string;
-    passengerId: string;
-    destination: string;
-    landmark: string;
-    pickupLocation: string;
-    notes: string;
-    departureTime: {
-      departureStart: string;
-      departureEnd: string;
-    };
-    acceptedAt: string | null;
-    createdAt: string;
-    updatedAt: string | null;
-    deletedAt: string | null;
-  };
-  driver: {
-    firstName: string;
-    lastName: string;
-    profileImage: string;
-    phoneNumber: string;
-    primaryLocation: string;
-  };
-  passenger: {
-    firstName: string;
-    lastName: string;
-    imageUrl: string;
-  };
-}
-
 export const tripTableableHeaders = [
   'S.N',
   'Driver',
@@ -49,29 +11,6 @@ export const tripTableableHeaders = [
   'Accepted At',
   'Cancelled At',
 ];
-
-export interface Ride {
-  id: string;
-  passengerId: string;
-  destination: string;
-  landmark: string;
-  pickupLocation: string;
-  notes: string;
-  departureTime: {
-    departureStart: string;
-    departureEnd: string;
-  };
-  acceptedAt: string | null;
-  createdAt: string;
-  updatedAt: string | null;
-  deletedAt: string | null;
-  passenger: {
-    firstName: string;
-    lastName: string;
-    profileImage: string;
-    phoneNumber: string;
-  };
-}
 
 export const rideTableableHeaders = [
   'S.N',
@@ -86,25 +25,25 @@ export const rideTableableHeaders = [
 export type HistoryTab = 'Rides' | 'Trips';
 
 export interface RideSearchTypes {
-  passenger?: {
-    firstName?: string;
-    lastName?: string;
+  passenger: {
+    firstName: string | null;
+    lastName: string | null;
   };
-  pickupLocation?: string;
-  destination?: string;
+  pickupLocation: string | null;
+  destination: string | null;
 }
 
 export interface TripSearchTypes {
-  driver?: {
-    firstName?: string;
-    lastName?: string;
+  driver: {
+    firstName: string | null;
+    lastName: string | null;
   };
-  passenger?: {
-    firstName?: string;
-    lastName?: string;
+  passenger: {
+    firstName: string | null;
+    lastName: string | null;
   };
-  ride?: {
-    pickupLocation?: string;
-    destination?: string;
-  }
+  ride: {
+    pickupLocation: string | null;
+    destination: string | null;
+  };
 }
