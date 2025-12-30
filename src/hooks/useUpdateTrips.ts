@@ -25,7 +25,7 @@ export const useCreateTrip = () => {
       );
 
       mutate('trips/me/pending');
-      mutate('rides/') 
+      mutate('ride-requests/') 
 
       return trip;
     } catch (error) {
