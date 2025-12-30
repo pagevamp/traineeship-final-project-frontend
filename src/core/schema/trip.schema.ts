@@ -32,7 +32,7 @@ export const RideSchema = z.object({
   passengerId: z.string(),
   destination: z.string(),
   landmark: z.string().nullable(),
-  pickupLocation: z.string().nullable(),
+  pickupLocation: z.string(),
   notes: z.string().nullable(),
    departureTime: z.preprocess((val) => {
       if (typeof val === 'string') {

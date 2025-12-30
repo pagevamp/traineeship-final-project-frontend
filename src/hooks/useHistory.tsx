@@ -1,6 +1,5 @@
 "use client"
 import { Trip } from '@/core/schema/trip.schema';
-import { RideSearchTypes, TripSearchTypes } from '@/core/types/history-types';
 import { Ride } from '@/core/types/Ride';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -66,8 +65,8 @@ export function useHistory() {
         (data) =>
           data.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
           data.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.pickupLocation?.toLowerCase().includes(lowerCaseQuery) ||
-          data.destination?.toLowerCase().includes(lowerCaseQuery),
+          data.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
+          data.destination.toLowerCase().includes(lowerCaseQuery),
       );
 
       return queriedData.slice(start, start + itemsPerPage);
@@ -87,12 +86,12 @@ export function useHistory() {
       const start = (currentPage - 1) * itemsPerPage;
       const queriedData = historyData.filter(
         (data) =>
-          data.driver?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.driver?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
-          data.ride?.pickupLocation?.toLowerCase().includes(lowerCaseQuery) ||
-          data.ride?.destination?.toLowerCase().includes(lowerCaseQuery),
+          data.driver.firstName.toLowerCase().includes(lowerCaseQuery) ||
+          data.driver.lastName.toLowerCase().includes(lowerCaseQuery) ||
+          data.passenger.firstName.toLowerCase().includes(lowerCaseQuery) ||
+          data.passenger.lastName.toLowerCase().includes(lowerCaseQuery) ||
+          data.ride.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
+          data.ride.destination.toLowerCase().includes(lowerCaseQuery),
       );
 
       return queriedData.slice(start, start + itemsPerPage);

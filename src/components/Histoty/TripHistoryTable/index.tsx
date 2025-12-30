@@ -38,8 +38,6 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
    return <div>Error fetching for your ride data</div>
   }
 
-
-
   return (
     <div className="">
       <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
@@ -77,7 +75,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
-                    <span className="text-text-one-100 font-medium">{data?.driver?.firstName} {data?.driver?.lastName}</span>
+                    <span className="text-text-one-100 font-medium">{data.driver.firstName} {data.driver.lastName}</span>
                   </div>
                 </TableCell>
 
@@ -91,25 +89,25 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
-                    <span className="text-text-one-100 font-medium">{data.passenger?.firstName} {data.passenger?.lastName}</span>
+                    <span className="text-text-one-100 font-medium">{data.passenger.firstName} {data.passenger.lastName}</span>
                   </div>
                 </TableCell>
 
                 {/* Pickup Location */}
-                <TableCell className="text-text-one-100">{data.ride?.pickupLocation}</TableCell>
+                <TableCell className="text-text-one-100">{data.ride.pickupLocation}</TableCell>
 
                 {/* Destination */}
-                <TableCell className="text-text-one-100">{data.ride?.destination}</TableCell>
+                <TableCell className="text-text-one-100">{data.ride.destination}</TableCell>
 
                 {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell text-text-one-100">
                   <span>
                     {data.ride?.departureTime?.departureStart 
-                      ? format(new Date(data.ride.departureTime.departureStart), 'EEE, MMM dd, yyyy') 
+                      ? format(new Date(data.ride?.departureTime?.departureStart), 'EEE, MMM dd, yyyy') 
                       : 'N/A'}
                     {' → '}
                     {data.ride?.departureTime?.departureEnd 
-                      ? format(new Date(data.ride.departureTime.departureEnd), 'EEE, MMM dd, yyyy') 
+                      ? format(new Date(data.ride?.departureTime?.departureEnd), 'EEE, MMM dd, yyyy') 
                       : 'N/A'}
                   </span>
                   {viewContentOpen && (
