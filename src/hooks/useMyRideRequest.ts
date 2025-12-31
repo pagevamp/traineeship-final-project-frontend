@@ -47,6 +47,8 @@ export function useMyRideRequests(close: () => void) {
         },
         error: (err) => err?.response?.data?.message || 'Failed to cancel ride',
       });
+      mutate('trips/accepted');
+      mutate('ride-requests/me/pending');
     } catch (err) {
       console.error(err);
     } finally {
