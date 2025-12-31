@@ -23,7 +23,7 @@ export function useMyRideRequests() {
   // If ridesData is empty, don't need to waste an API call on getMyRidsStatus
   const hasRides = ridesData.length > 0;
   const { data: isAccepted, isLoading: statusLoading } = useSWR<boolean>(
-    hasRides ? '/ride-requests/me/status' : null,
+    hasRides  ? null : '/ride-requests/me/status',
     getMyRidsStatus,
   );
 
