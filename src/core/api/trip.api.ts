@@ -45,7 +45,6 @@ export async function getMyPendingTrips(): Promise<Trip[]> {
     const res = await axiosInstance.get('/trips/me/pending');
 
     const result = z.array(TripSchema).safeParse(res.data.data.trips.trips);
-    console.log('This is pending trips',result)
 
     if (!result.success) {
       throw new Error('Data corruption: API response does not match frontend types.');
