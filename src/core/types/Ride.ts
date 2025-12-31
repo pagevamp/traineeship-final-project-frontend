@@ -1,4 +1,5 @@
 import z from 'zod';
+// import { DriverSchema } from '../schema/trip.schema';
 
 export const DepartureTimeSchema = z.object({
   departureStart: z.string(),
@@ -12,6 +13,13 @@ export const PassengerSchema = z.object({
   phoneNumber: z.string().nullable(),
 });
 
+export const DriverSchema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  phoneNumber: z.string().nullable().optional(),
+  profileImage: z.url().nullable().optional(),
+});
+
 export const RideSchema = z.object({
   id: z.string(),
   passengerId: z.string(),
@@ -23,6 +31,7 @@ export const RideSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string().nullable().optional(),
   passenger: PassengerSchema.optional(),
+  driver: DriverSchema.optional().nullable(),
   deletedAt: z.string().nullable().optional(),
   departureTime: z.preprocess((val) => {
     if (typeof val === 'string') {

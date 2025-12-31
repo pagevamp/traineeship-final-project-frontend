@@ -63,8 +63,8 @@ export function useHistory() {
       const start = (currentPage - 1) * itemsPerPage;
       const queriedData = RideHistoryData.filter(
         (rideData) =>
-          rideData.passenger?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
-          rideData.passenger?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
+          rideData.driver?.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          rideData.driver?.lastName?.toLowerCase().includes(lowerCaseQuery) ||
           rideData.pickupLocation.toLowerCase().includes(lowerCaseQuery) ||
           rideData.destination.toLowerCase().includes(lowerCaseQuery),
       );

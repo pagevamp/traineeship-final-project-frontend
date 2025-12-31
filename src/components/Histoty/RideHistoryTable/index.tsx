@@ -35,7 +35,7 @@ export const RideTable = () => {
   const rideData = useFilterRides(query, currentPage, ridesData ?? []);
 
   if (isLoading){
-   return <div><TableSkeleton rows={5} columns={5} message={'Ride'}/></div>
+   return <div><TableSkeleton rows={rideData.length <=5 ? rideData.length + 1 : 5} columns={rideTableableHeaders.length} message={'Ride'}/></div>
   }
 
   if (error){
@@ -71,18 +71,18 @@ export const RideTable = () => {
                 {/* S.N */}
                 <TableCell className='text-text-two-100'>{idx + 1}</TableCell>
 
-                {/* Passenger */}
+                {/* Driver */}
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.passenger?.profileImage ?? '/unknown_proile.png'}
-                      alt="passenger"
+                      src={data.driver?.profileImage ?? '/unknown_proile.png'}
+                      alt="driver"
                       width={32}
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
                     <span className="font-medium">
-                      {data.passenger?.firstName} {data.passenger?.lastName}
+                      {data.driver?.firstName} {data.driver?.lastName}
                     </span>
                   </div>
                 </TableCell>
@@ -137,13 +137,13 @@ export const RideTable = () => {
 
                 {/* Deleted At */}
                 <TableCell className="hidden lg:table-cell overflow-x-scroll">
-                  {data.deletedAt ? (
+                  {data.driver !== null && data.acceptedAt ? (
                     <span className="bg-red-500/10 text-red-800 text-xs font-semibold rounded-md px-3 py-1">
-                      {format(data.deletedAt,'EEE, MMM dd, yyyy')}
+                      Cancelled By Driver
                     </span>
                   ) : (
                     <span className="bg-amber-200/10 text-amber-800 text-xs font-semibold rounded-md px-3 py-1">
-                      N/A
+                     
                     </span>
                   )}
                 </TableCell>

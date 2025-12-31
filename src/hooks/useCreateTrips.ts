@@ -22,11 +22,11 @@ export const useCreateTrip = () => {
         {
           loading: 'Creating trip...',
           success: 'Trip created successfully!',
-          error: (err) =>  err?.response?.data?.message || 'Trip created successfully!',
+          error: (err) =>  err ? err?.response?.data?.message : 'Trip created successfully',
         }
       );
 
-      // update SWR cache
+      // to update SWR cache
       mutate('ride-requests/me/pending');
       mutate('ride-requests');
       mutate('ride-requests/me'); 

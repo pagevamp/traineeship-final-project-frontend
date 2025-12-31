@@ -32,7 +32,7 @@ export const TripTable = () => {
 const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
 
   if (isLoading){
-  return <div><TableSkeleton rows={5} columns={5} message={'Trip'}/></div>
+     return <div><TableSkeleton rows={tripData.length <=5 ? tripData.length + 1 : 5} columns={tripTableableHeaders.length} message={'Ride'}/></div>
   }
 
   if (error){

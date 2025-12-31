@@ -29,7 +29,7 @@ export const useUpdateTrip = () => {
             onClose?.();
             return `Status updated to ${res.status}`;
           },
-          error: (err) => err?.response?.data?.message,
+          error: (err) => err ? err?.response?.data?.message : 'Trip updates successfully',
         }
       );
     } finally {

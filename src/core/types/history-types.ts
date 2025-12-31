@@ -14,7 +14,7 @@ export const tripTableableHeaders = [
 
 export const rideTableableHeaders = [
   {title : 'S.N', className : ''},
-  {title : 'Passenger', className : ''},
+  {title : 'Driver', className : ''},
   {title : 'Destination', className : ''},
   {title : 'Pick-Up Location', className : ''},
   {title : 'Departure Time', className : 'hidden lg:table-cell'},

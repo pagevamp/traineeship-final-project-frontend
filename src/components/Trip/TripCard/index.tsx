@@ -77,9 +77,9 @@ export const TripCard = () => {
     const expired = new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)
 
   return (
-    <article className='flex flex-col items-center gap-5'>
+    <article>
       <div 
-        className='flex flex-col border border-secondary-100/60 rounded-xl w-[25vw] md:w-[35vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative'
+        className='flex flex-col border border-secondary-100/60 rounded-xl w-full md:w-[40vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative'
       >
        
         <div className="flex items-center mb-6 justify-between">

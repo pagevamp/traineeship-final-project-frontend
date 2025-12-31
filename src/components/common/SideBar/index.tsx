@@ -9,7 +9,7 @@ export const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="absolute top-32 h-[80vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 flex flex-col justify-between text-text-two-100 px-4 py-6">
+    <div className="absolute top-32 h-[45vh] md:h-[65vh] lg:h-[80vh] w-[50vw] md:w-[20vw] lg:w-[15vw] mx-8 rounded-lg bg-card-bg-100 glex flex-row lg:flex-col justify-between text-text-two-100 px-4 py-6 z-10">
       {/* top section with feature-page links */}
       <section className="flex flex-col gap-4">
         <h2 className="text-text-one-100/80 font-semibold text-xl text-center border-b border-tertiary-100/20 w-full pb-2 mb-4">
@@ -38,13 +38,15 @@ export const SideBar = () => {
       </section>
 
       {/* Bottom section with project user count */}
-      <section className="h-40 w-[85%] bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 shadow-md shadow-gray-900  mx-auto my-5 px-2 py-3 rounded-md flex flex-col gap-3 items-center justify-center text-tertiary-100 text-sm border-black">
-        <div className="flex flex-row gap-1 items-center text-text-one-100/80">
-          <Icon icon="mdi:robot-happy" width={18} height={18} />
-          <span className="text-sm whitespace-nowrap">58 Happy Outsiders</span>
-        </div>
-        <p className="font-semibold text-md">@Outside Shares</p>
-      </section>
+      <div className='hidden lg:block'>
+        <section className="h-40 w-[85%] bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 shadow-md shadow-gray-900  mx-auto my-5 px-2 py-3 rounded-md flex flex-col gap-3 items-center justify-center text-tertiary-100 text-sm border-black">
+          <div className="flex flex-row gap-1 items-center text-text-one-100/80">
+            <Icon icon="mdi:robot-happy" width={18} height={18} />
+            <span className="text-sm whitespace-nowrap">58 Happy Outsiders</span>
+          </div>
+          <p className="font-semibold text-md">@Outside Shares</p>
+        </section>
+      </div>
     </div>
   );
 };

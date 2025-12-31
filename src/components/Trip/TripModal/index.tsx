@@ -21,6 +21,12 @@ const tripsInfoRow = [
     label :"Created",
     value : new Date(trip?.[0].createdAt).toLocaleString()
   },
+   {
+    icon : "mdi:map-search",
+    label :"Landmark",
+    value : trip?.[0].ride.landmark,
+    className : 'w-px h-10 bg-linear-to-r from-transparent via-white/10 to-transparent mb-2 mr-5'
+  },
   {
     icon : "mdi:map-marker",
     label :"Pickup",
@@ -29,22 +35,19 @@ const tripsInfoRow = [
   {
     icon : "mdi:map-marker-radius",
     label :"Destination",
-    value : trip?.[0].ride.destination
+    value : trip?.[0].ride.destination,
+    className : 'w-px h-10 bg-linear-to-r from-transparent via-white/10 to-transparent mb-2 mr-5'
   },
   {
-    icon : "mdi:map-search",
-    label :"Landmark",
-    value : trip?.[0].ride.landmark
-  },
-  {
-    icon : "mdi:map-search",
+    icon : "fluent-mdl2:screen-time",
     label :"Departure Start",
     value : formatTime(trip?.[0].ride.departureTime.departureStart)
   },
   {
     icon : "mdi:clock",
     label :"Departure Ends",
-    value : formatTime(trip?.[0].ride.departureTime.departureEnd)
+    value : formatTime(trip?.[0].ride.departureTime.departureEnd),
+    className : 'w-px h-10 bg-linear-to-r from-transparent via-white/10 to-transparent mb-2 mr-5'
   }
 ]
 
@@ -81,9 +84,10 @@ const tripsInfoRow = [
         </div>
 
         {/* Trip Info */}
-        <div className="flex flex-col gap-4 rounded-xl border border-secondary-100/20 p-4">
+        <div className="grid grid-cols-2 gap-6 rounded-xl border border-secondary-100/20 pl-3 pr-8 py-4">
           {tripsInfoRow.map((trip)=>(
-            <div className="flex items-start gap-3" key={trip.label}>
+            <div className="flex items-start gap-2" key={trip.label}>
+               <div className={trip.className}/>
                 <Icon
                   icon={trip.icon}
                   className="text-tertiary-100 mt-0.5"
