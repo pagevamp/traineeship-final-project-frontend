@@ -1,6 +1,8 @@
 import { Modal } from '@/components/common/Modal';
 import { Icon } from '@iconify/react';
 import { Trip } from '@/core/schema/trip.schema';
+import Image from 'next/image';
+import { formatTime } from '@/lib/utils';
 
 export const TripModal = ({
   data,
@@ -33,6 +35,16 @@ const tripsInfoRow = [
     icon : "mdi:map-search",
     label :"Landmark",
     value : trip?.[0].ride.landmark
+  },
+  {
+    icon : "mdi:map-search",
+    label :"Departure Start",
+    value : formatTime(trip?.[0].ride.departureTime.departureStart)
+  },
+  {
+    icon : "mdi:clock",
+    label :"Departure Ends",
+    value : formatTime(trip?.[0].ride.departureTime.departureEnd)
   }
 ]
 
@@ -46,24 +58,24 @@ const tripsInfoRow = [
 
         {/* Passenger Section */}
         <div className="flex items-center gap-4 rounded-xl border border-tertiary-100/20 bg-secondary-100/5 p-4">
-          {/* <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
+          <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-secondary-100/30">
             <Image
-              src={trip?.[0].passenger.profileImage}
+              src={trip?.[0].passenger?.profileImage || '/unknown.png'}
               alt="Passenger"
               fill
               className="object-cover"
             />
-          </div> */}
+          </div>
 
           <div>
             <p className="text-xs uppercase font-semibold text-tertiary-100">
               Passenger
             </p>
             <h2 className="text-sm md:text-base font-semibold text-light-text-100">
-              {trip?.[0].ride?.passenger?.firstName} {trip?.[0].ride?.passenger?.lastName}
+              {trip?.[0].passenger?.firstName} {trip?.[0].passenger?.lastName}
             </h2>
             <h5 className="text-2xs font-light text-gray-500">
-              {trip?.[0].ride?.passenger?.phoneNumber} 
+              {trip?.[0].passenger?.phoneNumber} 
             </h5>
           </div>
         </div>

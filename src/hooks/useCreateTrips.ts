@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { useSWRConfig } from 'swr';
+import { useRouter } from 'next/navigation'; 
 import { createTrip } from '@/core/api/trip.api';
 import { CreateTripRequest } from '@/core/schema/trip.schema';
 import { VehicleType } from '@/core/types/trip-types';
@@ -10,32 +11,34 @@ import { VehicleType } from '@/core/types/trip-types';
 export const useCreateTrip = () => {
   const { mutate } = useSWRConfig();
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); 
 
   const acceptRide = async (rideRequestId: string, vehicleType: VehicleType) => {
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const trip = await toast.promise(
+    try {
+      await toast.promise(
         createTrip({ requestId: rideRequestId, vehicleType } as CreateTripRequest),
         {
           loading: 'Creating trip...',
-          success: () => { 
-            mutate('ride-requests/me/pending');
-            mutate('trips/pending');
-          return 'Trip created successfully!'} ,
-          error: (err) => err?.response?.data?.message,
+          success: 'Trip created successfully!',
+          error: (err) =>  err?.response?.data?.message || 'Trip created successfully!',
         }
       );
 
+      // update SWR cache
+      mutate('ride-requests/me/pending');
+      mutate('ride-requests');
+      mutate('ride-requests/me'); 
+      mutate('trips/pending');
 
-      return trip;
+      router.push('/trips');
     } catch (error) {
-      if(error instanceof Error){      
-          toast.error(`Error creating trip : ${error.message}`);
-        }
-      else{
-          toast.error(`Creating trip failed due to unknown error`);
-      } 
+      if (error instanceof Error) {
+        toast.error(`Error creating trip: ${error.message}`);
+      } else {
+        toast.error('Creating trip failed due to unknown error');
+      }
     } finally {
       setLoading(false);
     }

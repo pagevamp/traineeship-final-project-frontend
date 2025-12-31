@@ -68,7 +68,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 <TableCell className='hidden lg:table-cell'>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.driver?.profileImage ?? '/unknown_profile.png'}
+                      src={data.driver?.profileImage ?? '/unknown_profile.png'}                      
                       alt="driver"
                       width={32}
                       height={32}
@@ -82,13 +82,13 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Image
-                      src={data.ride?.passenger?.profileImage ?? '/unknown_profile.png'}
+                      src={data.passenger?.profileImage ?? '/unknown_profile.png'}
                       alt="passenger"
                       width={32}
                       height={32}
                       className="rounded-full object-cover border-2 border-secondary-100/40"
                     />
-                    <span className="text-text-one-100 font-medium">{data.ride.passenger?.firstName} {data.ride.passenger?.lastName}</span>
+                    <span className="text-text-one-100 font-medium">{data.passenger?.firstName} {data.passenger?.lastName}</span>
                   </div>
                 </TableCell>
 

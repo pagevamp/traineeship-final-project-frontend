@@ -36,6 +36,7 @@ export const TripCard = () => {
         loading: 'Cancelling the trip you accepted...',
         success: () => {
           mutate('trips/me/pending');
+          mutate('trips/me');
           close();
           return 'Accepted Trip cancelled.';
         },
@@ -54,7 +55,7 @@ export const TripCard = () => {
 
   if (error) {
     console.log(error.message)
-    return <div className="p-6 text-red-500">Failed to load trips</div>;
+    return <div className="p-6">Failed to load trips</div>;
   }
 
   if (!tripsData) {

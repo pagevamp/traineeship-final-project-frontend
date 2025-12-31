@@ -14,8 +14,6 @@ export const PassengerSchema = z.object({
   profileImage: z.string().nullable().optional(),
   phoneNumber: z.string().nullable().optional(),
   primaryLocation: z.string().nullable().optional(),
-
-
 });
 
 export const DriverSchema = z.object({
@@ -37,6 +35,7 @@ export const TripSchema = z.object({
   
   ride: RideSchema,
   driver: DriverSchema,
+  passenger: PassengerSchema.nullable().optional()
 });
 
 
