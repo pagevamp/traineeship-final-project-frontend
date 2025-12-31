@@ -20,7 +20,7 @@ export const rideTableableHeaders = [
   {title : 'Departure Time', className : 'hidden lg:table-cell'},
   {title : 'Created At', className : 'hidden lg:table-cell'},
   {title : 'Accepted At', className : 'hidden lg:table-cell'},
-  {title : 'Cancelled At', className : 'hidden lg:table-cell'},
+  {title : 'Ride Status', className : 'hidden lg:table-cell'},
 ];
 
 export type HistoryTab = 'Rides' | 'Trips';

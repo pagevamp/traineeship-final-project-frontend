@@ -64,7 +64,7 @@ export const TripCard = () => {
   }
 
   if (error) {
-    return <BufferComponent message={`Error loading your trips : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+    return <BufferComponent message={`Error loading your trips : ${error.message}`} icon={'line-md:alert-twotone'}/>;
 
   }
   

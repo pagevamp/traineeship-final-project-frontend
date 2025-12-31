@@ -39,7 +39,7 @@ export const RideTable = () => {
   }
 
   if (error){
-    return <BufferComponent message={`Error loading your ride history : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+    return <BufferComponent message={`Error loading your ride history : ${error.message}`} icon={'line-md:alert-twotone'}/>;
   }
 
   return (
@@ -135,17 +135,16 @@ export const RideTable = () => {
                   )}
                 </TableCell>
 
-                {/* Deleted At */}
-                <TableCell className="hidden lg:table-cell overflow-x-scroll">
-                  {data.driver !== null && data.acceptedAt ? (
-                    <span className="bg-red-500/10 text-red-800 text-xs font-semibold rounded-md px-3 py-1">
-                      Cancelled By Driver
+                {/* Cancelled Status */}
+                <TableCell className="hidden lg:table-cell">
+                  {data.driver !== null && data.acceptedAt === null ?  <span className="px-3 py-1 rounded-md text-xs font-semibold bg-red-500/10 text-red-800">
+                        Cancelled By Driver
+                    </span> : data.driver === null && data.acceptedAt === null ? <span className="px-3 py-1 rounded-md text-xs font-semibold bg-yellow-500/10 text-yellow-800">
+                        Pending
+                    </span> :<span className="px-3 py-1 rounded-md text-xs font-semibold bg-green-500/10 text-green-800">
+                        Accepted
                     </span>
-                  ) : (
-                    <span className="bg-amber-200/10 text-amber-800 text-xs font-semibold rounded-md px-3 py-1">
-                     
-                    </span>
-                  )}
+                  }
                 </TableCell>
               </TableRow>
             ))}

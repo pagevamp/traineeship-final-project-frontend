@@ -36,7 +36,7 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
   }
 
   if (error){
-    return <BufferComponent message={`Error loading your trip history : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+    return <BufferComponent message={`Error loading your trip history : ${error.message}`} icon={'line-md:alert-twotone'}/>;
   }
  
   return (

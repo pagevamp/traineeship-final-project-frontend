@@ -35,7 +35,7 @@ export const Pagination = ({ totalPages }: { totalPages: number }): React.ReactE
 
       <span className="text-md font-semibold text-text-one-100/80">
         Page <span className="font-semibold  text-black border border-black bg-secondary-100 rounded-full px-2 py-1">{currentPage}</span> of{' '}
-        <span className="font-semibold text-black border border-black bg-secondary-100 rounded-full px-2 py-1">{totalPages}</span>
+        <span className="font-semibold text-black border border-black bg-secondary-100 rounded-full px-2 py-1">{totalPages <=0 ? 1 : totalPages}</span>
       </span>
 
       {/* Next */}
