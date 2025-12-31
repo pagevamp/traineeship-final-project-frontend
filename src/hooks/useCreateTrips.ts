@@ -22,7 +22,7 @@ export const useCreateTrip = () => {
         {
           loading: 'Creating trip...',
           success: 'Trip created successfully!',
-          error: (err) =>  err ? err?.response?.data?.message : 'Trip created successfully',
+          error: (err) =>  err?.response?.data?.message || 'Trip created successfully',
         }
       );
 

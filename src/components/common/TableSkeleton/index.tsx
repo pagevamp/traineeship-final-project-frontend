@@ -15,7 +15,7 @@ export const TableSkeleton = ({columns,rows, message}:{ columns: number, rows: n
                     <tr className='hover:bg-tertiary-100/20 transition-colors duration-200 [&>th:last-child]:border-r-0'>
                         {Array.from({ length: columns }).map((_, idx) => (
                         <th key={idx} className='text-center text-text-one-100/70 font-semibold text-sm uppercase tracking-wider py-4 h-10 px-2 align-middle max-w-fit md:max-w-20 lg:max-w-50 whitespace-nowrap border-r border-tertiary-100/30  [&_td:last-child]:border-r-0'>
-                            <div className='h-5'></div>
+                            <p className='h-5'></p>
                         </th>
                         ))}
                     </tr>
@@ -30,7 +30,7 @@ export const TableSkeleton = ({columns,rows, message}:{ columns: number, rows: n
                         ))}
                         </tr>
                     ))}
-                    <tr><div className='h-20'/></tr>
+                    <tr><p className='h-20'/></tr>
                 </tbody>
             </table>
         </div>

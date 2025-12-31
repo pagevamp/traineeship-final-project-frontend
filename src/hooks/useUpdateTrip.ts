@@ -26,11 +26,13 @@ export const useUpdateTrip = () => {
             mutate(`trips/${tripId}`);
             mutate('trips');
             mutate('trips/me/pending');
+            mutate('ride-requests/me'); 
             onClose?.();
             return `Status updated to ${res.status}`;
           },
-          error: (err) => err ? err?.response?.data?.message : 'Trip updates successfully',
-        }
+            error: (err) => {
+          return err?.response?.data?.message || 'Status updated successfully' ;
+        },}
       );
     } finally {
       setLoading(false);
