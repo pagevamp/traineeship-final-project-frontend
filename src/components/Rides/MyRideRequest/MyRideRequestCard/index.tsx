@@ -10,7 +10,7 @@ import { Trip } from '@/core/schema/trip.schema';
 interface MyRideRequestCardProps {
   ride?: Ride;
   trip?: Trip;
-  onCancel?: (id: string) => void;
+  onCancel: (id: string) => void;
 }
 
 export const MyRideRequestCard = ({ ride, trip, onCancel }: MyRideRequestCardProps) => {
@@ -152,15 +152,12 @@ export const MyRideRequestCard = ({ ride, trip, onCancel }: MyRideRequestCardPro
       )}
 
       <div className="flex items-center justify-between gap-3 mt-auto">
-        {onCancel && (
-          <Button
-            className=" p-2 px-4 bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white border border-red-600/20 transition-all text-xs"
-            onClick={() => onCancel(data.id)}
-          >
-            {' '}
-            Cancel
-          </Button>
-        )}
+        <Button
+          className=" p-2 px-4 bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white border border-red-600/20 transition-all text-xs"
+          onClick={() => onCancel(data.id)}
+        >
+          Cancel
+        </Button>
       </div>
     </div>
   );

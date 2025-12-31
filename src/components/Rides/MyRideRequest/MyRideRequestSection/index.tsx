@@ -10,7 +10,6 @@ import { BufferComponent } from '@/components/common/BufferComponent';
 
 export const MyRideRequestsSection = () => {
   const { open, close, isFormOpen, isCancelling } = useModal();
-
   const {
     onConfirmCancel,
     ridesData,
@@ -19,7 +18,7 @@ export const MyRideRequestsSection = () => {
     tripsData,
     selectedRide,
     setSelectedRide,
-  } = useMyRideRequests();
+  } = useMyRideRequests(close);
 
 
   if (isLoading) {
