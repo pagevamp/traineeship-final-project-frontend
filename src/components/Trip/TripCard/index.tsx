@@ -14,6 +14,7 @@ import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { useUpdateTrip } from '@/hooks/useUpdateTrip';
 import { TripStatus } from '@/core/types/trip-types';
+import { LoadingPage } from '@/components/common/LoadingComponent';
 
 
 export const TripCard = () => {  
@@ -50,7 +51,7 @@ export const TripCard = () => {
 
   
   if (isLoading) {
-    return <div className="p-6">Loading trips...</div>;
+    return <div className="p-6"><LoadingPage/></div>;
   }
 
   if (error) {
