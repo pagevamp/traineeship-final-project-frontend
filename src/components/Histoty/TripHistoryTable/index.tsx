@@ -66,20 +66,6 @@ const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
                 {/* S.N */}
                 <TableCell className="text-text-two-100">{idx + 1}</TableCell>
 
-                {/* Driver */}
-                <TableCell className='hidden lg:table-cell'>
-                  <div className="flex items-center gap-3">
-                    <Image
-                      src={data.driver?.profileImage ?? '/unknown_profile.png'}                      
-                      alt="driver"
-                      width={32}
-                      height={32}
-                      className="rounded-full object-cover border-2 border-secondary-100/40"
-                    />
-                    {data.driver?.firstName} {data.driver?.lastName}
-                  </div>
-                </TableCell>
-
                 {/* Passenger */}
                 <TableCell>
                   <div className="flex items-center gap-3">

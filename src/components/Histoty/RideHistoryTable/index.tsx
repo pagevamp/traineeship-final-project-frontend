@@ -31,7 +31,7 @@ export const RideTable = () => {
     data: ridesData ,
     error,
     isLoading,
-  } = useSWR<Ride[]>('trips/', getMyRides);
+  } = useSWR<Ride[]>('ride-requests/me', getMyRides);
   const rideData = useFilterRides(query, currentPage, ridesData ?? []);
 
   if (isLoading){
@@ -44,7 +44,7 @@ export const RideTable = () => {
 
   return (
     <div>
-      <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3 over">
         <h2 className="font-bold text-2xl text-text-one-100/70">
           Your Ride History with <span className="text-secondary-100 font-extrabold">MILERA</span>
         </h2>
@@ -96,14 +96,14 @@ export const RideTable = () => {
                 {/* Departure Time */}
                 <TableCell className="hidden lg:table-cell">
                   <span>
-  {data.departureTime?.departureStart 
-    ? format(new Date(data.departureTime.departureStart), 'EEE, MMM dd, yyyy') 
-    : 'N/A'}
-  {' → '}
-  {data.departureTime?.departureEnd 
-    ? format(new Date(data.departureTime.departureEnd), 'EEE, MMM dd, yyyy') 
-    : 'N/A'}
-</span>
+                    {data.departureTime?.departureStart 
+                      ? format(new Date(data.departureTime.departureStart), 'EEE, MMM dd, yyyy') 
+                      : 'N/A'}
+                    {' → '}
+                    {data.departureTime?.departureEnd 
+                      ? format(new Date(data.departureTime.departureEnd), 'EEE, MMM dd, yyyy') 
+                      : 'N/A'}
+                  </span>
                   {viewContentOpen && (
                     <ViewContentComponent content={
                       <div className="flex flex-col gap-1 mt-1 text-light-text-100 text-sm">
@@ -113,6 +113,14 @@ export const RideTable = () => {
                     } />
                   )}
                 </TableCell>
+
+                 {/* Created At */}
+                <TableCell className="hidden lg:table-cell">
+                    <span className="px-3 py-1 rounded-md text-xs font-semibold">
+                      {format(data.createdAt,'EEE, MMM dd, yyyy')}
+                    </span>
+                </TableCell>
+
 
                 {/* Accepted At */}
                 <TableCell className="hidden lg:table-cell">
@@ -128,7 +136,7 @@ export const RideTable = () => {
                 </TableCell>
 
                 {/* Deleted At */}
-                <TableCell className="hidden lg:table-cell">
+                <TableCell className="hidden lg:table-cell overflow-x-scroll">
                   {data.deletedAt ? (
                     <span className="bg-red-500/10 text-red-800 text-xs font-semibold rounded-md px-3 py-1">
                       {format(data.deletedAt,'EEE, MMM dd, yyyy')}

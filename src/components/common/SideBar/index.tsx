@@ -9,7 +9,7 @@ export const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="absolute bottom-2 h-[83vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 flex flex-col justify-between text-text-two-100 px-4 py-6">
+    <div className="absolute top-32 h-[80vh] w-[35vh] mx-8 rounded-lg bg-card-bg-100 flex flex-col justify-between text-text-two-100 px-4 py-6">
       {/* top section with feature-page links */}
       <section className="flex flex-col gap-4">
         <h2 className="text-text-one-100/80 font-semibold text-xl text-center border-b border-tertiary-100/20 w-full pb-2 mb-4">

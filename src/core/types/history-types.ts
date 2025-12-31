@@ -3,7 +3,6 @@ export type vehicleType = 'two_wheeler' | 'four_wheeler';
 
 export const tripTableableHeaders = [
   {title : 'S.N', className : ''},
-  {title : 'Driver', className : 'hidden lg:table-cell'},
   {title : 'Passenger', className : ''},
   {title : 'Destination', className : ''},
   {title : 'Pick-Up Location', className : ''},
@@ -19,6 +18,7 @@ export const rideTableableHeaders = [
   {title : 'Destination', className : ''},
   {title : 'Pick-Up Location', className : ''},
   {title : 'Departure Time', className : 'hidden lg:table-cell'},
+  {title : 'Created At', className : 'hidden lg:table-cell'},
   {title : 'Accepted At', className : 'hidden lg:table-cell'},
   {title : 'Cancelled At', className : 'hidden lg:table-cell'},
 ];
