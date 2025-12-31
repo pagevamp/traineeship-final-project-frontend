@@ -9,7 +9,6 @@ import { useMyRideRequests } from '@/hooks/useMyRideRequest';
 
 export const MyRideRequestsSection = () => {
   const { open, close, isFormOpen, isCancelling } = useModal();
-
   const {
     onConfirmCancel,
     ridesData,
@@ -18,7 +17,7 @@ export const MyRideRequestsSection = () => {
     tripsData,
     selectedRide,
     setSelectedRide,
-  } = useMyRideRequests();
+  } = useMyRideRequests(close);
 
   if (isLoading) return <div className="p-6">Loading...</div>;
 
