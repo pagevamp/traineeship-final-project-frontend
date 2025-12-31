@@ -18,7 +18,7 @@ export const RideRequestCard = ({ ride, onClick }: RideRequestCardProps) => {
   const { acceptRide } = useCreateTrip();
 
   return (
-    <div className="relative flex flex-col border-2 border-secondary-100 rounded-xl w-full md:w-2/3 lg:w-2/4 p-4 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% transition-all duration-300">
+    <div className="relative flex flex-col border-2 border-secondary-100 rounded-xl w-[85vw] md:w-[60vw] lg:w-[50vw] p-4 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% transition-all duration-300">
       <div className="absolute top-0 right-0 z-10 px-4 py-1 rounded-bl-xl rounded-tr-lg text-xs md:text-sm uppercase tracking-wider bg-secondary-100 text-light-text-100">
         {formatDistanceToNow(new Date(ride.createdAt), { addSuffix: true })}
       </div>
@@ -87,8 +87,7 @@ export const RideRequestCard = ({ ride, onClick }: RideRequestCardProps) => {
       <div className="flex gap-2 md:gap-5">
         <Button
           className="h-9 px-4 bg-secondary-100 text-light-text-100 hover:scale-102 hover:opacity-90"
-                  onClick={() => acceptRide(ride.id, VehicleType.TWO_WHEELER)}
-
+          onClick={() => acceptRide(ride.id, VehicleType.TWO_WHEELER)}
         >
           <span className=" text-light-text-100">
             <Icon icon="fluent-mdl2:accept"></Icon>
