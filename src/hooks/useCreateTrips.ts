@@ -19,13 +19,14 @@ export const useCreateTrip = () => {
         createTrip({ requestId: rideRequestId, vehicleType } as CreateTripRequest),
         {
           loading: 'Creating trip...',
-          success: 'Trip created successfully!',
+          success: () => { 
+            mutate('ride-requests/me/pending');
+            mutate('trips/pending');
+          return 'Trip created successfully!'} ,
           error: (err) => err?.response?.data?.message,
         }
       );
 
-      mutate('trips/me/pending');
-      mutate('ride-requests') 
 
       return trip;
     } catch (error) {
@@ -35,7 +36,6 @@ export const useCreateTrip = () => {
       else{
           toast.error(`Creating trip failed due to unknown error`);
       } 
-      throw error;
     } finally {
       setLoading(false);
     }

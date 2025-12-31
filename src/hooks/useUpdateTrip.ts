@@ -23,8 +23,8 @@ export const useUpdateTrip = () => {
         {
           loading: 'Updating status...',
           success: (res) => {
-            mutate(`/trips/${tripId}`);
-            mutate('/trips');
+            mutate(`trips/${tripId}`);
+            mutate('trips');
             mutate('trips/me/pending');
             onClose?.();
             return `Status updated to ${res.status}`;
