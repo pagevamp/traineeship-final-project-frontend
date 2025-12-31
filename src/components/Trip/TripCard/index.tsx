@@ -14,7 +14,7 @@ import { Modal } from '@/components/common/Modal';
 import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { useUpdateTrip } from '@/hooks/useUpdateTrip';
 import { TripStatus } from '@/core/types/trip-types';
-import { LoadingPage } from '@/components/common/LoadingComponent';
+import { BufferComponent} from '@/components/common/BufferComponent';
 
 
 export const TripCard = () => {  
@@ -51,20 +51,21 @@ export const TripCard = () => {
 
   
   if (isLoading) {
-    return <div className="p-6"><LoadingPage/></div>;
-  }
-
-  if (error) {
-    console.log(error.message)
-    return <div className="p-6">Failed to load trips</div>;
+    return <BufferComponent message={'Please wait while we fetch the data. This might take a few seconds.'} icon={'eos-icons:hourglass'}/>;
   }
 
   if (!tripsData) {
-    return <div className="p-6">No trips pending</div>;
+    return <BufferComponent message={'Take a break. You do not have any pending trips'} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+
   }
 
   if (!tripsData.length) {
-    return <div className="p-6">No trips pending</div>;
+    return <BufferComponent message={'Take a break. You do not have any pending trips'} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+  }
+
+  if (error) {
+    return <BufferComponent message={`Error loading your trips : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
+
   }
   
     const handleAction = (mode: ViewMode, trip: Trip | null) => {

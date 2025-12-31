@@ -6,6 +6,7 @@ import { RideRequestForm } from '../../RideRequestForm';
 import { CancelConfirmationDialog } from '../../CancelDialog';
 import { useModal, ViewMode } from '@/hooks/useViewModal';
 import { useMyRideRequests } from '@/hooks/useMyRideRequest';
+import { BufferComponent } from '@/components/common/BufferComponent';
 
 export const MyRideRequestsSection = () => {
   const { open, close, isFormOpen, isCancelling } = useModal();
@@ -20,14 +21,17 @@ export const MyRideRequestsSection = () => {
     setSelectedRide,
   } = useMyRideRequests();
 
-  if (isLoading) return <div className="p-6">Loading...</div>;
+
+  if (isLoading) {
+    return <BufferComponent message={'Please wait while we fetch the available rides. This might take a few seconds.'} icon={'eos-icons:hourglass'}/>;
+  }
 
   if (ridesData.length === 0 && tripsData.length === 0) {
-    return <div className="p-6">No rides found.</div>;
+    return <BufferComponent message={'You have not requested any rides'} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
   }
 
   if (ridesError) {
-    return <div className="p-6 text-red-500">Failed to load rides</div>;
+    return <BufferComponent message={`Error loading your rides : ${ridesError.message}`} icon={'line-md:alert-twotone'}/>;
   }
 
   const handleAction = (mode: ViewMode, ride: Ride | null) => {

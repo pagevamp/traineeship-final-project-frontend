@@ -18,6 +18,8 @@ import { format } from 'date-fns';
 import useSWR from 'swr';
 import { Trip } from '@/core/schema/trip.schema';
 import { getTrips } from '@/core/api/trip.api';
+import { TableSkeleton } from '@/components/common/TableSkeleton';
+import { BufferComponent } from '@/components/common/BufferComponent';
 
 export const TripTable = () => {
   const itemsPerPage = 5;
@@ -30,13 +32,13 @@ export const TripTable = () => {
 const tripData = useFilterTrips(query, currentPage, tripsData ?? []);
 
   if (isLoading){
-   return <div>Looking for your trips data</div>
+  return <div><TableSkeleton rows={5} columns={5} message={'Trip'}/></div>
   }
 
   if (error){
-   return (error.message)
+    return <BufferComponent message={`Error loading your trip history : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
   }
-
+ 
   return (
     <div className="">
       <section className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">

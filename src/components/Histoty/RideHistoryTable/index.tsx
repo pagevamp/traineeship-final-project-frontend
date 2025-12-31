@@ -20,6 +20,8 @@ import { format } from 'date-fns';
 import { Ride } from '@/core/types/Ride';
 import { getMyRides } from '@/core/api/ride.api';
 import useSWR from 'swr';
+import { TableSkeleton } from '@/components/common/TableSkeleton';
+import { BufferComponent } from '@/components/common/BufferComponent';
 
 
 export const RideTable = () => {
@@ -32,12 +34,12 @@ export const RideTable = () => {
   } = useSWR<Ride[]>('trips/', getMyRides);
   const rideData = useFilterRides(query, currentPage, ridesData ?? []);
 
-   if (isLoading){
-   return <div>Looking for your trips data</div>
+  if (isLoading){
+   return <div><TableSkeleton rows={5} columns={5} message={'Ride'}/></div>
   }
 
   if (error){
-   return <div>Error fetching for your ride data</div>
+    return <BufferComponent message={`Error loading your ride history : ${error.message}`} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
   }
 
   return (
