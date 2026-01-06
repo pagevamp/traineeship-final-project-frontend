@@ -1,17 +1,15 @@
 import { Ride, RideTab } from '@/core/types/Ride';
 import { useState } from 'react';
-import { useModal } from './useViewModal';
 import { deleteRide, getMyPendingRides, getMyRidsStatus } from '@/core/api/ride.api';
 import useSWR, { mutate } from 'swr';
 import { getAcceptedTrips } from '@/core/api/trip.api';
 import { toast } from 'sonner';
 import { Trip } from '@/core/schema/trip.schema';
 
-export function useMyRideRequests() {
+export function useMyRideRequests(close: () => void) {
   const [activeTab, setActiveTab] = useState<RideTab>('all');
 
   const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
-  const { close } = useModal();
 
   const {
     data: ridesData = [],
@@ -23,11 +21,11 @@ export function useMyRideRequests() {
   // If ridesData is empty, don't need to waste an API call on getMyRidsStatus
   const hasRides = ridesData.length > 0;
   const { data: isAccepted, isLoading: statusLoading } = useSWR<boolean>(
-    hasRides  ? null : '/ride-requests/me/status',
+    hasRides ? null : '/ride-requests/me/status',
     getMyRidsStatus,
   );
 
-  // 3. Only fetch trips IF the status is officially 'accepted'
+  // Only fetch trips IF the status is officially 'accepted'
   const { data: tripsData = [], isLoading: tripsLoading } = useSWR<Trip[]>(
     isAccepted ? 'trips/accepted' : null,
     getAcceptedTrips,
@@ -36,22 +34,27 @@ export function useMyRideRequests() {
   const isLoading = ridesLoading || (hasRides && statusLoading) || (isAccepted && tripsLoading);
 
   const onConfirmCancel = async () => {
-    if (!selectedRide) return;
-
+    if (!selectedRide) {
+      close();
+      return;
+    }
     try {
-      toast.promise(deleteRide(selectedRide.id), {
+      await toast.promise(deleteRide(selectedRide.id), {
         loading: 'Cancelling your ride request...',
         success: () => {
-          mutate('ride-requests/me/pending');
-          mutate('trips/accepted');
           close();
           return 'Ride request cancelled.';
         },
         error: (err) => err?.response?.data?.message || 'Failed to cancel ride',
       });
+      mutate('trips/accepted');
+      mutate('ride-requests/me/pending');
     } catch (err) {
       console.error(err);
     } finally {
+      close();
+      await mutate('trips/accepted');
+      await mutate('ride-requests/me/pending');
     }
   };
 

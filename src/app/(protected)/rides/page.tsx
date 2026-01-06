@@ -11,9 +11,11 @@ import { useMyRideRequests } from '@/hooks/useMyRideRequest';
 import { useState } from 'react';
 import { Modal } from '@/components/common/Modal';
 import { RideRequestForm } from '@/components/Rides/RideRequestForm';
+import { useModal } from '@/hooks/useViewModal';
 
 const Rides = () => {
-  const { activeTab, setActiveTab } = useMyRideRequests();
+  const { close } = useModal();
+  const { activeTab, setActiveTab } = useMyRideRequests(close);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   return (
