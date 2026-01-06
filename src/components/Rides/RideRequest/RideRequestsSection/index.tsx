@@ -18,17 +18,32 @@ export const RideRequestsSection = () => {
     selectedRide,
   } = useAvailableRides();
 
-   if (isLoading) {
-      return <BufferComponent message={'Please wait while we fetch the available rides. This might take a few seconds.'} icon={'eos-icons:hourglass'}/>;
-    }
-  
-    if (ridesData.length === 0) {
-      return <BufferComponent message={'Take a break. You do not have any available rides'} icon={'line-md:coffee-half-empty-twotone-loop'}/>;
-    }
-  
-    if (error) {
-      return <BufferComponent message={`Error loading your rides : ${error.message}`} icon={'line-md:alert-twotone'}/>;
-    }
+  if (isLoading) {
+    return (
+      <BufferComponent
+        message={'Please wait while we fetch the available rides. This might take a few seconds.'}
+        icon={'eos-icons:hourglass'}
+      />
+    );
+  }
+
+  if (ridesData.length === 0) {
+    return (
+      <BufferComponent
+        message={'Take a break. You do not have any available rides'}
+        icon={'line-md:coffee-half-empty-twotone-loop'}
+      />
+    );
+  }
+
+  if (error) {
+    return (
+      <BufferComponent
+        message={`Error loading your rides : ${error.message}`}
+        icon={'line-md:alert-twotone'}
+      />
+    );
+  }
 
   return (
     <div className=" p-6 rounded-2xl">

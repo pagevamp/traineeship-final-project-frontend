@@ -82,12 +82,11 @@ export async function updateTrip(
 
     const res = await axiosInstance.patch(`/trips/${id}`, data);
 
-    const result = TripSchema.safeParse(res.data);
-    if (!result.success) {
-      throw new Error('Update successful, but server returned unexpected response format.');
-    }
-
-    return result.data;
+    // const result = TripSchema.safeParse(res.data);
+    // if (!result.success) {
+    //   throw new Error('Update successful, but server returned unexpected response format.');
+    // }
+    return res.data;
   } catch (error: unknown) {
     throw error;
   }

@@ -31,7 +31,7 @@ export const useUpdateTrip = () => {
             return `Status updated to ${res.status}`;
           },
             error: (err) => {
-          return err?.response?.data?.message || 'Status updated successfully' ;
+          return err?.response?.data?.message ;
         },}
       );
     } finally {

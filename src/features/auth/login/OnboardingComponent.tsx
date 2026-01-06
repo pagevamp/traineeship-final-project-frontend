@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation';
 import { completeOnboarding } from '@/app/onboarding/_actions';
 import { InputField } from '@/components/common/InputField';
 import { Button } from '@/components/common/Button';
+import { useUpdateProfile } from '@/hooks/useUpdateProfile';
 
 export default function OnboardingComponent() {
-  const [error, setError] = React.useState('');
   const { user } = useUser();
   const router = useRouter();
+  const { error, formData, handleChange, loading } = useUpdateProfile();
+  
 
   const handleSubmit = async (formData: FormData) => {
     const res = await completeOnboarding(formData);
@@ -18,10 +20,6 @@ export default function OnboardingComponent() {
     if (res?.message) {
       await user?.reload();
       router.push('/rides');
-    }
-
-    if (res?.error) {
-      setError(res.error);
     }
   };
   return (
@@ -42,21 +40,23 @@ export default function OnboardingComponent() {
             type="text"
             name="primaryLocation"
             labelName="Primary Location"
+            value={formData.primaryLocation}
             placeholder="Enter your primary location"
-            icon="mynaui:location-user-solid"
-          />
+            icon="material-symbols:location-away-outline"
+            error={error?.primaryLocation}
+            onChange={handleChange}
+        />
 
           <InputField
             type="text"
             name="contactNumber"
             labelName="Contact Number"
-            placeholder="Enter your contact number"
+            value={formData.contactNumber}
+            placeholder="+977 _ _ _ _ _ _ _ _ _"
             icon="bxs:contact"
+            error={error?.contactNumber}
+            onChange={handleChange}
           />
-
-          {error && (
-            <p className="text-sm text-red-500 bg-red-500/10 rounded-md px-3 py-2">{error}</p>
-          )}
 
           <Button
             type="submit"
@@ -66,7 +66,7 @@ export default function OnboardingComponent() {
               hover:opacity-90
               transition-all cursor-pointer hover:bg-tertiary-100"
           >
-            Complete Onboarding
+             {loading ? 'Getting you on board ' : 'Complete Onboarding'}
           </Button>
         </form>
       </section>

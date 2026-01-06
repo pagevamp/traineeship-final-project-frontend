@@ -34,6 +34,13 @@ export const NavBar = () => {
                   labelIcon={<Icon icon="nimbus:history" className="w-full"></Icon>}
                 />
               </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Link
+                  label="Edit Profile"
+                  href="/profile"
+                  labelIcon={<Icon icon="gg:profile" className="w-full"></Icon>}
+                />
+              </UserButton.MenuItems>
             </UserButton>
           </>
         )}

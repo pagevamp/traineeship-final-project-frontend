@@ -16,7 +16,7 @@ import { useUpdateTrip } from '@/hooks/useUpdateTrip';
 import { TripStatus } from '@/core/types/trip-types';
 import { BufferComponent} from '@/components/common/BufferComponent';
 import Image from 'next/image';
-
+import { STATUS_STYLES } from '@/constants';
 
 export const TripCard = () => {  
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -76,18 +76,30 @@ export const TripCard = () => {
 
     const now = new Date()
     const expired = new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)
-    const complete= tripsData?.[0]?.status
+const complete = tripsData?.[0]?.status as TripStatus | undefined;
+    const statusStyle = complete ? STATUS_STYLES[complete] : null;
+
 
   return (
     <article>
-      
-      <div 
-        className={`flex flex-col border border-secondary-100/60 rounded-xl w-full md:w-[40vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative
-                ${complete === TripStatus.REACHED_DESTINATION ? 'border-green-500/70 ' : 'border-secondary-100'}
+      <div
+          className={`flex flex-col border rounded-xl w-full md:w-[40vw] lg:w-[50vw] p-5 md:p-6 
+            bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative
+            ${statusStyle?.border ?? 'border-secondary-100/60'}
+          `}
+        >
 
-        `}
-      >
-       
+        <div
+          className={`absolute top-0 right-0 px-4 py-1 rounded-bl-xl text-xs md:text-sm uppercase tracking-wider
+            ${statusStyle?.badgeBg}
+            ${statusStyle?.badgeText}
+          `}
+        >
+          {statusStyle?.label}
+        </div>
+
+        {complete ===  TripStatus.NOT_STARTED ? 'NOT STARTED' : complete === TripStatus.ON_THE_WAY ? 'ON THE WAY' : 'REACHED PICKUP'}
+     
         <div className="flex items-center mb-6 justify-between">
           <section className='flex flex-row gap-4 place-content-start'>
             <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20"><Image
@@ -144,6 +156,7 @@ export const TripCard = () => {
                 <Icon icon="fluent:channel-alert-28-regular" /> Trip expires {" "}
                                 {tripsData?.[0]?.ride?.departureTime.departureEnd ? formatDistanceToNow(new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)) : formatDistanceToNow(new Date(0))} from now
          </p>
+   
       </div>
       {detailsOpen && <TripModal data={tripsData} onClose={() => setDetailsOpen(false)} open={detailsOpen}/>}
     </article>

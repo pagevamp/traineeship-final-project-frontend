@@ -8,13 +8,13 @@ export const SignInComponent = () => {
       <p className="whitespace-pre-wrap text-5xl text-text-two-100 font-semibold text-shadow-sm text-shadow-card-bg-100 ">
         Welcome to{' '}
         <span className="text-text-one-100 text-shadow-sm text-shadow-text-two-100">
-          Outside Shares.
+          Outside Milera.
         </span>
         We&apos;re happy to have you on board!
       </p>
       <p className="text-text-one-100 text-3xl font-normal ">
         {' '}
-        Please use your Outside Google Account to login.
+        Please use your Google Account to login.
       </p>
       <section className="bg-white rounded-xl px-5 w-fit h-full backdrop-blur-3xl shadow-2xl shadow-card-bg-100 cursor-pointer">
         <SignInButton mode="modal" forceRedirectUrl={'/rides'}>

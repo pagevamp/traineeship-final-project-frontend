@@ -37,7 +37,7 @@ export const UpdateStatus = ({trip, onStatusUpdate, onCancel}:AcceptRideProps) =
 
           {popoverOpen && (
           <Modal title='Update Trip Status' open={popoverOpen} onOpenChange={()=>setPopoverOpen(false)}>
-            <div className='flex flex-col gap-2 w-full p-2 '>
+            <div className='flex flex-col items-center gap-3 w-full p-2 mt-2'>
               {tripStatusUpdates.map((update)=>(
                 <Button
                 key={update.label}
