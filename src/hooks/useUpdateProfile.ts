@@ -66,6 +66,7 @@ export const useUpdateProfile = () => {
     error,
     formData,
     handleChange,
+    handleValidation,
     loading,
     setLoading,
     handleSubmit,

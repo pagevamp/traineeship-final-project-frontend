@@ -11,12 +11,13 @@ import { useUpdateProfile } from '@/hooks/useUpdateProfile';
 export default function OnboardingComponent() {
   const { user } = useUser();
   const router = useRouter();
-  const { error, formData, handleChange, loading } = useUpdateProfile();
+  const { error, formData, handleChange,handleValidation, loading } = useUpdateProfile();
   
 
   const handleSubmit = async (formData: FormData) => {
     const res = await completeOnboarding(formData);
 
+    if (!handleValidation()) return;
     if (res?.message) {
       await user?.reload();
       router.push('/rides');

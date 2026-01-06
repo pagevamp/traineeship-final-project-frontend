@@ -20,7 +20,7 @@ export const TripHeader = () => {
 
 
     <p className='font-normal text-xl w-full rounded-xl px-6 py-3 mb-2 text-center text-text-one-100/80 bg-secondary-100/60 my-4'> 
-      Here are your Pending Trips, <span className='text-primary-100 text-shadow-2xs font-semibold text-shadow-white/20'>{user?.firstName}</span>
+      Here are your Pending Trips, <span className='text-white-100/80 text-shadow-2xs font-semibold text-shadow-white/20'>{user?.firstName}</span>
     </p>
     </section>
   )
