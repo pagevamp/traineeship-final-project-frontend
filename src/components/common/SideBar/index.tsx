@@ -44,7 +44,7 @@ export const SideBar = () => {
           <Icon icon="mdi:robot-happy" width={18} height={18} />
           <span className="text-sm whitespace-nowrap">58 Happy Outsiders</span>
         </div>
-        <p className="font-semibold text-md text-center">@Outside Shares</p>
+        <p className="font-semibold text-md text-center">@Outside Milera</p>
       </section>
     </aside>
   );

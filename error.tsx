@@ -55,7 +55,7 @@ const UnauthorizedPage = () => {
 
           <div className="pt-4 border-t border-gray-100">
             <p className="text-xs text-gray-400 font-secondary tracking-wide">
-              Outside goes Outside
+              Outside Milera
             </p>
           </div>
         </section>
