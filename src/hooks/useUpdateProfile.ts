@@ -69,5 +69,6 @@ export const useUpdateProfile = () => {
     loading,
     setLoading,
     handleSubmit,
+    handleValidation,
   };
 };
