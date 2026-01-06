@@ -14,8 +14,12 @@ export default function OnboardingComponent() {
   const { error, formData, handleChange,handleValidation, loading } = useUpdateProfile();
   
 
-  const handleSubmit = async (formData: FormData) => {
-    const res = await completeOnboarding(formData);
+  const handleSubmit = async (rawFormData: FormData) => {
+    const isValid = handleValidation();
+
+    if (!isValid) return;
+
+    const res = await completeOnboarding(rawFormData);
 
     if (!handleValidation()) return;
     if (res?.message) {
@@ -46,7 +50,7 @@ export default function OnboardingComponent() {
             icon="material-symbols:location-away-outline"
             error={error?.primaryLocation}
             onChange={handleChange}
-        />
+          />
 
           <InputField
             type="text"
@@ -67,7 +71,7 @@ export default function OnboardingComponent() {
               hover:opacity-90
               transition-all cursor-pointer hover:bg-tertiary-100"
           >
-             {loading ? 'Getting you on board ' : 'Complete Onboarding'}
+            {loading ? 'Getting you on board ' : 'Complete Onboarding'}
           </Button>
         </form>
       </section>

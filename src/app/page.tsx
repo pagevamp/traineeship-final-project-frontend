@@ -1,5 +1,11 @@
-import { redirect } from "next/navigation";
+'use client';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
- redirect('/sign-in')
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/sign-in');
+  }, [router]);
 }

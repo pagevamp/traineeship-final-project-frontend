@@ -26,7 +26,8 @@ export const NavBar = () => {
                 </p>
               </div>
             )}
-            <UserButton>
+
+            <UserButton afterSignOutUrl="/sign-in">
               <UserButton.MenuItems>
                 <UserButton.Link
                   label="History"
