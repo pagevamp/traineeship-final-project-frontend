@@ -9,8 +9,11 @@ export const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="absolute top-32 h-[45vh] md:h-[65vh] lg:h-[80vh] w-[50vw] md:w-[20vw] lg:w-[15vw] mx-8 rounded-lg bg-card-bg-100 glex flex-row lg:flex-col justify-between text-text-two-100 px-4 py-6 z-10">
-      {/* top section with feature-page links */}
+    <aside className="fixed top-23 lg:top-26 left-8 z-10 flex flex-col justify-between
+      w-2/4 md:w-1/5 lg:w-1/5 h-[50vh] md:h-[65vh] lg:h-[80vh] 
+      mx-auto px-4 py-6 rounded-lg bg-card-bg-100 text-text-two-100 shadow-sm shadow-gray-700">
+      
+      {/* Top section: Feature links */}
       <section className="flex flex-col gap-4">
         <h2 className="text-text-one-100/80 font-semibold text-xl text-center border-b border-tertiary-100/20 w-full pb-2 mb-4">
           Features
@@ -22,31 +25,27 @@ export const SideBar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`w-full flex items-center gap-4 rounded-md py-3 px-4 transition-all duration-200
-                ${
-                  isActive
-                    ? 'bg-tertiary-100/30 text-text-one-100/80 scale-98'
-                    : 'text-tertiary-100 hover:rounded-md hover:bg-tertiary-100/30 hover:text-text-one-100/80 hover:scale-98'
-                }
-              `}
+              className={`flex items-center gap-4 w-full rounded-md py-3 px-4 transition-all duration-200
+                ${isActive
+                  ? 'bg-tertiary-100/30 text-text-one-100/80 scale-98'
+                  : 'text-tertiary-100 hover:bg-tertiary-100/30 hover:text-text-one-100/80 hover:scale-98'
+                }`}
             >
               <Icon icon={item.icon} width={24} height={24} className="text-shadow-2xs" />
-              <span className="text-md font-medium">{item.label}</span>
+              <span className="text-md font-medium truncate">{item.label}</span>
             </Link>
           );
         })}
       </section>
 
-      {/* Bottom section with project user count */}
-      <div className='hidden lg:block'>
-        <section className="h-40 w-[85%] bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 shadow-md shadow-gray-900  mx-auto my-5 px-2 py-3 rounded-md flex flex-col gap-3 items-center justify-center text-tertiary-100 text-sm border-black">
-          <div className="flex flex-row gap-1 items-center text-text-one-100/80">
-            <Icon icon="mdi:robot-happy" width={18} height={18} />
-            <span className="text-sm whitespace-nowrap">58 Happy Outsiders</span>
-          </div>
-          <p className="font-semibold text-md">@Outside Shares</p>
-        </section>
-      </div>
-    </div>
+      {/* Bottom section: User count */}
+      <section className="hidden lg:flex h-40 w-11/12 bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 shadow-md shadow-gray-900 mx-auto my-5 px-2 py-3 rounded-md flex-col gap-3 items-center justify-center text-tertiary-100 text-sm border-black">
+        <div className="flex items-center gap-1 text-text-one-100/80">
+          <Icon icon="mdi:robot-happy" width={18} height={18} />
+          <span className="text-sm whitespace-nowrap">58 Happy Outsiders</span>
+        </div>
+        <p className="font-semibold text-md text-center">@Outside Shares</p>
+      </section>
+    </aside>
   );
 };

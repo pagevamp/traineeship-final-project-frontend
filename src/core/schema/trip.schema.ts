@@ -34,7 +34,7 @@ export const TripSchema = z.object({
   deletedAt: z.string().nullable().optional(),  
   
   ride: RideSchema,
-  driver: DriverSchema,
+  driver: DriverSchema.nullable().optional(),
   passenger: PassengerSchema.nullable().optional()
 });
 

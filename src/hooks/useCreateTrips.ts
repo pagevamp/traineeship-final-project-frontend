@@ -18,11 +18,14 @@ export const useCreateTrip = () => {
 
     try {
       await toast.promise(
-        createTrip({ requestId: rideRequestId, vehicleType } as CreateTripRequest),
+       createTrip({ requestId: rideRequestId, vehicleType } as CreateTripRequest),
         {
           loading: 'Creating trip...',
           success: 'Trip created successfully!',
-          error: (err) =>  err?.response?.data?.message || 'Trip created successfully',
+          error: (err: Error) => {
+            if (err?.message) return err.message;
+            return 'Creating trip failed due to unknown error';
+          },
         }
       );
 

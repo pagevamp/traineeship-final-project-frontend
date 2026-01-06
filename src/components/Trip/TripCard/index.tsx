@@ -15,6 +15,7 @@ import { CancelConfirmationDialog } from '@/components/Rides/CancelDialog';
 import { useUpdateTrip } from '@/hooks/useUpdateTrip';
 import { TripStatus } from '@/core/types/trip-types';
 import { BufferComponent} from '@/components/common/BufferComponent';
+import Image from 'next/image';
 
 
 export const TripCard = () => {  
@@ -75,18 +76,26 @@ export const TripCard = () => {
 
     const now = new Date()
     const expired = new Date(tripsData?.[0]?.ride?.departureTime.departureEnd)
+    const complete= tripsData?.[0]?.status
 
   return (
     <article>
+      
       <div 
-        className='flex flex-col border border-secondary-100/60 rounded-xl w-full md:w-[40vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative'
+        className={`flex flex-col border border-secondary-100/60 rounded-xl w-full md:w-[40vw] lg:w-[50vw] p-5 md:p-6 bg-card-bg-100 hover:bg-radial-[at_25%_25%] from-bg-card-bg-100 to-primary-100 to-75% relative
+                ${complete === TripStatus.REACHED_DESTINATION ? 'border-green-500/70 ' : 'border-secondary-100'}
+
+        `}
       >
        
         <div className="flex items-center mb-6 justify-between">
           <section className='flex flex-row gap-4 place-content-start'>
-            {/* <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20">
-              <Image src={tripsData?.[0].passenger.profileImage} alt="Passenger" fill className="object-cover" />
-            </div> */}
+            <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-secondary-100/20"><Image
+              src={tripsData?.[0].passenger?.profileImage || '/unknown.png'}
+              alt="Passenger"
+              fill
+              className="object-cover"
+            />            </div> 
             <div>
               <h3 className="font-bold text-lg text-text-one-100">Trip Request</h3>
               <p className="text-xs text-light-text-100 flex items-center gap-1">
