@@ -25,21 +25,21 @@ export const STATUS_STYLES: Record<
   }
 > = {
   [TripStatus.NOT_STARTED]: {
-    border: 'border-blue-500/70',
-    badgeBg: 'bg-blue-500/10',
-    badgeText: 'text-blue-400',
+    border: 'border-secondary-100/70',
+    badgeBg: 'bg-secondary-100/70',
+    badgeText: 'text-white-100/80',
     label: 'NOT STARTED',
   },
   [TripStatus.ON_THE_WAY]: {
-    border: 'border-amber-500/70',
-    badgeBg: 'bg-amber-500/10',
-    badgeText: 'text-amber-400',
+    border: 'border-tertiary-100',
+    badgeBg: 'bg-tertiary-100',
+    badgeText: 'text-white-100/80',
     label: 'ON THE WAY',
   },
   [TripStatus.REACHED_PICKUP]: {
-    border: 'border-green-500/70',
-    badgeBg: 'bg-green-500/10',
-    badgeText: 'text-green-400',
+    border: 'border-quaternary-100',
+    badgeBg: 'bg-quaternary-100',
+    badgeText: 'text-white-100/80',
     label: 'REACHED PICKUP',
   },
   [TripStatus.REACHED_DESTINATION]: {

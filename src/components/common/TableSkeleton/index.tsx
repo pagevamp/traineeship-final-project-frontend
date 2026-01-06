@@ -30,7 +30,7 @@ export const TableSkeleton = ({columns,rows, message}:{ columns: number, rows: n
                         ))}
                         </tr>
                     ))}
-                    <tr><p className='h-20'/></tr>
+                    <tr><td className='h-20'/></tr>
                 </tbody>
             </table>
         </div>

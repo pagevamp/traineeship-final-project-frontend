@@ -90,7 +90,7 @@ const complete = tripsData?.[0]?.status as TripStatus | undefined;
         >
 
         <div
-          className={`absolute top-0 right-0 px-4 py-1 rounded-bl-xl text-xs md:text-sm uppercase tracking-wider
+          className={`absolute top-0 right-0 px-4 py-1 rounded-bl-xl rounded-tr-lg text-xs md:text-sm uppercase tracking-wider
             ${statusStyle?.badgeBg}
             ${statusStyle?.badgeText}
           `}
